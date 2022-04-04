@@ -2,21 +2,11 @@ import numpy as np
 from vessel_class import GliderVessel
 
 
-fin_h=np.array([0.25,0.5,1])
-fin_l=np.array([0.2, 0.4, 0.8])
-fin_t=np.array([5, 10, 20])
-
-ds1,ds2,ds3= np.meshgrid(fin_h,fin_l,fin_t)
-design_space=np.vstack((ds1.ravel(),ds2.ravel(),ds3.ravel())).T
-#print(design_space)
-index= np.arange(1,28).reshape(-1,1)
-glider_design_with_index= np.hstack((index,design_space))
-print(glider_design_with_index)
-np.savetxt('./data/rudder_study_design_points.csv', glider_design_with_index, delimiter=',')
-
+design_points= np.loadtxt('./data/rudder_study_design_points.csv', delimiter=',')
+print('design_points are:',design_points)
 
 #Importing vessel seed design
-vessel = GliderVessel('./cad/VUnderwater.FCStd') 
+vessel = GliderVessel('./cad/swordfish_cfd.FCStd') 
 
 
 for i in range(glider_design_with_index.shape[0]):
