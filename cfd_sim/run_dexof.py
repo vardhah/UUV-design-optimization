@@ -13,7 +13,7 @@ import time
 import re
 import shutil
 
-path_stl = './stl_rudder/'
+path_stl = './stl_cfd/'
 base_dexfile='rough_mesh_8cores.dex'
 design_set_load= np.loadtxt('./rudder_design_points.csv', delimiter = ",")
 result_folder='result_logs'
@@ -31,7 +31,7 @@ for file_name in files:
     print('---Running iteration:', itr,'----------')
     
     arg_=['./run_dexof.sh']
-    input_stl_file= './stl_rudder/'
+    input_stl_file= './stl_cfd/'
     #print('stl file name:',file_name)
     input_stl_file+=file_name
     #print('full path of stl file:',input_stl_file)

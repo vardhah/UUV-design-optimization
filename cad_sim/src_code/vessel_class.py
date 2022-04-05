@@ -39,11 +39,11 @@ else:
 
 from femtools.ccxtools import FemToolsCcx   # noqa
 from femmesh.gmshtools import GmshTools     # noqa
-
-
-
-
 import Mesh
+
+
+
+
 
 class GliderVessel(object):
     """
@@ -66,7 +66,7 @@ class GliderVessel(object):
        
         self.sketch_params = []
         obj = self.doc.getObject('Sketch')
-        obj1 = self.doc.getObject('Sketch001') 
+        
         
      
        
@@ -76,80 +76,73 @@ class GliderVessel(object):
             if c.Name:
                 self.sketch_params.append(str(c.Name))
                 print(str(c.Name))
-        print('Sketch001 is:')
-        for c in obj1.Constraints:
-            if c.Name:
-                self.sketch_params.append(str(c.Name))
-                print(str(c.Name))
+     
                 
         
-    def set_prop(self, f_dia,tail_l,fair_body):
-       f_dia=  str(f_dia)+' m'
-       t_len= str(tail_l)+' m'
-       f_len= str(fair_body)+' m'
-       print('f dia:',f_dia,'t_len:',t_len,'f_len:',f_len)
-       try:
-        sheet = self.doc.getObjectsByLabel('Parameters')[0]
-        print('sheet is:',sheet)
-        sheet.set("fairing_dia", f_dia)
-        sheet.set("tail_len", t_len)
-        sheet.set("fairing_len", f_len)
-        
-        sheet.recompute()
-        self.doc.recompute()
-        
-       except: 
-        print('failed')
+    def set_tail(self,tail_l,tail_r):
+      try:
+       obj = self.doc.getObject('Sketch') 
+       obj.setDatum('tail_len', Units.Quantity(tail_l , Units.Unit('mm')))
+       obj.setDatum('tail_rad', Units.Quantity(tail_r , Units.Unit('mm')))
+       self.doc.recompute()
+      except: 
+       print('failed in setting tail dimensions') 
     
-    def set_fins(self, r_height,r_len,r_thickness):
-       rud_h= str(r_height)+' m'
-       rud_l=  str(r_len)+' m'
-       rud_t= str(r_thickness)+' mm'
-       print('rudd_h:',rud_h,'rudd_l:',rud_l,'rudd_t:',rud_t)
-       try:
-        sheet = self.doc.getObjectsByLabel('Parameters')[0]
-        sheet.set("rudder_len", rud_l)
-        sheet.set("rudder_height", rud_h)
-        sheet.set("rudder_thickness", rud_t)
-        
-        sheet.recompute()
-        self.doc.recompute()
-        
-       except: 
-        print('failed')
+    def set_y_loc(self,first,second,third,fourth,fifth):
+      try: 
+       obj = self.doc.getObject('Sketch') 
+       obj.setDatum('first_y', Units.Quantity(first , Units.Unit('mm')))
+       obj.setDatum('second_y', Units.Quantity(second , Units.Unit('mm')))
+       obj.setDatum('third_y', Units.Quantity(third , Units.Unit('mm')))
+       obj.setDatum('fourth_y', Units.Quantity(fourth , Units.Unit('mm')))
+       obj.setDatum('fifth_y', Units.Quantity(fifth , Units.Unit('mm')))
+       self.doc.recompute()
+      except: 
+       print('failed in setting y location') 
+
+
+    def set_fairing_len(self, fairing_l):
+      try:
+       obj = self.doc.getObject('Sketch') 
+       obj.setDatum('fairing_len', Units.Quantity(fairing_l , Units.Unit('mm')))
+       self.doc.recompute()
+      except: 
+        print('failed in setting length')
     
-    def get_rudder_details(self) -> float:
-        """
-        Returns the wing thickness for current design.
-        """
-        sheet = self.doc.getObjectsByLabel('Parameters')[0]
-        r_l=sheet.get("rudder_len")
-        r_h=sheet.get("rudder_height")
-        r_t=sheet.get("rudder_thickness")
-        print('Rudder height is:',r_h,'Rudder lenght is:',r_l,'Rudder thickness is:',r_t)
-        
+    def set_fairing_rad(self, fairing_r):
+      try: 
+       obj = self.doc.getObject('Sketch') 
+       obj.setDatum('radius', Units.Quantity(fairing_r , Units.Unit('mm')))
+       self.doc.recompute()
+      except: 
+        print('failed in setting radius')
         
         
     def print_info(self):
         
         self.recompute()
-        """
-        Prints out all relevant information from the design template
-        and the output of design analysis.
-        """
-        names = [obj.Name for obj in self.doc.Objects]
-        print("Object names:", ", ".join(names))
+        obj_spz = self.doc.getObject('Sketch')
+        fairing_len=obj_spz.getDatum('fairing_len').getValueAs('mm') 
+        fairing_rad=obj_spz.getDatum('radius').getValueAs('mm') 
+        tail_len=obj_spz.getDatum('tail_len').getValueAs('mm') 
+        tail_rad=obj_spz.getDatum('tail_rad').getValueAs('mm') 
+        
+        first_y=obj_spz.getDatum('first_y').getValueAs('mm') 
+        second_y=obj_spz.getDatum('second_y').getValueAs('mm') 
+        third_y=obj_spz.getDatum('third_y').getValueAs('mm') 
+        fourth_y=obj_spz.getDatum('fourth_y').getValueAs('mm') 
+        fifth_y=obj_spz.getDatum('fifth_y').getValueAs('mm') 
+        
 
-        self.obj1 = self.doc.getObject('Sketch001')
 
 
         print("------Body properties:-------")
-        print("  body_area = {:.6f} m^2".format(self.get_body_area()))
-        print("  body_volume = {:.9f} m^3".format(self.get_body_volume()))
-        print("  Fairing_len = ".format(self.get_fairing_len()))
-        print("  Fairing_dia = ".format(self.get_fairing_dia()))
-        print("  Tail_len = ".format(self.get_tail_len()))
-        
+        print("  body_area = {:.6f} m^2".format(self.get_outer_volume()))
+        print("  body_volume = {:.9f} m^3".format(self.get_outer_volume()))
+        print("  Fairing_len = ",fairing_len,'fairing_rad = ',fairing_rad ,'.')
+        print("  Tail_len = ",tail_len,'Tail_rad = ',tail_rad ,'.')
+        print("  First_y = ",first_y,'second_y = ',second_y ,'; Third_y:',third_y,'"Fourth Y:',fourth_y,'Fifth_Y:',fifth_y)
+        print("------------------------------")
       
     
     def recompute(self):
@@ -165,12 +158,13 @@ class GliderVessel(object):
         Generate stl file from the current design
         """
         try:
-         __objs__=self.doc.getObjectsByLabel("CFDModel")
-         stl_name= "./stl_repo/rudder_study_uuv"+str(exp_index)+".stl"
-         Mesh.export(__objs__,stl_name)
+         __objs__=self.doc.getObject("Body")
+         #print(__objs__.Name, self.doc.Name)
+         stl_name= u"./stl_repo/swordfish"+str(exp_index)+".stl"
+         Mesh.export([__objs__], stl_name)
          del __objs__    
         except:
-         print("An error occurred while creating stl file") 
+          print("An error occurred while creating stl file") 
     
     
     def get_exp_index(self) -> int:
@@ -185,58 +179,6 @@ class GliderVessel(object):
         set the experiment index of current design
         """
         self.exp_index=exp_ind
-
-    
-
-   
-    def set_fairing_dia(self,dia):
-        """
-        set the wing location of current experiment
-        """
-        #print('In wing location setting')
-        obj1 = self.doc.getObject('Sketch001') 
-        return obj1.setDatum('fairing_dia', Units.Quantity(dia * 1e3, Units.Unit('mm')))
-    
-    
-    def get_fairing_dia(self) -> float:
-        """
-        Returns the wing thickness for current design.
-        """
-        obj_spz = self.doc.getObject('Sketch001')
-        return obj_spz.getDatum('fairing_dia').getValueAs('mm') * 1e-3
-   
-
-    def set_tail_len(self,t_len) -> float:
-        """
-        set the wing's thickness of current design
-        """
-        obj1 = self.doc.getObject('Sketch001') 
-        return obj1.setDatum('tail_len', Units.Quantity(t_len * 1e3, Units.Unit('mm')))
-    
-    
-    def get_tail_len(self) -> float:
-        """
-        Returns the wing thickness for current design.
-        """
-        obj_spz = self.doc.getObject('Sketch001')
-        return obj_spz.getDatum('tail_len').getValueAs('mm') * 1e-3
-   
-   
-    def set_fairing_len(self,f_len) -> float:
-        """
-        set the wing's chord of current design
-        """
-        obj1 = self.doc.getObject('Sketch001') 
-        return obj1.setDatum('fairing_len', Units.Quantity(f_len * 1e3, Units.Unit('mm')))
-     
-    
-    def get_fairing_len(self) -> float:
-        """
-        Returns the wing thickness for current design.
-        """
-        obj_spz = self.doc.getObject('Sketch001')
-        return obj_spz.getDatum('fairing_len').getValueAs('mm') * 1e-3
-   
 
 
     def get_body_area(self):
@@ -253,7 +195,6 @@ class GliderVessel(object):
         obj = self.doc.getObject('Body')
         return obj.Shape.Volume * 1e-9
 
-   
     def get_outer_area(self):
         obj = self.doc.getObject('Body')
         return obj.Shape.OuterShell.Area * 1e-6
@@ -280,12 +221,6 @@ class GliderVessel(object):
             self.doc.removeObject('ResultMesh')
         if self.doc.getObject('ccx_dat_file'):
             self.doc.removeObject('ccx_dat_file')
-
-
-   
-    
-
-
 
 
 
