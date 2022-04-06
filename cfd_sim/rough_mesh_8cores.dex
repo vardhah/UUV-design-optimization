@@ -36,8 +36,8 @@ scalez,input,continuous,0.001
 ***
 *** Computational Grid -- meshing/solution is run on 8 cores
 ***
-subdomains,input,discrete,64
-computegrid,input,string,(8 4 2)
+subdomains,input,discrete,8
+computegrid,input,string,(4 2 1)
 ***
 *** Flow Characteristics
 ***

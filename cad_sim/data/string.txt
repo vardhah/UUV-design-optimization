@@ -1,1 +1,0 @@
-"! from docker adi: How are you?"

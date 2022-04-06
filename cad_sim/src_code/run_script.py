@@ -2,13 +2,15 @@ import numpy as np
 from vessel_class import GliderVessel
 
 
-#design_points= np.loadtxt('./data/rudder_study_design_points.csv', delimiter=',')
-#print('design_points are:',design_points)
+dp= np.loadtxt('design_points.csv', delimiter=',')
+print('design_points are:',dp)
 
 #Importing vessel seed design
 vessel = GliderVessel('./seed_cad/swordfish_cfd.FCStd') 
 vessel.print_info()
 
+#vessel.set_tail(dp[])
+#vessel.set_y_loc()
 
 
 vessel.create_stl(1)

@@ -7,7 +7,17 @@ import shutil
 import glob 
 import subprocess
 import time
+#from run_dexof import *
+import sys 
+from cfd_sim.run_dexof import *
+
+sys.dont_write_bytecode = True
+
+
+
 input_size=2                             # input size may change if integer/ordinal type variable and represented by one-hot encoding
+
+
 
 num_iteration=20                        # Number of iteration of sampling
 init_samples=50 
@@ -38,19 +48,35 @@ def copy_file(src,dst):
 	shutil.copy(src, dst)
 
 
-def run_cad(src,dst):
+def run_cad_cfd():
 	delete_dir(dst)
 	subprocess.call('./cad_sim/run_cad.sh')
 	copy_dir(src,dst)
 	deletefiles(src)
+	prev = os.path.abspath(os.getcwd()) # Save the real cwd
+	print('prev is',prev)
+	cfd_sim_path= prev+'/cfd_sim'
+	print('func path is:',cfd_sim_path)
+	os.chdir(cfd_sim_path)
+	result = run_dex()
+	os.chdir(prev)
+	print(result)
 
 
 if __name__=='__main__':
-	time.sleep(5)
+	
 	delete_dir(dst)
 	subprocess.call('./cad_sim/run_cad.sh')
-	time.sleep(5)
 	copy_dir(src,dst)
-	time.sleep(5)
 	deletefiles(src)
-	time.sleep(5)
+	prev = os.path.abspath(os.getcwd()) # Save the real cwd
+	print('prev is',prev)
+	cfd_sim_path= prev+'/cfd_sim'
+	print('func path is:',cfd_sim_path)
+	os.chdir(cfd_sim_path)
+	result = run_dex()
+	os.chdir(prev)
+	print(result)
+
+
+

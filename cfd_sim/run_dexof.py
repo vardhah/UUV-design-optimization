@@ -8,33 +8,40 @@ Created on Mon Feb  7 17:02:38 2022
 import numpy as np
 import os 
 import subprocess
-from dexof_reader_class import parse_dex_file
+
 import time
 import re
 import shutil
 
 path_stl = './stl_cfd/'
 base_dexfile='rough_mesh_8cores.dex'
-design_set_load= np.loadtxt('./rudder_design_points.csv', delimiter = ",")
-result_folder='result_logs'
+
+result_folder='./result_logs'
+stl_name = 'swordfish' 
+ from dexof_reader_class import parse_dex_file
 
 
-files= os.listdir(path_stl)
-aoa= 0
-result_array=[]
+def run_dex():
+  
 
-dexof_editor= parse_dex_file(base_dexfile)
-print('Loaded files')
-itr=0
-for file_name in files:
+ 
+ design_set_load= np.loadtxt('./design_points.csv', delimiter = ",")
+ files= os.listdir(path_stl)
+ aoa= 0
+ result_array=[]
+
+ dexof_editor= parse_dex_file(base_dexfile)
+ print('Loaded files')
+ itr=0
+ for file_name in files:
     print('--------------------------------------')
-    print('---Running iteration:', itr,'----------')
+    print('---Running CFD iteration:', itr,'----------')
     
     arg_=['./run_dexof.sh']
-    input_stl_file= './stl_cfd/'
-    #print('stl file name:',file_name)
+    input_stl_file= path_stl
+    print('stl file name:',file_name)
     input_stl_file+=file_name
-    #print('full path of stl file:',input_stl_file)
+    print('full path of stl file:',input_stl_file)
     
     dexof_editor.set_input_file(input_stl_file)
     split_dexfilename=base_dexfile.split('.')
@@ -46,7 +53,7 @@ for file_name in files:
     with open(new_dex_file_name, 'w') as f:
      f.write(dexof_editor.contents)
      
-    exp_index=int(stlfile_name[0].split('rudder_uuv')[1])
+    exp_index=int(stlfile_name[0].split(stl_name)[1])
   
     arg_.append(new_dex_file_name)
     arg_.append(input_stl_file)
@@ -61,8 +68,8 @@ for file_name in files:
     #reading results from folder
     folder='dir_'+_dex_file_name+'_aoa_'+_aoa_str
     src_resultfile='./'+folder+'/results.log'
-    dst_result_file='./'+result_folder+'/result_'+str(exp_index)+'.log'
-    shutil.copyfile(src_resultfile, dst_result_file)
+    #dst_result_file='./'+result_folder+'/result_'+str(exp_index)+'.log'
+    #shutil.copyfile(src_resultfile, dst_result_file)
     
     
     with open(src_resultfile, 'r') as f:
@@ -82,7 +89,7 @@ for file_name in files:
     del arg_
     print('sim time is:',sim_time)
     #print(design_set_load[aoa_index,:].shape)
-    
+    """
     result=np.concatenate((design_set_load[(exp_index-1),:],np.array([Fd_found,sim_time]))).reshape(1,-1)
     if itr ==0:
         result_array=result
@@ -92,8 +99,11 @@ for file_name in files:
         
     print('-----------------------------------')
     print(result_array)
-    np.savetxt('sim_out_rudder.csv',result_array,delimiter=',')
-   
+    np.savetxt('sim_out_rudder_study.csv',result_array,delimiter=',')
+    """
+
     os.remove(new_dex_file_name)
+    os.remove('seaglider_out.stl')
+    os.remove('temp.stl')
     shutil.rmtree(folder)
-    
+ return Fd_found    

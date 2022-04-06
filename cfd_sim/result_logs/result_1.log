@@ -1,0 +1,25 @@
+*** Results ***
+ ----- LIFT AND DRAG FORCES ---- 
+    Sum of forces
+        Total    : (7.7815755 -0.010048113 0.0022296529)
+        Pressure : (3.3294055 -0.0098026094 0.0022395354)
+        Viscous  : (4.45217 -0.0002455031 -9.8825049e-06)
+    Sum of moments
+        Total    : (6.7810449e-06 -0.001750841 -0.012398402)
+        Pressure : (7.9657316e-06 -0.0017561336 -0.012106774)
+        Viscous  : (-1.1846868e-06 5.2926181e-06 -0.00029162863)
+ ----- LIFT AND DRAG COEFFICIENTS ---- 
+        Cd       : 0.083675767	(pressure: 0.035801305	viscous: 0.047874462)
+        Cl       : -2.9398014e-05	(pressure: -2.8679739e-05	viscous: -7.1827457e-07)
+        Cs       : -6.5233512e-06	(pressure: -6.5522647e-06	viscous: 2.8913492e-08)
+___ REFERENCE AREAS ----
+Arefs
+./postProcessing/forceCoeffs_cl/0/coefficient.dat:# Aref          : 6.65619519e-01
+./postProcessing/forceCoeffs_cd/0/coefficient.dat:# Aref          : 1.81103726e-01
+lrefs:
+./postProcessing/forceCoeffs_cl/0/coefficient.dat:# lRef          : 1.99005010e+00
+./postProcessing/forceCoeffs_cd/0/coefficient.dat:# lRef          : 1.99005010e+00
+dir_rough_mesh_8cores_swordfish1_aoa_0.log:Layer mesh : cells:90295  faces:287488  points:108271
+log.snappyHexMesh:Finished meshing in = 5.99 s.
+Time = 135
+ExecutionTime = 12.07 s  ClockTime = 12 s
