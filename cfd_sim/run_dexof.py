@@ -18,13 +18,13 @@ base_dexfile='rough_mesh_8cores.dex'
 
 result_folder='./result_logs'
 stl_name = 'swordfish' 
- from dexof_reader_class import parse_dex_file
+from .dexof_reader_class import parse_dex_file
 
 
 def run_dex():
   
 
- 
+
  design_set_load= np.loadtxt('./design_points.csv', delimiter = ",")
  files= os.listdir(path_stl)
  aoa= 0
@@ -81,7 +81,7 @@ def run_dex():
         Fd_found = Fd_out.group(0).split(': (')[1]
         Fd_found= float(Fd_found)
     else: 
-        Fd_found= 2
+        Fd_found= 100
     
     print('Drag force is:', Fd_found)
     end_time=time.time()
@@ -106,4 +106,4 @@ def run_dex():
     os.remove('seaglider_out.stl')
     os.remove('temp.stl')
     shutil.rmtree(folder)
- return Fd_found    
+ return np.atleast_2d(Fd_found)    

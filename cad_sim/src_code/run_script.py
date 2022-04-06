@@ -3,15 +3,20 @@ from vessel_class import GliderVessel
 
 
 dp= np.loadtxt('design_points.csv', delimiter=',')
-print('design_points are:',dp)
+print('design_points are:',dp,'shape:',dp.shape)
 
 #Importing vessel seed design
 vessel = GliderVessel('./seed_cad/swordfish_cfd.FCStd') 
+
+tail_Rad=dp[0] ; tail_Len=dp[1] 
+F_y=dp[2]; S_y=dp[3]; T_y=dp[4]; Four_y=dp[5]; Five_y=dp[6]
+print('dp1:',dp[0],'dp2:',dp[1],'dp3:',dp[2],'dp4:',dp[3],'dp5:',dp[4],'dp6:',dp[5],'dp7:',dp[6])
+
+
 vessel.print_info()
+vessel.set_tail(tail_Len,tail_Rad)
 
-#vessel.set_tail(dp[])
-#vessel.set_y_loc()
-
+vessel.set_y_loc(F_y,S_y,T_y,Four_y,Five_y)
 
 vessel.create_stl(1)
 
