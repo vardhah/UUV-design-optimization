@@ -74,39 +74,57 @@ if __name__=='__main__':
 	
 	#run_cad_cfd(np.array([1,2]))
 	
-	bounds = [{'name': 'var_1','type': 'continuous', 'domain':(50,190)},
-            {'name': 'var_2', 'type': 'continuous', 'domain': (100,500)},
-            {'name': 'var_3', 'type': 'continuous', 'domain': (0,100)},
-            {'name': 'var_4', 'type': 'continuous', 'domain': (0,100)},
-            {'name': 'var_5', 'type': 'continuous', 'domain': (0,100)},
-            {'name': 'var_6', 'type': 'continuous', 'domain': (0,100)},
-            {'name': 'var_7', 'type': 'continuous', 'domain': (-40,100)}]
+	bounds = [{'name': 'first_y', 'type': 'continuous', 'domain': (0,50)},
+            {'name': 'second_y', 'type': 'continuous', 'domain': (0,50)},
+            {'name': 'third_y', 'type': 'continuous', 'domain': (0,50)},
+            {'name': 'fourth_y', 'type': 'continuous', 'domain': (0,50)},
+            {'name': 'fifth_y', 'type': 'continuous', 'domain': (0,50)}]
+
+	################################################
+
 
 	max_time  = None 
 	max_iter  = 100
+	num_iter=10
+	batch= int(max_iter/num_iter)
 	tolerance = 1e-8     # distance between two consecutive observations 
 
-    #################################################
-	myBopt2D = GPyOpt.methods.BayesianOptimization(f=run_cad_cfd,
+	#################################################
+	first_run=1 
+	print('Batch is:',batch)
+	for i in range(num_iter): 
+
+	 if first_run==0:
+	   evals = pd.read_csv("sea_parrot", index_col=0, delimiter="\t")
+	   Y = np.array([[x] for x in evals["Y"]])
+	   X = np.array(evals.filter(regex="var*"))
+	   myBopt2D = GPyOpt.methods.BayesianOptimization(run_cad_cfd, bounds,model_type = 'GP',X=X, Y=Y,
+                                              acquisition_type='EI',  
+                                              normalize_Y = True,
+                                              acquisition_weight = 2) 
+
+	   print('In other runs run')
+	 else: 
+	   myBopt2D = GPyOpt.methods.BayesianOptimization(f=run_cad_cfd,
                                               domain=bounds,
                                               model_type = 'GP',
                                               acquisition_type='EI',  
                                               normalize_Y = True,
                                               acquisition_weight = 2) 
-
-	print('Number of iteration is:',max_iter) 
+	   first_run=0
+	   print('In 1st run')
+	 print('------Running batch is:',i) 
    
-    #Run the optimization 
-	try:
-	  myBopt2D.run_optimization(max_iter,verbosity=True)  
-	except KeyboardInterrupt:
+ # --- Run the optimization 
+	 try:
+	  myBopt2D.run_optimization(batch,verbosity=True)  
+	 except KeyboardInterrupt:
 	  pass
+ 
+	 sim_data_x= myBopt2D.X;
+	 myBopt2D.save_evaluations("sea_parrot")
+
 
 	myBopt2D.plot_acquisition()  
 	myBopt2D.plot_convergence()
-	#print('gopt class:',myBopt2D.X)
-	sim_data_x= myBopt2D.X;
-	myBopt2D.save_evaluations("sea_parrot_file")
-	sim_data_y= myBopt2D.Y;
-	print("Minimum value of the objective: ",myBopt2D.fx_opt)  
 	

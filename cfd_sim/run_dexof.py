@@ -20,7 +20,7 @@ result_folder='./result_logs'
 stl_name = 'swordfish' 
 from .dexof_reader_class import parse_dex_file
 
-
+default_max=100
 def run_dex():
   
 
@@ -81,9 +81,14 @@ def run_dex():
         Fd_found = Fd_out.group(0).split(': (')[1]
         Fd_found= float(Fd_found)
     else: 
-        Fd_found= 100
-    
+        Fd_found= default_max
+    if Fd_found==0: 
+        Fd_found=default_max
+
+    print("######################################") 
+    print("######################################")   
     print('Drag force is:', Fd_found)
+    print("######################################")
     end_time=time.time()
     sim_time=end_time-start_time
     del arg_

@@ -69,14 +69,14 @@ class GliderVessel(object):
         
         
      
-       
+        """
         print('***Parametric properties are:***')
         print('Sketch is:')
         for c in obj.Constraints:
             if c.Name:
                 self.sketch_params.append(str(c.Name))
                 print(str(c.Name))
-     
+        """
                 
         
     def set_tail(self,tail_l,tail_r):
@@ -135,7 +135,7 @@ class GliderVessel(object):
         
 
 
-
+        
         print("------Body properties:-------")
         print("  body_area = {:.6f} m^2".format(self.get_outer_volume()))
         print("  body_volume = {:.9f} m^3".format(self.get_outer_volume()))
