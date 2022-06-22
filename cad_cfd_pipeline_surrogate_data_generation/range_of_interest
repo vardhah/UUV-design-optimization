@@ -1,0 +1,15 @@
+Input design space=>   
+  total_len  = 1000-2000;                     % units in mm  
+  Diameter   = 50-200 ;                       % units in mm 
+  nose       = 50-600                         % units in mm 
+  tail       = 50-600                         % units in mm 
+  n          = 10-50                          % dimensionless parameter 
+  theta      = 1-50 ;	                      % Semi-angle of tail 
+
+water density : open sea(1027 kg/m^3) 
+
+Mateial type: Al6061-T6
+    
+Output : Drag force  
+
+Goal : to study which hull design will have minimum drag. 
