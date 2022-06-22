@@ -41,6 +41,14 @@ categories=[[None],[None],[None],[None],[None],[None]]
 
 
 path='./models/nn_acc_5percent.pt'
+sim_file_name= 'exp1_for_foam'      # Need to change for each experiment
+D=191; total_len=1330               #define problem requirement
+dim=4;n_gen=10;pop_size=5           #GA settings
+####Dont change below it #####
+file_name= sim_file_name+'.csv'
+max_file= sim_file_name+'_max.csv'
+min_file= sim_file_name+'_min.csv'
+opt_file=sim_file_name+'_optimal.csv'
 
 
 def run(test_data): 
@@ -71,7 +79,7 @@ from pymoo.core.problem import ElementwiseProblem
 class MyProblem(ElementwiseProblem):
 
     def __init__(self,d,tl):
-        self.dia=d ; self.tl=tl
+        self.dia=d ; self.tl=tl; self.flag=0;self.sim_data=None
         super().__init__(n_var=4,
                          n_obj=1,
                          n_constr=0,
@@ -84,7 +92,7 @@ class MyProblem(ElementwiseProblem):
         #print('c is:',b ,'x is:',x) 
         X= np.array([x[0],b,x[1],self.dia,x[2]*0.1,x[3]])
         X= X.reshape(1,-1)
-        print('X is:',X[0])
+        #print('X is:',X[0])
         copied_test_data=np.copy(X)
         fitted_text_X= data_preperation(copied_test_data,mask,np.array(ranges),categories)
         #fitted_text_X = SimDataset(fitted_test_data)
@@ -103,28 +111,53 @@ class MyProblem(ElementwiseProblem):
             output = neuralNet(torch.from_numpy(fitted_text_X).float())
               
         output=output.cpu().detach().numpy()
-        print('Output is:',output[0][0])
+        #print('Output is:',output[0][0])
         out["F"] = [output[0][0]]
         #out["G"] = [np.array([1])]
-
-
-
+        
+        if self.flag==0:
+            self.sim_data= np.append(X,output).reshape(1,-1) ; self.flag=1
+        else: 
+            self.sim_data= np.concatenate((self.sim_data,np.append(X,output).reshape(1,-1)),axis=0)
+        np.savetxt(file_name,self.sim_data,  delimiter=',')
+        
+def generate_data_for_foam(n_gen,population):  
+    sim_data=np.loadtxt(file_name,  delimiter=',')
+    print('sim data is:',sim_data.shape)   
+    optimal=100000; flag=0
+    for i in range(n_gen):
+     print('i is:',i,'population is:',population)
+     data= sim_data[(population*i):(population*(i+1))] 
+     print('data shape is:',data.shape)
+     max_index= np.argmax(data[:,-1])
+     min_index=np.argmin(data[:,-1])
+     max_= np.max(data[:,-1]); min_= np.min(data[:,-1])
+     if min_ < optimal: 
+         optimal= min_
+     data_till_now= sim_data[:(population*(i+1))] 
+     print('data tillnow shape is:',data_till_now.shape)
+     opt_index= np.argmin(data_till_now[:,-1])
+     print('max index:',max_index,'max is:',max_,'min index :',min_index,'min is:',min_,'opt_index:',opt_index,'optimal is:',optimal)
+     
+     if flag==0:
+            max_data= data[max_index].reshape(1,-1); flag=1 
+            min_data= data[min_index].reshape(1,-1); opt_data= data_till_now[opt_index].reshape(1,-1);
+     else: 
+            max_data= np.concatenate((max_data,data[max_index].reshape(1,-1)),axis=0) 
+            min_data= np.concatenate((min_data,data[min_index].reshape(1,-1)),axis=0)   
+            opt_data= np.concatenate((opt_data,data_till_now[opt_index].reshape(1,-1)),axis=0)       
+     np.savetxt(max_file,max_data,  delimiter=',')
+     np.savetxt(min_file,min_data,  delimiter=',')
+     np.savetxt(opt_file,opt_data,  delimiter=',')   
 
 if __name__=='__main__':
 	
-	############################
-	data_file_name='pymoo_nn.csv'   
-	D=191; total_len=1330
-	dim=4;n=100;
-
-	pop_size=5
-	n_gen=100
+	##########################
+	n=n_gen*pop_size
 	#################################################
 	#given total length & D => need to find a,c,n,theta
 	problem = MyProblem(D,total_len) 
     
-	already_run = len(glob.glob(data_file_name))
-	print('file exist?:',already_run)
 	#############
 	
 	###########Genetic algorithm ######################
@@ -133,6 +166,7 @@ if __name__=='__main__':
 	res = minimize(problem,algorithm,termination,verbose=True, save_history=True)
 	print('X is:', res.X)
 	print('F is:', res.F)
+	generate_data_for_foam(n_gen,pop_size)      
 	##################################
 	"""
 	######### Nealder Mead ###########################
