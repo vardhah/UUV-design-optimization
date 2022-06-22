@@ -15,6 +15,13 @@ from cfd_sim.dexof_reader_class import parse_dex_file
 sys.dont_write_bytecode = True
 
 
+_name= 'exp1_D150_tl1500_for_foam_max'
+
+#####No editing beyond it
+file_name= _name+'.csv'
+foam_file_name=_name+'_foam.csv'
+
+
                              # input size may change if integer/ordinal type variable and represented by one-hot encoding
 cad_storage_name= './cad_sim/design_points.csv'
 cfd_storage_name= './cfd_sim/design_points.csv'
@@ -92,13 +99,23 @@ if __name__=='__main__':
 	#### tail(c)       = 50-600                         % units in mm 
 	#### n          = 10-50                          % dimensionless parameter 
 	#### theta      = 1-50 ;	                      % Semi-angle of tail 
-
-	a=572.71;c=441.91;d=65; n=10.0; theta=3.07;tl=1250
-	 
-	#Do not delete beyond it.. 
-	x= np.array([a,c,n,theta,d,tl])
-	drag=_evaluate(x)
-	print('x is:',x,'drag is:',drag)
+        
+        
+	#a=572.71;c=441.91;d=65; n=10.0; theta=3.07;tl=1250
+	X=np.loadtxt(file_name,  delimiter=','); flag=0 
+	print('Shape of X is:',X.shape)    
+	for i in range(X.shape[0]):
+		a=X[i,0];b=X[i,1];c=X[i,2];d=X[i,3];n=X[i,4];theta=X[i,5] 
+		tl=a+b+c               
+		x= np.array([a,c,n,theta,d,tl])
+		drag=_evaluate(x)
+		print('x is:',x,'drag is:',drag)
+		if flag==0:
+			foam_data= np.append(X[i],drag).reshape(1,-1) ; flag=1
+		else: 
+			foam_data= np.concatenate((foam_data,np.append(X[i],drag).reshape(1,-1)),axis=0)
+		np.savetxt(foam_file_name,foam_data,  delimiter=',')
+          
 
 
 

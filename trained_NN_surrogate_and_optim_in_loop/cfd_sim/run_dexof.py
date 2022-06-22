@@ -13,7 +13,7 @@ import time
 import re
 import shutil
 
-data_file_name='pymoo_ga.csv' 
+data_file_name='sim_run.csv' 
 
 #######
 path_stl = './stl_cfd/'
@@ -24,16 +24,8 @@ from .dexof_reader_class import parse_dex_file
 default_max=1100
 ######
 
-def run_dex():
- already_run = len(glob.glob(data_file_name))
- print('file exist?:',already_run)
- if already_run==1:
-        multi_runresults=np.loadtxt(data_file_name, delimiter=",",skiprows=0, dtype=np.float32)
-        multi_runresults= np.atleast_2d(multi_runresults)
-        #print('shape of multi_runresults:',multi_runresults.shape)
+def run_dex(mesh=0.2):
 
-
- design_set_load= np.loadtxt('./design_points.csv', delimiter = ",")
  files= os.listdir(path_stl)
  aoa= 0
  result_array=[]
@@ -43,7 +35,7 @@ def run_dex():
  itr=0
  for file_name in files:
     #vel=np.random.rand(1)*9+1
-    #dexof_editor.set_uinlet(vel[0])
+    dexof_editor.setall_mesh(mesh)
     print('--------------------------------------')
     print('---Running CFD iteration:', itr,'----------')
     
@@ -101,23 +93,41 @@ def run_dex():
      os.remove('temp.stl')
      shutil.rmtree(folder)
      del arg_
-     data= np.atleast_2d(np.append(design_set_load,Fd_found))
-     if already_run==0:
-           multi_runresults= data
-     else:
-           multi_runresults= np.concatenate((multi_runresults,data),axis=0)
-         #print('multirun result:',multi_runresults)
-     np.savetxt(data_file_name,multi_runresults,  delimiter=',')
      return Fd_found
-     #return np.atleast_2d(np.append(design_set_load,Fd_found))   
-    except: 
-     data= np.atleast_2d(np.append(design_set_load,np.array(default_max*2)))   
-     if already_run==0:
+    except:
+     return np.atleast_2d(np.array(default_max*2))  
+
+
+def main_run():
+    alt_mesh=[0.15,0.1,0.08,0.06,0.05]
+    already_run = len(glob.glob(data_file_name))
+    print('file exist?:',already_run)
+    if already_run==1:
+        multi_runresults=np.loadtxt(data_file_name, delimiter=",",skiprows=0, dtype=np.float32)
+        multi_runresults= np.atleast_2d(multi_runresults)
+        #print('shape of multi_runresults:',multi_runresults.shape)
+
+    design_set_load= np.loadtxt('./design_points.csv', delimiter = ",")
+    Fd_found= run_dex()
+    mesh=0.2
+    #print('Fd found is:',Fd_found,type(Fd_found))
+    if (Fd_found>=1000):
+      for i in range(len(alt_mesh)):
+         Fd_found= run_dex(alt_mesh[i])
+         if (Fd_found<1000):
+            mesh=alt_mesh[i]
+            break
+
+    drag_data=np.array([Fd_found,mesh])
+    data= np.atleast_2d(np.append(design_set_load,drag_data))
+    print('Data is:',data)
+    if already_run==0:
            multi_runresults= data
-     else:
+    else:
            multi_runresults= np.concatenate((multi_runresults,data),axis=0)
          #print('multirun result:',multi_runresults)
-     np.savetxt(data_file_name,multi_runresults,  delimiter=',')
-     return np.atleast_2d(np.array(default_max*2))  
+    np.savetxt(data_file_name,multi_runresults,  delimiter=',')
+    return Fd_found
+    
 
      

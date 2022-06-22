@@ -41,9 +41,9 @@ categories=[[None],[None],[None],[None],[None],[None]]
 
 
 path='./models/nn_acc_5percent.pt'
-sim_file_name= 'exp1_for_foam'      # Need to change for each experiment
-D=191; total_len=1330               #define problem requirement
-dim=4;n_gen=10;pop_size=5           #GA settings
+sim_file_name= 'exp1_D150_tl1500_for_foam'      # Need to change for each experiment
+D=150; total_len=1500               #define problem requirement
+dim=4;n_gen=20;pop_size=20           #GA settings
 ####Dont change below it #####
 file_name= sim_file_name+'.csv'
 max_file= sim_file_name+'_max.csv'
@@ -114,7 +114,8 @@ class MyProblem(ElementwiseProblem):
         #print('Output is:',output[0][0])
         out["F"] = [output[0][0]]
         #out["G"] = [np.array([1])]
-        
+        X= np.array([x[0],b,x[1],self.dia,x[2],x[3]])
+        X= X.reshape(1,-1)
         if self.flag==0:
             self.sim_data= np.append(X,output).reshape(1,-1) ; self.flag=1
         else: 
