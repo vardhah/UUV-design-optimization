@@ -16,7 +16,6 @@ vessel = GliderVessel('./seed_cad/Remus_Myring_hull.FCStd')
 
 ######Setting vehicle details###
 
-
 #d= dp[1]
 
 a= dp[0]
@@ -24,13 +23,13 @@ c= dp[1]
 n=dp[2]/10
 theta=dp[3]
 d=dp[4]
-tl=dp[5]
-b= tl-a-c
-print('a:',a,'b:',b,'c:',c,'d:',d,'n:',n,'theta:',theta)
+total_len=dp[5]
+
+
+
+b= total_len-a-c
+
 r= d*0.5
-
-
-
 
 
 

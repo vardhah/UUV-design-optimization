@@ -9,13 +9,13 @@ import subprocess
 import time
 #from run_dexof import *
 import sys 
-from cfd_sim.run_dexof import run_dex
+from cfd_sim.run_dexof import *
 from cfd_sim.dexof_reader_class import parse_dex_file
 
 sys.dont_write_bytecode = True
 
 
-_name= 'exp1_D150_tl1500_for_foam_max'
+_name= 'exp3_D165_tl 2000_for_foam_optimal'
 
 #####No editing beyond it
 file_name= _name+'.csv'
@@ -66,27 +66,12 @@ def run_cad_cfd(x):
 	cfd_sim_path= prev+'/cfd_sim'
 	print('func path is:',cfd_sim_path)
 	os.chdir(cfd_sim_path)
-	result = run_dex()
+	result = main_run()
 	os.chdir(prev)
 	return result
 
 
 
-def _evaluate(x):
-        save_design_points(x)
-        delete_dir(dst)
-        subprocess.call('./cad_sim/run_cad.sh')
-        copy_file(cad_storage_name,cfd_storage_name)
-        copy_dir(src,dst)
-        deletefiles(src)
-        prev = os.path.abspath(os.getcwd()) # Save the real cwd
-        print('prev is',prev)
-        cfd_sim_path= prev+'/cfd_sim'
-        print('func path is:',cfd_sim_path)
-        os.chdir(cfd_sim_path)
-        result = run_dex()
-        os.chdir(prev)
-        return result
 
 
 
@@ -102,13 +87,13 @@ if __name__=='__main__':
         
         
 	#a=572.71;c=441.91;d=65; n=10.0; theta=3.07;tl=1250
-	X=np.loadtxt(file_name,  delimiter=','); flag=0 
-	print('Shape of X is:',X.shape)    
+	X=np.loadtxt(file_name,  delimiter=','); flag=0 ;
+	print('--->Shape of X is:',X.shape)    
 	for i in range(X.shape[0]):
 		a=X[i,0];b=X[i,1];c=X[i,2];d=X[i,3];n=X[i,4];theta=X[i,5] 
 		tl=a+b+c               
 		x= np.array([a,c,n,theta,d,tl])
-		drag=_evaluate(x)
+		drag=run_cad_cfd(x)
 		print('x is:',x,'drag is:',drag)
 		if flag==0:
 			foam_data= np.append(X[i],drag).reshape(1,-1) ; flag=1

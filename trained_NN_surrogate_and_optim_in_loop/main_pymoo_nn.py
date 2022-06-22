@@ -41,9 +41,9 @@ categories=[[None],[None],[None],[None],[None],[None]]
 
 
 path='./models/nn_acc_5percent.pt'
-sim_file_name= 'exp1_D150_tl1500_for_foam'      # Need to change for each experiment
-D=150; total_len=1500               #define problem requirement
-dim=4;n_gen=20;pop_size=20           #GA settings
+sim_file_name= 'exp3_D165_tl 2000_for_foam'      # Need to change for each experiment
+D=165; total_len=1200               #define problem requirement
+dim=4;n_gen=20;pop_size=5           #GA settings
 ####Dont change below it #####
 file_name= sim_file_name+'.csv'
 max_file= sim_file_name+'_max.csv'
@@ -127,18 +127,18 @@ def generate_data_for_foam(n_gen,population):
     print('sim data is:',sim_data.shape)   
     optimal=100000; flag=0
     for i in range(n_gen):
-     print('i is:',i,'population is:',population)
+     #print('i is:',i,'population is:',population)
      data= sim_data[(population*i):(population*(i+1))] 
-     print('data shape is:',data.shape)
+     #print('data shape is:',data.shape)
      max_index= np.argmax(data[:,-1])
      min_index=np.argmin(data[:,-1])
      max_= np.max(data[:,-1]); min_= np.min(data[:,-1])
      if min_ < optimal: 
          optimal= min_
      data_till_now= sim_data[:(population*(i+1))] 
-     print('data tillnow shape is:',data_till_now.shape)
+     #print('data tillnow shape is:',data_till_now.shape)
      opt_index= np.argmin(data_till_now[:,-1])
-     print('max index:',max_index,'max is:',max_,'min index :',min_index,'min is:',min_,'opt_index:',opt_index,'optimal is:',optimal)
+     #print('max index:',max_index,'max is:',max_,'min index :',min_index,'min is:',min_,'opt_index:',opt_index,'optimal is:',optimal)
      
      if flag==0:
             max_data= data[max_index].reshape(1,-1); flag=1 

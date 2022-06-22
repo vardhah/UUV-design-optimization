@@ -1,0 +1,85 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2112                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+Build  : _d44c8318-20220111 OPENFOAM=2112 version=2112
+Arch   : "LSB;label=32;scalar=64"
+Exec   : surfaceFeatureExtract
+Date   : Jun 22 2022
+Time   : 22:12:44
+Host   : cf438617a2de
+PID    : 483
+I/O    : uncollated
+Case   : /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0
+nProcs : 1
+trapFpe: Floating point exception trapping enabled (FOAM_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 5, maxFileModificationPolls 20)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+
+Note: Feature line extraction only valid on closed manifold surfaces
+
+Reading surfaceFeatureExtractDict
+
+Surfaces     : UUV.stl
+Output       : UUV
+Load options : offset
+Write options: writeObj=yes writeVTK=off
+
+Statistics:
+Triangles    : 10244 in 1 region(s)
+Vertices     : 5124
+Bounding Box : (-0.54172403 -0.026121 -0.026113) (0.56546801 0.026121 0.026113)
+
+Constructing feature set from included angle 150
+Selecting edges based purely on geometric tests: no
+
+Initial Feature set:
+    points : 2
+    edges  : 38
+    of which
+        region edges   : 0
+        external edges : 25
+        internal edges : 13
+
+Final Feature set:
+    points : 40
+    of which
+        convex             : 0
+        concave            : 0
+        mixed              : 2
+        non-feature        : 38
+    edges  : 38
+    of which
+        external edges     : 25
+        internal edges     : 13
+        flat edges         : 0
+        open edges         : 0
+        multiply connected : 0
+
+Writing extendedFeatureEdgeMesh to "/home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0/constant/extendedFeatureEdgeMesh/UUV.extendedFeatureEdgeMesh"
+
+Writing extendedEdgeMesh components to "/home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0/constant/extendedFeatureEdgeMesh/UUV"
+Writing 0 convex feature points to "/home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0/constant/extendedFeatureEdgeMesh/UUV_convexFeaturePts.obj"
+Writing 0 concave feature points to "/home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0/constant/extendedFeatureEdgeMesh/UUV_concaveFeaturePts.obj"
+Writing 2 mixed feature points to "/home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0/constant/extendedFeatureEdgeMesh/UUV_mixedFeaturePts.obj"
+Writing 2 mixed feature point structure to "/home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0/constant/extendedFeatureEdgeMesh/UUV_mixedFeaturePtsStructure.obj"
+Writing 25 external edges to "/home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0/constant/extendedFeatureEdgeMesh/UUV_externalEdges.obj"
+Writing 13 internal edges to "/home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0/constant/extendedFeatureEdgeMesh/UUV_internalEdges.obj"
+Writing 0 flat edges to "/home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0/constant/extendedFeatureEdgeMesh/UUV_flatEdges.obj"
+Writing 0 open edges to "/home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0/constant/extendedFeatureEdgeMesh/UUV_openEdges.obj"
+Writing 0 multiple edges to "/home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0/constant/extendedFeatureEdgeMesh/UUV_multipleEdges.obj"
+Writing 0 region edges to "/home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0/constant/extendedFeatureEdgeMesh/UUV_regionEdges.obj"
+Writing 38 edge directions to "/home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0/constant/extendedFeatureEdgeMesh/UUV_edgeDirections.obj"
+
+Writing featureEdgeMesh to "/home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0/constant/triSurface/UUV.eMesh"
+ExecutionTime = 0.04 s  ClockTime = 0 s
+
+End
+

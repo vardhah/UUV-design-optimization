@@ -1,0 +1,13 @@
+Wed Jun 22 22:12:44 UTC 2022
+***Feature Extraction***
+Running surfaceFeatureExtract on /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0
+***Block meshing ***
+Running blockMesh on /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0
+***Decomposing  Subdomains  ***
+Running decomposePar on /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0
+***Parallel Meshing   ***
+Running snappyHexMesh (8 processes) on /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0 
+*** Restoring Initial Fields   ***
+Restore 0/ from 0.orig/  [processor directories]
+*** Running Simple Foam   ***
+Running simpleFoam (8 processes) on /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0 

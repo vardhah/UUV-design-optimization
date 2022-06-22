@@ -13,7 +13,7 @@ import time
 import re
 import shutil
 
-data_file_name='sim_run.csv' 
+data_file_name='vmc_cfd3.csv' 
 
 #######
 path_stl = './stl_cfd/'
@@ -109,7 +109,7 @@ def main_run():
 
     design_set_load= np.loadtxt('./design_points.csv', delimiter = ",")
     Fd_found= run_dex()
-    mesh=0.2
+    
     #print('Fd found is:',Fd_found,type(Fd_found))
     if (Fd_found>=1000):
       for i in range(len(alt_mesh)):

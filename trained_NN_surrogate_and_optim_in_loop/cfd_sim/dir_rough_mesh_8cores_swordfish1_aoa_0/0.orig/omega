@@ -45,7 +45,7 @@ boundaryField
     airfoil
     {
         type            omegaWallFunction;
-        value           uniform 35.555832524799996;
+        value           uniform 142.22333009919998;
 	}
 
 	#includeEtc "caseDicts/setConstraintTypes"
