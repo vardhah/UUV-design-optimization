@@ -15,7 +15,7 @@ from cfd_sim.dexof_reader_class import parse_dex_file
 sys.dont_write_bytecode = True
 
 
-_name= 'exp3_D165_tl 2000_for_foam_optimal'
+_name= 'exp4_D120_tl1250_for_foam_optimal'
 
 #####No editing beyond it
 file_name= _name+'.csv'

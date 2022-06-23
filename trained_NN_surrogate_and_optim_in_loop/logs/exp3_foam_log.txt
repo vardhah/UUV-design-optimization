@@ -1664,3 +1664,1886 @@ Problem definition /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_
 **** ALL DONE ****
 *** Cleaning and Running OF ***
 Cleaning case /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0
+*** PostProcessing ***
+----- MESH DENSITIES & CPU TIMES ----- 
+ Converged In:
+Results stored in dir_rough_mesh_8cores_swordfish1_aoa_0/results.log
+*** Results ***
+ ----- LIFT AND DRAG FORCES ---- 
+    Sum of forces
+        Total    : (4.1667649 0.00042414409 0.00078738631)
+        Pressure : (0.48724473 0.00045149783 0.00083113374)
+        Viscous  : (3.6795201 -2.7353735e-05 -4.3747429e-05)
+    Sum of moments
+        Total    : (1.6852387e-05 -6.4441385e-05 0.0003730043)
+        Pressure : (1.7844235e-05 -3.9720847e-05 0.0003515457)
+        Viscous  : (-9.9184724e-07 -2.4720537e-05 2.1458607e-05)
+ ----- LIFT AND DRAG COEFFICIENTS ---- 
+        Cd       : 0.094912026	(pressure: 0.011098631	viscous: 0.083813396)
+        Cl       : 1.4981669e-06	(pressure: 1.5947861e-06	viscous: -9.6619196e-08)
+        Cs       : -2.7812155e-06	(pressure: -2.9357407e-06	viscous: 1.545252e-07)
+___ REFERENCE AREAS ----
+Arefs
+./postProcessing/forceCoeffs_cl/0/coefficient.dat:# Aref          : 1.37832865e-01
+./postProcessing/forceCoeffs_cd/0/coefficient.dat:# Aref          : 2.13735818e-02
+lrefs:
+./postProcessing/forceCoeffs_cl/0/coefficient.dat:# lRef          : 1.20000000e+00
+./postProcessing/forceCoeffs_cd/0/coefficient.dat:# lRef          : 1.20000000e+00
+dir_rough_mesh_8cores_swordfish1_aoa_0.log:Layer mesh : cells:452930  faces:1430564  points:529450
+log.snappyHexMesh:Finished meshing in = 27.87 s.
+Time = 211
+ExecutionTime = 110.73 s  ClockTime = 111 s
+*** ALL DONE ***
+*** ALL DONE -- ALL DONE ***
+Running freecad in Docker 
+Opening: ./seed_cad/Remus_Myring_hull.FCStd
+----> body is: [522.6976948005974, 292.43801541809637, 384.8642897813062, 82.5]
+=> nose_x: [104.53953896011949 209.07907792023897 313.61861688035845
+ 418.15815584047795]
+=> tail_x: [892.108568174955 969.0814261312163 1046.0542840874775 1123.0271420437389]
+******design point is:****** [5.22697695e+02 2.92438015e+02 3.84864290e+02 1.65000000e+02
+ 1.05930515e+00 2.21630772e+00 1.88197877e+04] dp shape  is: (7,)
+=> nose_tail_y: [31.448275386663997 54.13584599190543 69.97976107449018 79.38121206195123
+ 74.39663036595567 54.88989109786704 31.184836646800562 10.486521463822712]
+------Body properties:-------
+  body_area = 0.437300 m^2
+  body_volume = 15145.376971486 m^3
+ my_a: 522.6976948005974 my_b: 292.43801541809637 my_c: 384.8642897813062 my_r: 82.5
+  b1y: 0.0 b2y: 0.0 b3y: 0.0 b4y: 0.0 b5y: 0.0
+  n1y: 31.448275386663997 n2y: 54.13584599190543 n3y: 69.97976107449018 n4y: 79.38121206195123
+  t1y: 74.39663036595567 t2y: 54.88989109786704 t3y: 31.184836646800562 t4y: 10.486521463822712
+------------------------------
+*** ALL DONE -- ALL DONE ***
+ptimisation/git/Surrogate_based_optim_of_UUVhull/trained_NN_surrogate_and_optim_in_loop/cfd_sim')
+('file exist?:', 1)
+Loaded files
+--------------------------------------
+('---Running CFD iteration:', 0, '----------')
+('stl file name:', 'swordfish1.stl')
+('full path of stl file:', './stl_cfd/swordfish1.stl')
+('New dex file name is:', 'rough_mesh_8cores_swordfish1.dex')
+('arg is:', ['./run_dexof.sh', 'rough_mesh_8cores_swordfish1.dex', './stl_cfd/swordfish1.stl', '0'])
+######################################
+######################################
+('Drag force is:', 1100)
+######################################
+('sim time is:', 13.910170078277588)
+Loaded files
+--------------------------------------
+('---Running CFD iteration:', 0, '----------')
+('stl file name:', 'swordfish1.stl')
+('full path of stl file:', './stl_cfd/swordfish1.stl')
+('New dex file name is:', 'rough_mesh_8cores_swordfish1.dex')
+('arg is:', ['./run_dexof.sh', 'rough_mesh_8cores_swordfish1.dex', './stl_cfd/swordfish1.stl', '0'])
+######################################
+######################################
+('Drag force is:', 4.178604)
+######################################
+('sim time is:', 79.74832677841187)
+('Data is:', array([[5.22697695e+02, 2.92438015e+02, 3.84864290e+02, 1.65000000e+02,
+        1.05930515e+00, 2.21630772e+00, 1.88197877e+04, 4.17860400e+00,
+        1.50000000e-01]]))
+('x is:', array([ 522.6976948 ,  384.86428978,   10.59305151,    2.21630772,
+        165.        , 1200.        ]), 'drag is:', 4.178604)
+('*Deleted directory:', './cfd_sim/stl_cfd')
+('*Copied file from', './cad_sim/design_points.csv', 'to destination:', './cfd_sim/design_points.csv')
+('*Copied directory from', './cad_sim/stl_repo', 'to destination:', './cfd_sim/stl_cfd')
+('Deleted files from location:', './cad_sim/stl_repo')
+('prev is', '/home/hv/harsh/Surrogate_and_optimisation/git/Surrogate_based_optim_of_UUVhull/trained_NN_surrogate_and_optim_in_loop')
+('func path is:', '/home/hv/harsh/Surrogate_and_optimisation/git/Surrogate_based_optim_of_UUVhull/trained_NN_surrogate_and_optim_in_loop/cfd_sim')
+('file exist?:', 1)
+Loaded files
+--------------------------------------
+('---Running CFD iteration:', 0, '----------')
+('stl file name:', 'swordfish1.stl')
+('full path of stl file:', './stl_cfd/swordfish1.stl')
+('New dex file name is:', 'rough_mesh_8cores_swordfish1.dex')
+('arg is:', ['./run_dexof.sh', 'rough_mesh_8cores_swordfish1.dex', './stl_cfd/swordfish1.stl', '0'])
+######################################
+######################################
+('Drag force is:', 1100)
+######################################
+('sim time is:', 13.941256999969482)
+Loaded files
+--------------------------------------
+('---Running CFD iteration:', 0, '----------')
+('stl file name:', 'swordfish1.stl')
+('full path of stl file:', './stl_cfd/swordfish1.stl')
+('New dex file name is:', 'rough_mesh_8cores_swordfish1.dex')
+('arg is:', ['./run_dexof.sh', 'rough_mesh_8cores_swordfish1.dex', './stl_cfd/swordfish1.stl', '0'])
+######################################
+######################################
+('Drag force is:', 1100)
+######################################
+('sim time is:', 16.66097092628479)
+Loaded files
+--------------------------------------
+('---Running CFD iteration:', 0, '----------')
+('stl file name:', 'swordfish1.stl')
+('full path of stl file:', './stl_cfd/swordfish1.stl')
+('New dex file name is:', 'rough_mesh_8cores_swordfish1.dex')
+('arg is:', ['./run_dexof.sh', 'rough_mesh_8cores_swordfish1.dex', './stl_cfd/swordfish1.stl', '0'])
+######################################
+######################################
+('Drag force is:', 4.1667649)
+######################################
+('sim time is:', 147.98344802856445)
+('Data is:', array([[5.22697695e+02, 2.92438015e+02, 3.84864290e+02, 1.65000000e+02,
+        1.05930515e+00, 2.21630772e+00, 1.88197877e+04, 4.16676490e+00,
+        1.00000000e-01]]))
+('x is:', array([ 522.6976948 ,  384.86428978,   10.59305151,    2.21630772,
+        165.        , 1200.        ]), 'drag is:', 4.1667649)
+('*Deleted directory:', './cfd_sim/stl_cfd')
+('*Copied file from', '.******************************************
+**     DEXTER-OPENFOAM INTERFACE        **
+**  Stevens Institute of Technology     **
+**  No warranties: use at your own risk **
+******************************************
+USAGE: run_one_aoa.sh dexfile stlfile aoa 
+rough_mesh_8cores_swordfish1.dex
+./stl_cfd/swordfish1.stl
+0
+Running openfoam in Docker 
+USAGE: run_one_aoa.sh dexfile stlfile aoa 
+rough_mesh_8cores_swordfish1
+*** Preprocessing *** 
+Dex_of called with arguments:
+ Positional Arguments: ['/home/aimed_user/dex_of/dex_of.py', 'rough_mesh_8cores_swordfish1.dex']
+ Named Arguments: {'infile': './stl_cfd/swordfish1.stl', 'aoa': '0', 'casefoldername': 'dir_rough_mesh_8cores_swordfish1_aoa_0'}
+Path:  /home/aimed_user/dex_of
+Updated the value for infile given in dex file with  that from the command line
+Updated the value for aoa given in dex file with  that from the command line
+Updated the value for casefoldername given in dex file with  that from the command line
+WARNING - The mesh surface refinement level is not specified. Default values of (5 7) will be used.
+Copying:: cp -r /home/aimed_user/dex_of/ofTemplate/* /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0
+Case folder (/home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0) has been created 
+Problem definition /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0/problem_def.json is written into the case folder
+**** ALL DONE ****
+*** Cleaning and Running OF ***
+Cleaning case /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0
+*** PostProcessing ***
+----- MESH DENSITIES & CPU TIMES ----- 
+ Converged In:
+Results stored in dir_rough_mesh_8cores_swordfish1_aoa_0/results.log
+*** Results ***
+ ----- LIFT AND DRAG FORCES ---- 
+    Sum of forces
+        Total    : (0 0 0)
+        Pressure : (0 0 0)
+        Viscous  : (0 0 0)
+    Sum of moments
+        Total    : (0 0 0)
+        Pressure : (0 0 0)
+        Viscous  : (0 0 0)
+ ----- LIFT AND DRAG COEFFICIENTS ---- 
+        Cd       : 0	(pressure: 0	viscous: 0)
+        Cl       : 0	(pressure: 0	viscous: 0)
+        Cs       : 0	(pressure: 0	viscous: 0)
+___ REFERENCE AREAS ----
+Arefs
+./postProcessing/forceCoeffs_cl/0/coefficient.dat:# Aref          : 1.37832414e-01
+./postProcessing/forceCoeffs_cd/0/coefficient.dat:# Aref          : 2.13735820e-02
+lrefs:
+./postProcessing/forceCoeffs_cl/0/coefficient.dat:# lRef          : 1.20000000e+00
+./postProcessing/forceCoeffs_cd/0/coefficient.dat:# lRef          : 1.20000000e+00
+dir_rough_mesh_8cores_swordfish1_aoa_0.log:Layer mesh : cells:864  faces:2916  points:1225
+log.snappyHexMesh:Finished meshing in = 0.26 s.
+Time = 500
+ExecutionTime = 5.65 s  ClockTime = 5 s
+*** ALL DONE ***
+*** ALL DONE -- ALL DONE ***
+******************************************
+**     DEXTER-OPENFOAM INTERFACE        **
+**  Stevens Institute of Technology     **
+**  No warranties: use at your own risk **
+******************************************
+USAGE: run_one_aoa.sh dexfile stlfile aoa 
+rough_mesh_8cores_swordfish1.dex
+./stl_cfd/swordfish1.stl
+0
+Running openfoam in Docker 
+USAGE: run_one_aoa.sh dexfile stlfile aoa 
+rough_mesh_8cores_swordfish1
+*** Preprocessing *** 
+Dex_of called with arguments:
+ Positional Arguments: ['/home/aimed_user/dex_of/dex_of.py', 'rough_mesh_8cores_swordfish1.dex']
+ Named Arguments: {'infile': './stl_cfd/swordfish1.stl', 'aoa': '0', 'casefoldername': 'dir_rough_mesh_8cores_swordfish1_aoa_0'}
+Path:  /home/aimed_user/dex_of
+Updated the value for infile given in dex file with  that from the command line
+Updated the value for aoa given in dex file with  that from the command line
+Updated the value for casefoldername given in dex file with  that from the command line
+WARNING - The mesh surface refinement level is not specified. Default values of (5 7) will be used.
+Copying:: cp -r /home/aimed_user/dex_of/ofTemplate/* /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0
+Case folder (/home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0) has been created 
+Problem definition /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0/problem_def.json is written into the case folder
+**** ALL DONE ****
+*** Cleaning and Running OF ***
+Cleaning case /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0
+*** PostProcessing ***
+----- MESH DENSITIES & CPU TIMES ----- 
+ Converged In:
+Results stored in dir_rough_mesh_8cores_swordfish1_aoa_0/results.log
+*** Results ***
+ ----- LIFT AND DRAG FORCES ---- 
+    Sum of forces
+        Total    : (4.1879983 0.0023890539 0.0004643548)
+        Pressure : (0.53128588 0.0023337187 0.00045121896)
+        Viscous  : (3.6567125 5.5335185e-05 1.3135839e-05)
+    Sum of moments
+        Total    : (-1.9976528e-05 -0.00024457277 0.00054214754)
+        Pressure : (-2.6233965e-05 -0.00025216995 0.0005195999)
+        Viscous  : (6.2574363e-06 7.597183e-06 2.2547646e-05)
+ ----- LIFT AND DRAG COEFFICIENTS ---- 
+        Cd       : 0.095395689	(pressure: 0.012101815	viscous: 0.083293874)
+        Cl       : 8.4386728e-06	(pressure: 8.2432166e-06	viscous: 1.9545625e-07)
+        Cs       : -1.640205e-06	(pressure: -1.5938063e-06	viscous: -4.6398723e-08)
+___ REFERENCE AREAS ----
+Arefs
+./postProcessing/forceCoeffs_cl/0/coefficient.dat:# Aref          : 1.37832414e-01
+./postProcessing/forceCoeffs_cd/0/coefficient.dat:# Aref          : 2.13735820e-02
+lrefs:
+./postProcessing/forceCoeffs_cl/0/coefficient.dat:# lRef          : 1.20000000e+00
+./postProcessing/forceCoeffs_cd/0/coefficient.dat:# lRef          : 1.20000000e+00
+dir_rough_mesh_8cores_swordfish1_aoa_0.log:Layer mesh : cells:224773  faces:714960  points:268064
+log.snappyHexMesh:Finished meshing in = 14.73 s.
+Time = 245
+ExecutionTime = 55.77 s  ClockTime = 56 s
+*** ALL DONE ***
+*** ALL DONE -- ALL DONE ***
+Running freecad in Docker 
+Opening: ./seed_cad/Remus_Myring_hull.FCStd
+----> body is: [522.6976948005974, 292.43801541809637, 384.8642897813062, 82.5]
+=> nose_x: [104.53953896011949 209.07907792023897 313.61861688035845
+ 418.15815584047795]
+=> tail_x: [892.108568174955 969.0814261312163 1046.0542840874775 1123.0271420437389]
+******design point is:****** [5.22697695e+02 2.92438015e+02 3.84864290e+02 1.65000000e+02
+ 1.05930515e+00 2.21630772e+00 1.88197877e+04] dp shape  is: (7,)
+=> nose_tail_y: [31.448275386663997 54.13584599190543 69.97976107449018 79.38121206195123
+ 74.39663036595567 54.88989109786704 31.184836646800562 10.486521463822712]
+------Body properties:-------
+  body_area = 0.437300 m^2
+  body_volume = 15145.376971486 m^3
+ my_a: 522.6976948005974 my_b: 292.43801541809637 my_c: 384.8642897813062 my_r: 82.5
+  b1y: 0.0 b2y: 0.0 b3y: 0.0 b4y: 0.0 b5y: 0.0
+  n1y: 31.448275386663997 n2y: 54.13584599190543 n3y: 69.97976107449018 n4y: 79.38121206195123
+  t1y: 74.39663036595567 t2y: 54.88989109786704 t3y: 31.184836646800562 t4y: 10.486521463822712
+------------------------------
+*** ALL DONE -- ALL DONE ***
+******************************************
+**     DEXTER-OPENFOAM INTERFACE        **
+**  Stevens Institute of Technology     **
+**  No warranties: use at your own risk **
+******************************************
+USAGE: run_one_aoa.sh dexfile stlfile aoa 
+rough_mesh_8cores_swordfish1.dex
+./stl_cfd/swordfish1.stl
+0
+Running openfoam in Docker 
+USAGE: run_one_aoa.sh dexfile stlfile aoa 
+rough_mesh_8cores_swordfish1
+*** Preprocessing *** 
+Dex_of called with arguments:
+ Positional Arguments: ['/home/aimed_user/dex_of/dex_of.py', 'rough_mesh_8cores_swordfish1.dex']
+ Named Arguments: {'infile': './stl_cfd/swordfish1.stl', 'aoa': '0', 'casefoldername': 'dir_rough_mesh_8cores_swordfish1_aoa_0'}
+Path:  /home/aimed_user/dex_of
+Updated the value for infile given in dex file with  that from the command line
+Updated the value for aoa given in dex file with  that from the command line
+Updated the value for casefoldername given in dex file with  that from the command line
+WARNING - The mesh surface refinement level is not specified. Default values of (5 7) will be used.
+Copying:: cp -r /home/aimed_user/dex_of/ofTemplate/* /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0
+Case folder (/home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0) has been created 
+Problem definition /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0/problem_def.json is written into the case folder
+**** ALL DONE ****
+*** Cleaning and Running OF ***
+Cleaning case /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0
+*** PostProcessing ***
+----- MESH DENSITIES & CPU TIMES ----- 
+ Converged In:
+Results stored in dir_rough_mesh_8cores_swordfish1_aoa_0/results.log
+*** Results ***
+ ----- LIFT AND DRAG FORCES ---- 
+    Sum of forces
+        Total    : (0 0 0)
+        Pressure : (0 0 0)
+        Viscous  : (0 0 0)
+    Sum of moments
+        Total    : (0 0 0)
+        Pressure : (0 0 0)
+        Viscous  : (0 0 0)
+ ----- LIFT AND DRAG COEFFICIENTS ---- 
+        Cd       : 0	(pressure: 0	viscous: 0)
+        Cl       : 0	(pressure: 0	viscous: 0)
+        Cs       : 0	(pressure: 0	viscous: 0)
+___ REFERENCE AREAS ----
+Arefs
+./postProcessing/forceCoeffs_cl/0/coefficient.dat:# Aref          : 1.37832865e-01
+./postProcessing/forceCoeffs_cd/0/coefficient.dat:# Aref          : 2.13735818e-02
+lrefs:
+./postProcessing/forceCoeffs_cl/0/coefficient.dat:# lRef          : 1.20000000e+00
+./postProcessing/forceCoeffs_cd/0/coefficient.dat:# lRef          : 1.20000000e+00
+dir_rough_mesh_8cores_swordfish1_aoa_0.log:Layer mesh : cells:864  faces:2916  points:1225
+log.snappyHexMesh:Finished meshing in = 0.22 s.
+Time = 500
+ExecutionTime = 5.53 s  ClockTime = 6 s
+*** ALL DONE ***
+*** ALL DONE -- ALL DONE ***
+******************************************
+**     DEXTER-OPENFOAM INTERFACE        **
+**  Stevens Institute of Technology     **
+**  No warranties: use at your own risk **
+******************************************
+USAGE: run_one_aoa.sh dexfile stlfile aoa 
+rough_mesh_8cores_swordfish1.dex
+./stl_cfd/swordfish1.stl
+0
+Running openfoam in Docker 
+USAGE: run_one_aoa.sh dexfile stlfile aoa 
+rough_mesh_8cores_swordfish1
+*** Preprocessing *** 
+Dex_of called with arguments:
+ Positional Arguments: ['/home/aimed_user/dex_of/dex_of.py', 'rough_mesh_8cores_swordfish1.dex']
+ Named Arguments: {'infile': './stl_cfd/swordfish1.stl', 'aoa': '0', 'casefoldername': 'dir_rough_mesh_8cores_swordfish1_aoa_0'}
+Path:  /home/aimed_user/dex_of
+Updated the value for infile given in dex file with  that from the command line
+Updated the value for aoa given in dex file with  that from the command line
+Updated the value for casefoldername given in dex file with  that from the command line
+WARNING - The mesh surface refinement level is not specified. Default values of (5 7) will be used.
+Copying:: cp -r /home/aimed_user/dex_of/ofTemplate/* /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0
+Case folder (/home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0) has been created 
+Problem definition /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0/problem_def.json is written into the case folder
+**** ALL DONE ****
+*** Cleaning and Running OF ***
+Cleaning case /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0
+*** PostProcessing ***
+----- MESH DENSITIES & CPU TIMES ----- 
+ Converged In:
+Results stored in dir_rough_mesh_8cores_swordfish1_aoa_0/results.log
+*** Results ***
+ ----- LIFT AND DRAG FORCES ---- 
+    Sum of forces
+        Total    : (0 0 0)
+        Pressure : (0 0 0)
+        Viscous  : (0 0 0)
+    Sum of moments
+        Total    : (0 0 0)
+        Pressure : (0 0 0)
+        Viscous  : (0 0 0)
+ ----- LIFT AND DRAG COEFFICIENTS ---- 
+        Cd       : 0	(pressure: 0	viscous: 0)
+        Cl       : 0	(pressure: 0	viscous: 0)
+        Cs       : 0	(pressure: 0	viscous: 0)
+___ REFERENCE AREAS ----
+Arefs
+./postProcessing/forceCoeffs_cl/0/coefficient.dat:# Aref          : 1.37832865e-01
+./postProcessing/forceCoeffs_cd/0/coefficient.dat:# Aref          : 2.13735818e-02
+lrefs:
+./postProcessing/forceCoeffs_cl/0/coefficient.dat:# lRef          : 1.20000000e+00
+./postProcessing/forceCoeffs_cd/0/coefficient.dat:# lRef          : 1.20000000e+00
+dir_rough_mesh_8cores_swordfish1_aoa_0.log:Layer mesh : cells:2048  faces:6720  points:2673
+log.snappyHexMesh:Finished meshing in = 0.26 s.
+Time = 500
+ExecutionTime = 8.22 s  ClockTime = 8 s
+*** ALL DONE ***
+*** ALL DONE -- ALL DONE ***
+******************************************
+**     DEXTER-OPENFOAM INTERFACE        **
+**  Stevens Institute of Technology     **
+**  No warranties: use at your own risk **
+******************************************
+USAGE: run_one_aoa.sh dexfile stlfile aoa 
+rough_mesh_8cores_swordfish1.dex
+./stl_cfd/swordfish1.stl
+0
+Running openfoam in Docker 
+USAGE: run_one_aoa.sh dexfile stlfile aoa 
+rough_mesh_8cores_swordfish1
+*** Preprocessing *** 
+Dex_of called with arguments:
+ Positional Arguments: ['/home/aimed_user/dex_of/dex_of.py', 'rough_mesh_8cores_swordfish1.dex']
+ Named Arguments: {'infile': './stl_cfd/swordfish1.stl', 'aoa': '0', 'casefoldername': 'dir_rough_mesh_8cores_swordfish1_aoa_0'}
+Path:  /home/aimed_user/dex_of
+Updated the value for infile given in dex file with  that from the command line
+Updated the value for aoa given in dex file with  that from the command line
+Updated the value for casefoldername given in dex file with  that from the command line
+WARNING - The mesh surface refinement level is not specified. Default values of (5 7) will be used.
+Copying:: cp -r /home/aimed_user/dex_of/ofTemplate/* /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0
+Case folder (/home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0) has been created 
+Problem definition /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0/problem_def.json is written into the case folder
+**** ALL DONE ****
+*** Cleaning and Running OF ***
+Cleaning case /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0
+*** PostProcessing ***
+----- MESH DENSITIES & CPU TIMES ----- 
+ Converged In:
+Results stored in dir_rough_mesh_8cores_swordfish1_aoa_0/results.log
+*** Results ***
+ ----- LIFT AND DRAG FORCES ---- 
+    Sum of forces
+        Total    : (4.1667649 0.00042414409 0.00078738631)
+        Pressure : (0.48724473 0.00045149783 0.00083113374)
+        Viscous  : (3.6795201 -2.7353735e-05 -4.3747429e-05)
+    Sum of moments
+        Total    : (1.6852387e-05 -6.4441385e-05 0.0003730043)
+        Pressure : (1.7844235e-05 -3.9720847e-05 0.0003515457)
+        Viscous  : (-9.9184724e-07 -2.4720537e-05 2.1458607e-05)
+ ----- LIFT AND DRAG COEFFICIENTS ---- 
+        Cd       : 0.094912026	(pressure: 0.011098631	viscous: 0.083813396)
+        Cl       : 1.4981669e-06	(pressure: 1.5947861e-06	viscous: -9.6619196e-08)
+        Cs       : -2.7812155e-06	(pressure: -2.9357407e-06	viscous: 1.545252e-07)
+___ REFERENCE AREAS ----
+Arefs
+./postProcessing/forceCoeffs_cl/0/coefficient.dat:# Aref          : 1.37832865e-01
+./postProcessing/forceCoeffs_cd/0/coefficient.dat:# Aref          : 2.13735818e-02
+lrefs:
+./postProcessing/forceCoeffs_cl/0/coefficient.dat:# lRef          : 1.20000000e+00
+./postProcessing/forceCoeffs_cd/0/coefficient.dat:# lRef          : 1.20000000e+00
+dir_rough_mesh_8cores_swordfish1_aoa_0.log:Layer mesh : cells:452930  faces:1430564  points:529450
+log.snappyHexMesh:Finished meshing in = 27.27 s.
+Time = 211
+ExecutionTime = 107.28 s  ClockTime = 108 s
+*** ALL DONE ***
+*** ALL DONE -- ALL DONE ***
+/cad_sim/design_points.csv', 'to destination:', './cfd_sim/design_points.csv')
+('*Copied directory from', './cad_sim/stl_repo', 'to destination:', './cfd_sim/stl_cfd')
+('Deleted files from location:', './cad_sim/stl_repo')
+('prev is', '/home/hv/harsh/Surrogate_and_optimisation/git/Surrogate_based_optim_of_UUVhull/trained_NN_surrogate_and_optim_in_loop')
+('func path is:', '/home/hv/harsh/Surrogate_and_optimisation/git/Surrogate_based_optim_of_UUVhull/trained_NN_surrogate_and_optim_in_loop/cfd_sim')
+('file exist?:', 1)
+Loaded files
+--------------------------------------
+('---Running CFD iteration:', 0, '----------')
+('stl file name:', 'swordfish1.stl')
+('full path of stl file:', './stl_cfd/swordfish1.stl')
+('New dex file name is:', 'rough_mesh_8cores_swordfish1.dex')
+('arg is:', ['./run_dexof.sh', 'rough_mesh_8cores_swordfish1.dex', './stl_cfd/swordfish1.stl', '0'])
+######################################
+######################################
+('Drag force is:', 1100)
+######################################
+('sim time is:', 13.83988881111145)
+Loaded files
+--------------------------------------
+('---Running CFD iteration:', 0, '----------')
+('stl file name:', 'swordfish1.stl')
+('full path of stl file:', './stl_cfd/swordfish1.stl')
+('New dex file name is:', 'rough_mesh_8cores_swordfish1.dex')
+('arg is:', ['./run_dexof.sh', 'rough_mesh_8cores_swordfish1.dex', './stl_cfd/swordfish1.stl', '0'])
+######################################
+######################################
+('Drag force is:', 4.1879983)
+######################################
+('sim time is:', 79.21713209152222)
+('Data is:', array([[5.22697695e+02, 2.92438015e+02, 3.84864290e+02, 1.65000000e+02,
+        1.05930515e+00, 2.21630772e+00, 1.88197877e+04, 4.18799830e+00,
+        1.50000000e-01]]))
+('x is:', array([ 522.6976948 ,  384.86428978,   10.59305151,    2.21630772,
+        165.        , 1200.        ]), 'drag is:', 4.1879983)
+('*Deleted directory:', './cfd_sim/stl_cfd')
+('*Copied file from', './cad_sim/design_points.csv', 'to destination:', './cfd_sim/design_points.csv')
+('*Copied directory from', './cad_sim/stl_repo', 'to destination:', './cfd_sim/stl_cfd')
+('Deleted files from location:', './cad_sim/stl_repo')
+('prev is', '/home/hv/harsh/Surrogate_and_optimisation/git/Surrogate_based_optim_of_UUVhull/trained_NN_surrogate_and_optim_in_loop')
+('func path is:', '/home/hv/harsh/Surrogate_and_optimisation/git/Surrogate_based_optim_of_UUVhull/trained_NN_surrogate_and_optim_in_loop/cfd_sim')
+('file exist?:', 1)
+Loaded files
+--------------------------------------
+('---Running CFD iteration:', 0, '----------')
+('stl file name:', 'swordfish1.stl')
+('full path of stl file:', './stl_cfd/swordfish1.stl')
+('New dex file name is:', 'rough_mesh_8cores_swordfish1.dex')
+('arg is:', ['./run_dexof.sh', 'rough_mesh_8cores_swordfish1.dex', './stl_cfd/swordfish1.stl', '0'])
+######################################
+######################################
+('Drag force is:', 1100)
+######################################
+('sim time is:', 13.680072784423828)
+Loaded files
+--------------------------------------
+('---Running CFD iteration:', 0, '----------')
+('stl file name:', 'swordfish1.stl')
+('full path of stl file:', './stl_cfd/swordfish1.stl')
+('New dex file name is:', 'rough_mesh_8cores_swordfish1.dex')
+('arg is:', ['./run_dexof.sh', 'rough_mesh_8cores_swordfish1.dex', './stl_cfd/swordfish1.stl', '0'])
+######################################
+######################################
+('Drag force is:', 1100)
+######################################
+('sim time is:', 16.442909955978394)
+Loaded files
+--------------------------------------
+('---Running CFD iteration:', 0, '----------')
+('stl file name:', 'swordfish1.stl')
+('full path of stl file:', './stl_cfd/swordfish1.stl')
+('New dex file name is:', 'rough_mesh_8cores_swordfish1.dex')
+('arg is:', ['./run_dexof.sh', 'rough_mesh_8cores_swordfish1.dex', './stl_cfd/swordfish1.stl', '0'])
+######################################
+######################################
+('Drag force is:', 4.1667649)
+######################################
+('sim time is:', 144.0Running freecad in Docker 
+Opening: ./seed_cad/Remus_Myring_hull.FCStd
+----> body is: [522.6976948005974, 292.43801541809637, 384.8642897813062, 82.5]
+=> nose_x: [104.53953896011949 209.07907792023897 313.61861688035845
+ 418.15815584047795]
+=> tail_x: [892.108568174955 969.0814261312163 1046.0542840874775 1123.0271420437389]
+******design point is:****** [5.22697695e+02 2.92438015e+02 3.84864290e+02 1.65000000e+02
+ 1.05930515e+00 2.98983425e+00 1.88197877e+04] dp shape  is: (7,)
+=> nose_tail_y: [31.448275386663997 54.13584599190543 69.97976107449018 79.38121206195123
+ 74.56324515210204 55.38973545630612 31.934603184459164 11.152980608408143]
+------Body properties:-------
+  body_area = 0.438238 m^2
+  body_volume = 15179.597230010 m^3
+ my_a: 522.6976948005974 my_b: 292.43801541809637 my_c: 384.8642897813062 my_r: 82.5
+  b1y: 0.0 b2y: 0.0 b3y: 0.0 b4y: 0.0 b5y: 0.0
+  n1y: 31.448275386663997 n2y: 54.13584599190543 n3y: 69.97976107449018 n4y: 79.38121206195123
+  t1y: 74.56324515210204 t2y: 55.38973545630612 t3y: 31.934603184459164 t4y: 11.152980608408143
+------------------------------
+*** ALL DONE -- ALL DONE ***
+******************************************
+**     DEXTER-OPENFOAM INTERFACE        **
+**  Stevens Institute of Technology     **
+**  No warranties: use at your own risk **
+******************************************
+USAGE: run_one_aoa.sh dexfile stlfile aoa 
+rough_mesh_8cores_swordfish1.dex
+./stl_cfd/swordfish1.stl
+0
+Running openfoam in Docker 
+USAGE: run_one_aoa.sh dexfile stlfile aoa 
+rough_mesh_8cores_swordfish1
+*** Preprocessing *** 
+Dex_of called with arguments:
+ Positional Arguments: ['/home/aimed_user/dex_of/dex_of.py', 'rough_mesh_8cores_swordfish1.dex']
+ Named Arguments: {'infile': './stl_cfd/swordfish1.stl', 'aoa': '0', 'casefoldername': 'dir_rough_mesh_8cores_swordfish1_aoa_0'}
+Path:  /home/aimed_user/dex_of
+Updated the value for infile given in dex file with  that from the command line
+Updated the value for aoa given in dex file with  that from the command line
+Updated the value for casefoldername given in dex file with  that from the command line
+WARNING - The mesh surface refinement level is not specified. Default values of (5 7) will be used.
+Copying:: cp -r /home/aimed_user/dex_of/ofTemplate/* /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0
+Case folder (/home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0) has been created 
+Problem definition /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0/problem_def.json is written into the case folder
+**** ALL DONE ****
+*** Cleaning and Running OF ***
+Cleaning case /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0
+*** PostProcessing ***
+----- MESH DENSITIES & CPU TIMES ----- 
+ Converged In:
+Results stored in dir_rough_mesh_8cores_swordfish1_aoa_0/results.log
+*** Results ***
+ ----- LIFT AND DRAG FORCES ---- 
+    Sum of forces
+        Total    : (0 0 0)
+        Pressure : (0 0 0)
+        Viscous  : (0 0 0)
+    Sum of moments
+        Total    : (0 0 0)
+        Pressure : (0 0 0)
+        Viscous  : (0 0 0)
+ ----- LIFT AND DRAG COEFFICIENTS ---- 
+        Cd       : 0	(pressure: 0	viscous: 0)
+        Cl       : 0	(pressure: 0	viscous: 0)
+        Cs       : 0	(pressure: 0	viscous: 0)
+___ REFERENCE AREAS ----
+Arefs
+./postProcessing/forceCoeffs_cl/0/coefficient.dat:# Aref          : 1.38134229e-01
+./postProcessing/forceCoeffs_cd/0/coefficient.dat:# Aref          : 2.13736032e-02
+lrefs:
+./postProcessing/forceCoeffs_cl/0/coefficient.dat:# lRef          : 1.20000000e+00
+./postProcessing/forceCoeffs_cd/0/coefficient.dat:# lRef          : 1.20000000e+00
+dir_rough_mesh_8cores_swordfish1_aoa_0.log:Layer mesh : cells:864  faces:2916  points:1225
+log.snappyHexMesh:Finished meshing in = 0.25 s.
+Time = 500
+ExecutionTime = 5.52 s  ClockTime = 5 s
+*** ALL DONE ***
+*** ALL DONE -- ALL DONE ***
+******************************************
+**     DEXTER-OPENFOAM INTERFACE        **
+**  Stevens Institute of Technology     **
+**  No warranties: use at your own risk **
+******************************************
+USAGE: run_one_aoa.sh dexfile stlfile aoa 
+rough_mesh_8cores_swordfish1.dex
+./stl_cfd/swordfish1.stl
+0
+Running openfoam in Docker 
+USAGE: run_one_aoa.sh dexfile stlfile aoa 
+rough_mesh_8cores_swordfish1
+*** Preprocessing *** 
+Dex_of called with arguments:
+ Positional Arguments: ['/home/aimed_user/dex_of/dex_of.py', 'rough_mesh_8cores_swordfish1.dex']
+ Named Arguments: {'infile': './stl_cfd/swordfish1.stl', 'aoa': '0', 'casefoldername': 'dir_rough_mesh_8cores_swordfish1_aoa_0'}
+Path:  /home/aimed_user/dex_of
+Updated the value for infile given in dex file with  that from the command line
+Updated the value for aoa given in dex file with  that from the command line
+Updated the value for casefoldername given in dex file with  that from the command line
+WARNING - The mesh surface refinement level is not specified. Default values of (5 7) will be used.
+Copying:: cp -r /home/aimed_user/dex_of/ofTemplate/* /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0
+Case folder (/home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0) has been created 
+Problem definition /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0/problem_def.json is written into the case folder
+**** ALL DONE ****
+*** Cleaning and Running OF ***
+Cleaning case /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0
+*** PostProcessing ***
+----- MESH DENSITIES & CPU TIMES ----- 
+ Converged In:
+Results stored in dir_rough_mesh_8cores_swordfish1_aoa_0/results.log
+*** Results ***
+ ----- LIFT AND DRAG FORCES ---- 
+    Sum of forces
+        Total    : (4.1740453 -0.00095016559 -8.6820975e-05)
+        Pressure : (0.52483204 -0.00098954542 -9.2971652e-05)
+        Viscous  : (3.6492133 3.9379824e-05 6.1506766e-06)
+    Sum of moments
+        Total    : (-1.024954e-05 0.00011780273 -0.00036879078)
+        Pressure : (-1.2591995e-05 0.00010720756 -0.00039088563)
+        Viscous  : (2.3424548e-06 1.0595172e-05 2.209485e-05)
+ ----- LIFT AND DRAG COEFFICIENTS ---- 
+        Cd       : 0.095077769	(pressure: 0.011954796	viscous: 0.083122973)
+        Cl       : -3.3488643e-06	(pressure: -3.4876588e-06	viscous: 1.3879443e-07)
+        Cs       : 3.0600105e-07	(pressure: 3.2767914e-07	viscous: -2.1678097e-08)
+___ REFERENCE AREAS ----
+Arefs
+./postProcessing/forceCoeffs_cl/0/coefficient.dat:# Aref          : 1.38134229e-01
+./postProcessing/forceCoeffs_cd/0/coefficient.dat:# Aref          : 2.13736032e-02
+lrefs:
+./postProcessing/forceCoeffs_cl/0/coefficient.dat:# lRef          : 1.20000000e+00
+./postProcessing/forceCoeffs_cd/0/coefficient.dat:# lRef          : 1.20000000e+00
+dir_rough_mesh_8cores_swordfish1_aoa_0.log:Layer mesh : cells:218581  faces:695110  points:260443
+log.snappyHexMesh:Finished meshing in = 14.34 s.
+Time = 265
+ExecutionTime = 59.2 s  ClockTime = 59 s
+*** ALL DONE ***
+*** ALL DONE -- ALL DONE ***
+Running freecad in Docker 
+Opening: ./seed_cad/Remus_Myring_hull.FCStd
+----> body is: [539.1200551655073, 276.0156550531865, 384.8642897813062, 82.5]
+=> nose_x: [107.82401103310147 215.64802206620294 323.4720330993044 431.2960441324059]
+=> tail_x: [892.108568174955 969.0814261312163 1046.0542840874775 1123.0271420437389]
+******design point is:****** [5.39120055e+02 2.76015655e+02 3.84864290e+02 1.65000000e+02
+ 1.04313333e+00 2.99971214e+00 1.87491949e+04] dp shape  is: (7,)
+=> nose_tail_y: [30.981557026085717 53.78341030756171 69.80142179699295 79.3338009266972
+ 74.5653742023705 55.396122607111515 31.944183910667274 11.161496809482003]
+------Body properties:-------
+  body_area = 0.434642 m^2
+  body_volume = 14981.367828211 m^3
+ my_a: 539.1200551655073 my_b: 276.0156550531865 my_c: 384.8642897813062 my_r: 82.5
+  b1y: 0.0 b2y: 0.0 b3y: 0.0 b4y: 0.0 b5y: 0.0
+  n1y: 30.981557026085717 n2y: 53.78341030756171 n3y: 69.80142179699295 n4y: 79.3338009266972
+  t1y: 74.5653742023705 t2y: 55.396122607111515 t3y: 31.944183910667274 t4y: 11.161496809482003
+------------------------------
+*** ALL DONE -- ALL DONE ***
+******************************************
+**     DEXTER-OPENFOAM INTERFACE        **
+**  Stevens Institute of Technology     **
+**  No warranties: use at your own risk **
+******************************************
+USAGE: run_one_aoa.sh dexfile stlfile aoa 
+rough_mesh_8cores_swordfish1.dex
+./stl_cfd/swordfish1.stl
+0
+Running openfoam in Docker 
+USAGE: run_one_aoa.sh dexfile stlfile aoa 
+rough_mesh_8cores_swordfish1
+*** Preprocessing *** 
+Dex_of called with arguments:
+ Positional Arguments: ['/home/aimed_user/dex_of/dex_of.py', 'rough_mesh_8cores_swordfish1.dex']
+ Named Arguments: {'infile': './stl_cfd/swordfish1.stl', 'aoa': '0', 'casefoldername': 'dir_rough_mesh_8cores_swordfish1_aoa_0'}
+Path:  /home/aimed_user/dex_of
+Updated the value for infile given in dex file with  that from the command line
+Updated the value for aoa given in dex file with  that from the command line
+Updated the value for casefoldername given in dex file with  that from the command line
+WARNING - The mesh surface refinement level is not specified. Default values of (5 7) will be used.
+Copying:: cp -r /home/aimed_user/dex_of/ofTemplate/* /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0
+Case folder (/home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0) has been created 
+Problem definition /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0/problem_def.json is written into the case folder
+**** ALL DONE ****
+*** Cleaning and Running OF ***
+Cleaning case /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0
+*** PostProcessing ***
+----- MESH DENSITIES & CPU TIMES ----- 
+ Converged In:
+Results stored in dir_rough_mesh_8cores_swordfish1_aoa_0/results.log
+*** Results ***
+ ----- LIFT AND DRAG FORCES ---- 
+    Sum of forces
+        Total    : (0 0 0)
+        Pressure : (0 0 0)
+        Viscous  : (0 0 0)
+    Sum of moments
+        Total    : (0 0 0)
+        Pressure : (0 0 0)
+        Viscous  : (0 0 0)
+ ----- LIFT AND DRAG COEFFICIENTS ---- 
+        Cd       : 0	(pressure: 0	viscous: 0)
+        Cl       : 0	(pressure: 0	viscous: 0)
+        Cs       : 0	(pressure: 0	viscous: 0)
+___ REFERENCE AREAS ----
+Arefs
+./postProcessing/forceCoeffs_cl/0/coefficient.dat:# Aref          : 1.37011192e-01
+./postProcessing/forceCoeffs_cd/0/coefficient.dat:# Aref          : 2.13736119e-02
+lrefs:
+./postProcessing/forceCoeffs_cl/0/coefficient.dat:# lRef          : 1.20000000e+00
+./postProcessing/forceCoeffs_cd/0/coefficient.dat:# lRef          : 1.20000000e+00
+dir_rough_mesh_8cores_swordfish1_aoa_0.log:Layer mesh : cells:864  faces:2916  points:1225
+log.snappyHexMesh:Finished meshing in = 0.24 s.
+Time = 500
+ExecutionTime = 5.63 s  ClockTime = 6 s
+*** ALL DONE ***
+*** ALL DONE -- ALL DONE ***
+******************************************
+**     DEXTER-OPENFOAM INTERFACE        **
+**  Stevens Institute of Technology     **
+**  No warranties: use at your own risk **
+******************************************
+USAGE: run_one_aoa.sh dexfile stlfile aoa 
+rough_mesh_8cores_swordfish1.dex
+./stl_cfd/swordfish1.stl
+0
+Running openfoam in Docker 
+USAGE: run_one_aoa.sh dexfile stlfile aoa 
+rough_mesh_8cores_swordfish1
+*** Preprocessing *** 
+Dex_of called with arguments:
+ Positional Arguments: ['/home/aimed_user/dex_of/dex_of.py', 'rough_mesh_8cores_swordfish1.dex']
+ Named Arguments: {'infile': './stl_cfd/swordfish1.stl', 'aoa': '0', 'casefoldername': 'dir_rough_mesh_8cores_swordfish1_aoa_0'}
+Path:  /home/aimed_user/dex_of
+Updated the value for infile given in dex file with  that from the command line
+Updated the value for aoa given in dex file with  that from the command line
+Updated the value for casefoldername given in dex file with  that from the command line
+WARNING - The mesh surface refinement level is not specified. Default values of (5 7) will be used.
+Copying:: cp -r /home/aimed_user/dex_of/ofTemplate/* /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0
+Case folder (/home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0) has been created 
+Problem definition /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0/problem_def.json is written into the case folder
+**** ALL DONE ****
+*** Cleaning and Running OF ***
+Cleaning case /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0
+*** PostProcessing ***
+----- MESH DENSITIES & CPU TIMES ----- 
+ Converged In:
+Results stored in dir_rough_mesh_8cores_swordfish1_aoa_0/results.log
+*** Results ***
+ ----- LIFT AND DRAG FORCES ---- 
+    Sum of forces
+        Total    : (4.1454628 -0.0010630972 0.00041677777)
+        Pressure : (0.51665697 -0.001049542 0.00039839327)
+        Viscous  : (3.6288059 -1.3555242e-05 1.83845e-05)
+    Sum of moments
+        Total    : (-1.6027897e-05 -0.00023317877 -0.00039875393)
+        Pressure : (-1.9913498e-05 -0.00022085046 -0.00038365698)
+        Viscous  : (3.8856004e-06 -1.2328313e-05 -1.5096948e-05)
+ ----- LIFT AND DRAG COEFFICIENTS ---- 
+        Cd       : 0.094426668	(pressure: 0.011768577	viscous: 0.082658092)
+        Cl       : -3.7776046e-06	(pressure: -3.7294374e-06	viscous: -4.8167133e-08)
+        Cs       : -1.4809761e-06	(pressure: -1.4156487e-06	viscous: -6.5327393e-08)
+___ REFERENCE AREAS ----
+Arefs
+./postProcessing/forceCoeffs_cl/0/coefficient.dat:# Aref          : 1.37011192e-01
+./postProcessing/forceCoeffs_cd/0/coefficient.dat:# Aref          : 2.13736119e-02
+lrefs:
+./postProcessing/forceCoeffs_cl/0/coefficient.dat:# lRef          : 1.20000000e+00
+./postProcessing/forceCoeffs_cd/0/coefficient.dat:# lRef          : 1.20000000e+00
+dir_rough_mesh_8cores_swordfish1_aoa_0.log:Layer mesh : cells:219999  faces:699840  points:262402
+log.snappyHexMesh:Finished meshing in = 13.37 s.
+Time = 262
+ExecutionTime = 58.21 s  ClockTime = 58 s
+*** ALL DONE ***
+*** ALL DONE -- ALL DONE ***
+2198100090027)
+('Data is:', array([[5.22697695e+02, 2.92438015e+02, 3.84864290e+02, 1.65000000e+02,
+        1.05930515e+00, 2.21630772e+00, 1.88197877e+04, 4.16676490e+00,
+        1.00000000e-01]]))
+('x is:', array([ 522.6976948 ,  384.86428978,   10.59305151,    2.21630772,
+        165.        , 1200.        ]), 'drag is:', 4.1667649)
+('*Deleted directory:', './cfd_sim/stl_cfd')
+('*Copied file from', './cad_sim/design_points.csv', 'to destination:', './cfd_sim/design_points.csv')
+('*Copied directory from', './cad_sim/stl_repo', 'to destination:', './cfd_sim/stl_cfd')
+('Deleted files from location:', './cad_sim/stl_repo')
+('prev is', '/home/hv/harsh/Surrogate_and_optimisation/git/Surrogate_based_optim_of_UUVhull/trained_NN_surrogate_and_optim_in_loop')
+('func path is:', '/home/hv/harsh/Surrogate_and_optimisation/git/Surrogate_based_optim_of_UUVhull/trained_NN_surrogate_and_optim_in_loop/cfd_sim')
+('file exist?:', 1)
+Loaded files
+--------------------------------------
+('---Running CFD iteration:', 0, '----------')
+('stl file name:', 'swordfish1.stl')
+('full path of stl file:', './stl_cfd/swordfish1.stl')
+('New dex file name is:', 'rough_mesh_8cores_swordfish1.dex')
+('arg is:', ['./run_dexof.sh', 'rough_mesh_8cores_swordfish1.dex', './stl_cfd/swordfish1.stl', '0'])
+######################################
+######################################
+('Drag force is:', 1100)
+######################################
+('sim time is:', 13.89057207107544)
+Loaded files
+--------------------------------------
+('---Running CFD iteration:', 0, '----------')
+('stl file name:', 'swordfish1.stl')
+('full path of stl file:', './stl_cfd/swordfish1.stl')
+('New dex file name is:', 'rough_mesh_8cores_swordfish1.dex')
+('arg is:', ['./run_dexof.sh', 'rough_mesh_8cores_swordfish1.dex', './stl_cfd/swordfish1.stl', '0'])
+######################################
+######################################
+('Drag force is:', 4.1740453)
+######################################
+('sim time is:', 82.27371788024902)
+('Data is:', array([[5.22697695e+02, 2.92438015e+02, 3.84864290e+02, 1.65000000e+02,
+        1.05930515e+00, 2.98983425e+00, 1.88197877e+04, 4.17404530e+00,
+        1.50000000e-01]]))
+('x is:', array([ 522.6976948 ,  384.86428978,   10.59305151,    2.98983425,
+        165.        , 1200.        ]), 'drag is:', 4.1740453)
+('*Deleted directory:', './cfd_sim/stl_cfd')
+('*Copied file from', './cad_sim/design_points.csv', 'to destination:', './cfd_sim/design_points.csv')
+('*Copied directory from', './cad_sim/stl_repo', 'to destination:', './cfd_sim/stl_cfd')
+('Deleted files from location:', './cad_sim/stl_repo')
+('prev is', '/home/hv/harsh/Surrogate_and_optimisation/git/Surrogate_based_optim_of_UUVhull/trained_NN_surrogate_and_optim_in_loop')
+('func path is:', '/home/hv/harsh/Surrogate_and_optimisation/git/Surrogate_based_optim_of_UUVhull/trained_NN_surrogate_and_optim_in_loop/cfd_sim')
+('file exist?:', 1)
+Loaded files
+--------------------------------------
+('---Running CFD iteration:', 0, '----------')
+('stl file name:', 'swordfish1.stl')
+('full path of stl file:', './stl_cfd/swordfish1.stl')
+('New dex file name is:', 'rough_mesh_8cores_swordfish1.dex')
+('arg is:', ['./run_dexof.sh', 'rough_mesh_8cores_swordfish1.dex', './stl_cfd/swordfish1.stl', '0'])
+######################################
+######################################
+('Drag force is:', 1100)
+######################################
+('sim time is:', 14.16965389251709)
+Loaded files
+--------------------------------------
+('---Running CFD iteration:', 0, '----------')
+('stl file name:', 'swordfish1.stl')
+('full path of stl file:', './stl_cfd/swordfish1.stl')
+('New dex file name is:', 'rough_mesh_8cores_swordfish1.dex')
+('arg is:', ['./run_dexof.sh', 'rough_mesh_8cores_swordfish1.dex', './stl_cfd/swordfish1.stl', '0'])
+######################################
+######################################
+('Drag force is:', 4.1454628)
+######################################
+('sim time is:', 80.57797503471375)
+('Data is:', array([[5.39120055e+02, 2.76015655e+02, 3.84864290e+02, 1.65000000e+02,
+        1.04313333e+00, 2.99Running freecad in Docker 
+Opening: ./seed_cad/Remus_Myring_hull.FCStd
+----> body is: [539.1200551655073, 276.0156550531865, 384.8642897813062, 82.5]
+=> nose_x: [107.82401103310147 215.64802206620294 323.4720330993044 431.2960441324059]
+=> tail_x: [892.108568174955 969.0814261312163 1046.0542840874775 1123.0271420437389]
+******design point is:****** [5.39120055e+02 2.76015655e+02 3.84864290e+02 1.65000000e+02
+ 1.04313333e+00 2.99971214e+00 1.87491949e+04] dp shape  is: (7,)
+=> nose_tail_y: [30.981557026085717 53.78341030756171 69.80142179699295 79.3338009266972
+ 74.5653742023705 55.396122607111515 31.944183910667274 11.161496809482003]
+------Body properties:-------
+  body_area = 0.434642 m^2
+  body_volume = 14981.367828211 m^3
+ my_a: 539.1200551655073 my_b: 276.0156550531865 my_c: 384.8642897813062 my_r: 82.5
+  b1y: 0.0 b2y: 0.0 b3y: 0.0 b4y: 0.0 b5y: 0.0
+  n1y: 30.981557026085717 n2y: 53.78341030756171 n3y: 69.80142179699295 n4y: 79.3338009266972
+  t1y: 74.5653742023705 t2y: 55.396122607111515 t3y: 31.944183910667274 t4y: 11.161496809482003
+------------------------------
+*** ALL DONE -- ALL DONE ***
+******************************************
+**     DEXTER-OPENFOAM INTERFACE        **
+**  Stevens Institute of Technology     **
+**  No warranties: use at your own risk **
+******************************************
+USAGE: run_one_aoa.sh dexfile stlfile aoa 
+rough_mesh_8cores_swordfish1.dex
+./stl_cfd/swordfish1.stl
+0
+Running openfoam in Docker 
+USAGE: run_one_aoa.sh dexfile stlfile aoa 
+rough_mesh_8cores_swordfish1
+*** Preprocessing *** 
+Dex_of called with arguments:
+ Positional Arguments: ['/home/aimed_user/dex_of/dex_of.py', 'rough_mesh_8cores_swordfish1.dex']
+ Named Arguments: {'infile': './stl_cfd/swordfish1.stl', 'aoa': '0', 'casefoldername': 'dir_rough_mesh_8cores_swordfish1_aoa_0'}
+Path:  /home/aimed_user/dex_of
+Updated the value for infile given in dex file with  that from the command line
+Updated the value for aoa given in dex file with  that from the command line
+Updated the value for casefoldername given in dex file with  that from the command line
+WARNING - The mesh surface refinement level is not specified. Default values of (5 7) will be used.
+Copying:: cp -r /home/aimed_user/dex_of/ofTemplate/* /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0
+Case folder (/home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0) has been created 
+Problem definition /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0/problem_def.json is written into the case folder
+**** ALL DONE ****
+*** Cleaning and Running OF ***
+Cleaning case /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0
+*** PostProcessing ***
+----- MESH DENSITIES & CPU TIMES ----- 
+ Converged In:
+Results stored in dir_rough_mesh_8cores_swordfish1_aoa_0/results.log
+*** Results ***
+ ----- LIFT AND DRAG FORCES ---- 
+    Sum of forces
+        Total    : (0 0 0)
+        Pressure : (0 0 0)
+        Viscous  : (0 0 0)
+    Sum of moments
+        Total    : (0 0 0)
+        Pressure : (0 0 0)
+        Viscous  : (0 0 0)
+ ----- LIFT AND DRAG COEFFICIENTS ---- 
+        Cd       : 0	(pressure: 0	viscous: 0)
+        Cl       : 0	(pressure: 0	viscous: 0)
+        Cs       : 0	(pressure: 0	viscous: 0)
+___ REFERENCE AREAS ----
+Arefs
+./postProcessing/forceCoeffs_cl/0/coefficient.dat:# Aref          : 1.37011192e-01
+./postProcessing/forceCoeffs_cd/0/coefficient.dat:# Aref          : 2.13736119e-02
+lrefs:
+./postProcessing/forceCoeffs_cl/0/coefficient.dat:# lRef          : 1.20000000e+00
+./postProcessing/forceCoeffs_cd/0/coefficient.dat:# lRef          : 1.20000000e+00
+dir_rough_mesh_8cores_swordfish1_aoa_0.log:Layer mesh : cells:864  faces:2916  points:1225
+log.snappyHexMesh:Finished meshing in = 0.29 s.
+Time = 500
+ExecutionTime = 5.65 s  ClockTime = 6 s
+*** ALL DONE ***
+*** ALL DONE -- ALL DONE ***
+******************************************
+**     DEXTER-OPENFOAM INTERFACE        **
+**  Stevens Institute of Technology     **
+**  No warranties: use at your own risk **
+******************************************
+USAGE: run_one_aoa.sh dexfile stlfile aoa 
+rough_mesh_8cores_swordfish1.dex
+./stl_cfd/swordfish1.stl
+0
+Running openfoam in Docker 
+USAGE: run_one_aoa.sh dexfile stlfile aoa 
+rough_mesh_8cores_swordfish1
+*** Preprocessing *** 
+Dex_of called with arguments:
+ Positional Arguments: ['/home/aimed_user/dex_of/dex_of.py', 'rough_mesh_8cores_swordfish1.dex']
+ Named Arguments: {'infile': './stl_cfd/swordfish1.stl', 'aoa': '0', 'casefoldername': 'dir_rough_mesh_8cores_swordfish1_aoa_0'}
+Path:  /home/aimed_user/dex_of
+Updated the value for infile given in dex file with  that from the command line
+Updated the value for aoa given in dex file with  that from the command line
+Updated the value for casefoldername given in dex file with  that from the command line
+WARNING - The mesh surface refinement level is not specified. Default values of (5 7) will be used.
+Copying:: cp -r /home/aimed_user/dex_of/ofTemplate/* /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0
+Case folder (/home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0) has been created 
+Problem definition /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0/problem_def.json is written into the case folder
+**** ALL DONE ****
+*** Cleaning and Running OF ***
+Cleaning case /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0
+*** PostProcessing ***
+----- MESH DENSITIES & CPU TIMES ----- 
+ Converged In:
+Results stored in dir_rough_mesh_8cores_swordfish1_aoa_0/results.log
+*** Results ***
+ ----- LIFT AND DRAG FORCES ---- 
+    Sum of forces
+        Total    : (4.1454651 -0.0010629579 0.00038277577)
+        Pressure : (0.51665876 -0.0010492835 0.00036381218)
+        Viscous  : (3.6288064 -1.3674476e-05 1.8963588e-05)
+    Sum of moments
+        Total    : (-1.6010591e-05 -0.00022035183 -0.0003963481)
+        Pressure : (-1.9886818e-05 -0.00020770744 -0.00038117496)
+        Viscous  : (3.8762264e-06 -1.2644388e-05 -1.517314e-05)
+ ----- LIFT AND DRAG COEFFICIENTS ---- 
+        Cd       : 0.09442672	(pressure: 0.011768617	viscous: 0.082658103)
+        Cl       : -3.7771097e-06	(pressure: -3.7285189e-06	viscous: -4.8590816e-08)
+        Cs       : -1.3601536e-06	(pressure: -1.2927685e-06	viscous: -6.7385122e-08)
+___ REFERENCE AREAS ----
+Arefs
+./postProcessing/forceCoeffs_cl/0/coefficient.dat:# Aref          : 1.37011192e-01
+./postProcessing/forceCoeffs_cd/0/coefficient.dat:# Aref          : 2.13736119e-02
+lrefs:
+./postProcessing/forceCoeffs_cl/0/coefficient.dat:# lRef          : 1.20000000e+00
+./postProcessing/forceCoeffs_cd/0/coefficient.dat:# lRef          : 1.20000000e+00
+dir_rough_mesh_8cores_swordfish1_aoa_0.log:Layer mesh : cells:219999  faces:699840  points:262402
+log.snappyHexMesh:Finished meshing in = 13.4 s.
+Time = 262
+ExecutionTime = 58.55 s  ClockTime = 58 s
+*** ALL DONE ***
+*** ALL DONE -- ALL DONE ***
+Running freecad in Docker 
+Opening: ./seed_cad/Remus_Myring_hull.FCStd
+----> body is: [536.4140464226272, 278.72166379606665, 384.8642897813062, 82.5]
+=> nose_x: [107.28280928452543 214.56561856905086 321.8484278535763 429.1312371381017]
+=> tail_x: [892.108568174955 969.0814261312163 1046.0542840874775 1123.0271420437389]
+******design point is:****** [5.36414046e+02 2.78721664e+02 3.84864290e+02 1.65000000e+02
+ 1.03761816e+00 2.99971214e+00 1.87608269e+04] dp shape  is: (7,)
+=> nose_tail_y: [30.820693577659522 53.66124430650567 69.73943729055134 79.31730074580186
+ 74.5653742023705 55.396122607111515 31.944183910667274 11.161496809482003]
+------Body properties:-------
+  body_area = 0.434898 m^2
+  body_volume = 14998.281896424 m^3
+ my_a: 536.4140464226272 my_b: 278.72166379606665 my_c: 384.8642897813062 my_r: 82.5
+  b1y: 0.0 b2y: 0.0 b3y: 0.0 b4y: 0.0 b5y: 0.0
+  n1y: 30.820693577659522 n2y: 53.66124430650567 n3y: 69.73943729055134 n4y: 79.31730074580186
+  t1y: 74.5653742023705 t2y: 55.396122607111515 t3y: 31.944183910667274 t4y: 11.161496809482003
+------------------------------
+*** ALL DONE -- ALL DONE ***
+******************************************
+**     DEXTER-OPENFOAM INTERFACE        **
+**  Stevens Institute of Technology     **
+**  No warranties: use at your own risk **
+******************************************
+USAGE: run_one_aoa.sh dexfile stlfile aoa 
+rough_mesh_8cores_swordfish1.dex
+./stl_cfd/swordfish1.stl
+0
+Running openfoam in Docker 
+USAGE: run_one_aoa.sh dexfile stlfile aoa 
+rough_mesh_8cores_swordfish1
+*** Preprocessing *** 
+Dex_of called with arguments:
+ Positional Arguments: ['/home/aimed_user/dex_of/dex_of.py', 'rough_mesh_8cores_swordfish1.dex']
+ Named Arguments: {'infile': './stl_cfd/swordfish1.stl', 'aoa': '0', 'casefoldername': 'dir_rough_mesh_8cores_swordfish1_aoa_0'}
+Path:  /home/aimed_user/dex_of
+Updated the value for infile given in dex file with  that from the command line
+Updated the value for aoa given in dex file with  that from the command line
+Updated the value for casefoldername given in dex file with  that from the command line
+WARNING - The mesh surface refinement level is not specified. Default values of (5 7) will be used.
+Copying:: cp -r /home/aimed_user/dex_of/ofTemplate/* /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0
+Case folder (/home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0) has been created 
+Problem definition /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0/problem_def.json is written into the case folder
+**** ALL DONE ****
+*** Cleaning and Running OF ***
+Cleaning case /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0
+*** PostProcessing ***
+----- MESH DENSITIES & CPU TIMES ----- 
+ Converged In:
+Results stored in dir_rough_mesh_8cores_swordfish1_aoa_0/results.log
+*** Results ***
+ ----- LIFT AND DRAG FORCES ---- 
+    Sum of forces
+        Total    : (0 0 0)
+        Pressure : (0 0 0)
+        Viscous  : (0 0 0)
+    Sum of moments
+        Total    : (0 0 0)
+        Pressure : (0 0 0)
+        Viscous  : (0 0 0)
+ ----- LIFT AND DRAG COEFFICIENTS ---- 
+        Cd       : 0	(pressure: 0	viscous: 0)
+        Cl       : 0	(pressure: 0	viscous: 0)
+        Cs       : 0	(pressure: 0	viscous: 0)
+___ REFERENCE AREAS ----
+Arefs
+./postProcessing/forceCoeffs_cl/0/coefficient.dat:# Aref          : 1.37089357e-01
+./postProcessing/forceCoeffs_cd/0/coefficient.dat:# Aref          : 2.13736038e-02
+lrefs:
+./postProcessing/forceCoeffs_cl/0/coefficient.dat:# lRef          : 1.20000000e+00
+./postProcessing/forceCoeffs_cd/0/coefficient.dat:# lRef          : 1.20000000e+00
+dir_rough_mesh_8cores_swordfish1_aoa_0.log:Layer mesh : cells:864  faces:2916  points:1225
+log.snappyHexMesh:Finished meshing in = 0.26 s.
+Time = 500
+ExecutionTime = 5.64 s  ClockTime = 6 s
+*** ALL DONE ***
+*** ALL DONE -- ALL DONE ***
+******************************************
+**     DEXTER-OPENFOAM INTERFACE        **
+**  Stevens Institute of Technology     **
+**  No warranties: use at your own risk **
+******************************************
+USAGE: run_one_aoa.sh dexfile stlfile aoa 
+rough_mesh_8cores_swordfish1.dex
+./stl_cfd/swordfish1.stl
+0
+Running openfoam in Docker 
+USAGE: run_one_aoa.sh dexfile stlfile aoa 
+rough_mesh_8cores_swordfish1
+*** Preprocessing *** 
+Dex_of called with arguments:
+ Positional Arguments: ['/home/aimed_user/dex_of/dex_of.py', 'rough_mesh_8cores_swordfish1.dex']
+ Named Arguments: {'infile': './stl_cfd/swordfish1.stl', 'aoa': '0', 'casefoldername': 'dir_rough_mesh_8cores_swordfish1_aoa_0'}
+Path:  /home/aimed_user/dex_of
+Updated the value for infile given in dex file with  that from the command line
+Updated the value for aoa given in dex file with  that from the command line
+Updated the value for casefoldername given in dex file with  that from the command line
+WARNING - The mesh surface refinement level is not specified. Default values of (5 7) will be used.
+Copying:: cp -r /home/aimed_user/dex_of/ofTemplate/* /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0
+Case folder (/home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0) has been created 
+Problem definition /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0/problem_def.json is written into the case folder
+**** ALL DONE ****
+*** Cleaning and Running OF ***
+Cleaning case /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0
+*** PostProcessing ***
+----- MESH DENSITIES & CPU TIMES ----- 
+ Converged In:
+Results stored in dir_rough_mesh_8cores_swordfish1_aoa_0/results.log
+*** Results ***
+ ----- LIFT AND DRAG FORCES ---- 
+    Sum of forces
+        Total    : (4.1487006 -0.00014967009 0.00039012882)
+        Pressure : (0.51869464 -0.00016348329 0.00034406911)
+        Viscous  : (3.630006 1.3813201e-05 4.6059709e-05)
+    Sum of moments
+        Total    : (-1.7831723e-05 -0.00027018979 0.00049114138)
+        Pressure : (-2.2380934e-05 -0.00023727396 0.00055356892)
+        Viscous  : (4.5492112e-06 -3.291583e-05 -6.2427536e-05)
+ ----- LIFT AND DRAG COEFFICIENTS ---- 
+        Cd       : 0.094500455	(pressure: 0.011814996	viscous: 0.08268546)
+        Cl       : -5.3153375e-07	(pressure: -5.8058952e-07	viscous: 4.9055777e-08)
+        Cs       : -1.3854915e-06	(pressure: -1.2219164e-06	viscous: -1.6357503e-07)
+___ REFERENCE AREAS ----
+Arefs
+./postProcessing/forceCoeffs_cl/0/coefficient.dat:# Aref          : 1.37089357e-01
+./postProcessing/forceCoeffs_cd/0/coefficient.dat:# Aref          : 2.13736038e-02
+lrefs:
+./postProcessing/forceCoeffs_cl/0/coefficient.dat:# lRef          : 1.20000000e+00
+./postProcessing/forceCoeffs_cd/0/coefficient.dat:# lRef          : 1.20000000e+00
+dir_rough_mesh_8cores_swordfish1_aoa_0.log:Layer mesh : cells:217860  faces:692916  points:259705
+log.snappyHexMesh:Finished meshing in = 13.12 s.
+Time = 272
+ExecutionTime = 60.1 s  ClockTime = 60 s
+*** ALL DONE ***
+*** ALL DONE -- ALL DONE ***
+971214e+00, 1.87491949e+04, 4.14546280e+00,
+        1.50000000e-01]]))
+('x is:', array([ 539.12005517,  384.86428978,   10.43133326,    2.99971214,
+        165.        , 1200.        ]), 'drag is:', 4.1454628)
+('*Deleted directory:', './cfd_sim/stl_cfd')
+('*Copied file from', './cad_sim/design_points.csv', 'to destination:', './cfd_sim/design_points.csv')
+('*Copied directory from', './cad_sim/stl_repo', 'to destination:', './cfd_sim/stl_cfd')
+('Deleted files from location:', './cad_sim/stl_repo')
+('prev is', '/home/hv/harsh/Surrogate_and_optimisation/git/Surrogate_based_optim_of_UUVhull/trained_NN_surrogate_and_optim_in_loop')
+('func path is:', '/home/hv/harsh/Surrogate_and_optimisation/git/Surrogate_based_optim_of_UUVhull/trained_NN_surrogate_and_optim_in_loop/cfd_sim')
+('file exist?:', 1)
+Loaded files
+--------------------------------------
+('---Running CFD iteration:', 0, '----------')
+('stl file name:', 'swordfish1.stl')
+('full path of stl file:', './stl_cfd/swordfish1.stl')
+('New dex file name is:', 'rough_mesh_8cores_swordfish1.dex')
+('arg is:', ['./run_dexof.sh', 'rough_mesh_8cores_swordfish1.dex', './stl_cfd/swordfish1.stl', '0'])
+######################################
+######################################
+('Drag force is:', 1100)
+######################################
+('sim time is:', 14.295773983001709)
+Loaded files
+--------------------------------------
+('---Running CFD iteration:', 0, '----------')
+('stl file name:', 'swordfish1.stl')
+('full path of stl file:', './stl_cfd/swordfish1.stl')
+('New dex file name is:', 'rough_mesh_8cores_swordfish1.dex')
+('arg is:', ['./run_dexof.sh', 'rough_mesh_8cores_swordfish1.dex', './stl_cfd/swordfish1.stl', '0'])
+######################################
+######################################
+('Drag force is:', 4.1454651)
+######################################
+('sim time is:', 81.00728106498718)
+('Data is:', array([[5.39120055e+02, 2.76015655e+02, 3.84864290e+02, 1.65000000e+02,
+        1.04313333e+00, 2.99971214e+00, 1.87491949e+04, 4.14546510e+00,
+        1.50000000e-01]]))
+('x is:', array([ 539.12005517,  384.86428978,   10.43133326,    2.99971214,
+        165.        , 1200.        ]), 'drag is:', 4.1454651)
+('*Deleted directory:', './cfd_sim/stl_cfd')
+('*Copied file from', './cad_sim/design_points.csv', 'to destination:', './cfd_sim/design_points.csv')
+('*Copied directory from', './cad_sim/stl_repo', 'to destination:', './cfd_sim/stl_cfd')
+('Deleted files from location:', './cad_sim/stl_repo')
+('prev is', '/home/hv/harsh/Surrogate_and_optimisation/git/Surrogate_based_optim_of_UUVhull/trained_NN_surrogate_and_optim_in_loop')
+('func path is:', '/home/hv/harsh/Surrogate_and_optimisation/git/Surrogate_based_optim_of_UUVhull/trained_NN_surrogate_and_optim_in_loop/cfd_sim')
+('file exist?:', 1)
+Loaded files
+--------------------------------------
+('---Running CFD iteration:', 0, '----------')
+('stl file name:', 'swordfish1.stl')
+('full path of stl file:', './stl_cfd/swordfish1.stl')
+('New dex file name is:', 'rough_mesh_8cores_swordfish1.dex')
+('arg is:', ['./run_dexof.sh', 'rough_mesh_8cores_swordfish1.dex', './stl_cfd/swordfish1.stl', '0'])
+######################################
+######################################
+('Drag force is:', 1100)
+######################################
+('sim time is:', 14.152124881744385)
+Loaded files
+--------------------------------------
+('---Running CFD iteration:', 0, '----------')
+('stl file name:', 'swordfish1.stl')
+('full path of stl file:', './stl_cfd/swordfish1.stl')
+('New dex file name is:', 'rough_mesh_8cores_swordfish1.dex')
+('arg is:', ['./run_dexof.sh', 'rough_mesh_8cores_swordfish1.dex', './stl_cfd/swordfish1.stl', '0'])
+######################################
+######################################
+('Drag force is:', 4.1487006)
+######################################
+('sim time is:', 82.1989438533783)
+('Data is:', array([[5.36414046e+02, 2.78721664e+02, 3.84864290e+02, 1.65000000e+02,
+        1.03761816e+00, 2.99971214e+00, 1.87608269e+04, 4.14870060e+00,
+        1.50000000e-01]]))
+('x is:', array([ 536.41404642,  384.86428978,   10.3761Running freecad in Docker 
+Opening: ./seed_cad/Remus_Myring_hull.FCStd
+----> body is: [536.4140464226272, 278.72166379606665, 384.8642897813062, 82.5]
+=> nose_x: [107.28280928452543 214.56561856905086 321.8484278535763 429.1312371381017]
+=> tail_x: [892.108568174955 969.0814261312163 1046.0542840874775 1123.0271420437389]
+******design point is:****** [5.36414046e+02 2.78721664e+02 3.84864290e+02 1.65000000e+02
+ 1.03761816e+00 2.99971214e+00 1.87608269e+04] dp shape  is: (7,)
+=> nose_tail_y: [30.820693577659522 53.66124430650567 69.73943729055134 79.31730074580186
+ 74.5653742023705 55.396122607111515 31.944183910667274 11.161496809482003]
+------Body properties:-------
+  body_area = 0.434898 m^2
+  body_volume = 14998.281896424 m^3
+ my_a: 536.4140464226272 my_b: 278.72166379606665 my_c: 384.8642897813062 my_r: 82.5
+  b1y: 0.0 b2y: 0.0 b3y: 0.0 b4y: 0.0 b5y: 0.0
+  n1y: 30.820693577659522 n2y: 53.66124430650567 n3y: 69.73943729055134 n4y: 79.31730074580186
+  t1y: 74.5653742023705 t2y: 55.396122607111515 t3y: 31.944183910667274 t4y: 11.161496809482003
+------------------------------
+*** ALL DONE -- ALL DONE ***
+******************************************
+**     DEXTER-OPENFOAM INTERFACE        **
+**  Stevens Institute of Technology     **
+**  No warranties: use at your own risk **
+******************************************
+USAGE: run_one_aoa.sh dexfile stlfile aoa 
+rough_mesh_8cores_swordfish1.dex
+./stl_cfd/swordfish1.stl
+0
+Running openfoam in Docker 
+USAGE: run_one_aoa.sh dexfile stlfile aoa 
+rough_mesh_8cores_swordfish1
+*** Preprocessing *** 
+Dex_of called with arguments:
+ Positional Arguments: ['/home/aimed_user/dex_of/dex_of.py', 'rough_mesh_8cores_swordfish1.dex']
+ Named Arguments: {'infile': './stl_cfd/swordfish1.stl', 'aoa': '0', 'casefoldername': 'dir_rough_mesh_8cores_swordfish1_aoa_0'}
+Path:  /home/aimed_user/dex_of
+Updated the value for infile given in dex file with  that from the command line
+Updated the value for aoa given in dex file with  that from the command line
+Updated the value for casefoldername given in dex file with  that from the command line
+WARNING - The mesh surface refinement level is not specified. Default values of (5 7) will be used.
+Copying:: cp -r /home/aimed_user/dex_of/ofTemplate/* /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0
+Case folder (/home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0) has been created 
+Problem definition /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0/problem_def.json is written into the case folder
+**** ALL DONE ****
+*** Cleaning and Running OF ***
+Cleaning case /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0
+*** PostProcessing ***
+----- MESH DENSITIES & CPU TIMES ----- 
+ Converged In:
+Results stored in dir_rough_mesh_8cores_swordfish1_aoa_0/results.log
+*** Results ***
+ ----- LIFT AND DRAG FORCES ---- 
+    Sum of forces
+        Total    : (0 0 0)
+        Pressure : (0 0 0)
+        Viscous  : (0 0 0)
+    Sum of moments
+        Total    : (0 0 0)
+        Pressure : (0 0 0)
+        Viscous  : (0 0 0)
+ ----- LIFT AND DRAG COEFFICIENTS ---- 
+        Cd       : 0	(pressure: 0	viscous: 0)
+        Cl       : 0	(pressure: 0	viscous: 0)
+        Cs       : 0	(pressure: 0	viscous: 0)
+___ REFERENCE AREAS ----
+Arefs
+./postProcessing/forceCoeffs_cl/0/coefficient.dat:# Aref          : 1.37089357e-01
+./postProcessing/forceCoeffs_cd/0/coefficient.dat:# Aref          : 2.13736038e-02
+lrefs:
+./postProcessing/forceCoeffs_cl/0/coefficient.dat:# lRef          : 1.20000000e+00
+./postProcessing/forceCoeffs_cd/0/coefficient.dat:# lRef          : 1.20000000e+00
+dir_rough_mesh_8cores_swordfish1_aoa_0.log:Layer mesh : cells:864  faces:2916  points:1225
+log.snappyHexMesh:Finished meshing in = 0.28 s.
+Time = 500
+ExecutionTime = 5.57 s  ClockTime = 6 s
+*** ALL DONE ***
+*** ALL DONE -- ALL DONE ***
+******************************************
+**     DEXTER-OPENFOAM INTERFACE        **
+**  Stevens Institute of Technology     **
+**  No warranties: use at your own risk **
+******************************************
+USAGE: run_one_aoa.sh dexfile stlfile aoa 
+rough_mesh_8cores_swordfish1.dex
+./stl_cfd/swordfish1.stl
+0
+Running openfoam in Docker 
+USAGE: run_one_aoa.sh dexfile stlfile aoa 
+rough_mesh_8cores_swordfish1
+*** Preprocessing *** 
+Dex_of called with arguments:
+ Positional Arguments: ['/home/aimed_user/dex_of/dex_of.py', 'rough_mesh_8cores_swordfish1.dex']
+ Named Arguments: {'infile': './stl_cfd/swordfish1.stl', 'aoa': '0', 'casefoldername': 'dir_rough_mesh_8cores_swordfish1_aoa_0'}
+Path:  /home/aimed_user/dex_of
+Updated the value for infile given in dex file with  that from the command line
+Updated the value for aoa given in dex file with  that from the command line
+Updated the value for casefoldername given in dex file with  that from the command line
+WARNING - The mesh surface refinement level is not specified. Default values of (5 7) will be used.
+Copying:: cp -r /home/aimed_user/dex_of/ofTemplate/* /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0
+Case folder (/home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0) has been created 
+Problem definition /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0/problem_def.json is written into the case folder
+**** ALL DONE ****
+*** Cleaning and Running OF ***
+Cleaning case /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0
+*** PostProcessing ***
+----- MESH DENSITIES & CPU TIMES ----- 
+ Converged In:
+Results stored in dir_rough_mesh_8cores_swordfish1_aoa_0/results.log
+*** Results ***
+ ----- LIFT AND DRAG FORCES ---- 
+    Sum of forces
+        Total    : (4.1487006 -0.00014967009 0.00039012882)
+        Pressure : (0.51869464 -0.00016348329 0.00034406911)
+        Viscous  : (3.630006 1.3813201e-05 4.6059709e-05)
+    Sum of moments
+        Total    : (-1.7831723e-05 -0.00027018979 0.00049114138)
+        Pressure : (-2.2380934e-05 -0.00023727396 0.00055356892)
+        Viscous  : (4.5492112e-06 -3.291583e-05 -6.2427536e-05)
+ ----- LIFT AND DRAG COEFFICIENTS ---- 
+        Cd       : 0.094500455	(pressure: 0.011814996	viscous: 0.08268546)
+        Cl       : -5.3153375e-07	(pressure: -5.8058952e-07	viscous: 4.9055777e-08)
+        Cs       : -1.3854915e-06	(pressure: -1.2219164e-06	viscous: -1.6357503e-07)
+___ REFERENCE AREAS ----
+Arefs
+./postProcessing/forceCoeffs_cl/0/coefficient.dat:# Aref          : 1.37089357e-01
+./postProcessing/forceCoeffs_cd/0/coefficient.dat:# Aref          : 2.13736038e-02
+lrefs:
+./postProcessing/forceCoeffs_cl/0/coefficient.dat:# lRef          : 1.20000000e+00
+./postProcessing/forceCoeffs_cd/0/coefficient.dat:# lRef          : 1.20000000e+00
+dir_rough_mesh_8cores_swordfish1_aoa_0.log:Layer mesh : cells:217860  faces:692916  points:259705
+log.snappyHexMesh:Finished meshing in = 13.09 s.
+Time = 272
+ExecutionTime = 60.13 s  ClockTime = 60 s
+*** ALL DONE ***
+*** ALL DONE -- ALL DONE ***
+Running freecad in Docker 
+Opening: ./seed_cad/Remus_Myring_hull.FCStd
+----> body is: [536.4140464226272, 278.72166379606665, 384.8642897813062, 82.5]
+=> nose_x: [107.28280928452543 214.56561856905086 321.8484278535763 429.1312371381017]
+=> tail_x: [892.108568174955 969.0814261312163 1046.0542840874775 1123.0271420437389]
+******design point is:****** [5.36414046e+02 2.78721664e+02 3.84864290e+02 1.65000000e+02
+ 1.03761816e+00 2.99971214e+00 1.87608269e+04] dp shape  is: (7,)
+=> nose_tail_y: [30.820693577659522 53.66124430650567 69.73943729055134 79.31730074580186
+ 74.5653742023705 55.396122607111515 31.944183910667274 11.161496809482003]
+------Body properties:-------
+  body_area = 0.434898 m^2
+  body_volume = 14998.281896424 m^3
+ my_a: 536.4140464226272 my_b: 278.72166379606665 my_c: 384.8642897813062 my_r: 82.5
+  b1y: 0.0 b2y: 0.0 b3y: 0.0 b4y: 0.0 b5y: 0.0
+  n1y: 30.820693577659522 n2y: 53.66124430650567 n3y: 69.73943729055134 n4y: 79.31730074580186
+  t1y: 74.5653742023705 t2y: 55.396122607111515 t3y: 31.944183910667274 t4y: 11.161496809482003
+------------------------------
+*** ALL DONE -- ALL DONE ***
+******************************************
+**     DEXTER-OPENFOAM INTERFACE        **
+**  Stevens Institute of Technology     **
+**  No warranties: use at your own risk **
+******************************************
+USAGE: run_one_aoa.sh dexfile stlfile aoa 
+rough_mesh_8cores_swordfish1.dex
+./stl_cfd/swordfish1.stl
+0
+Running openfoam in Docker 
+USAGE: run_one_aoa.sh dexfile stlfile aoa 
+rough_mesh_8cores_swordfish1
+*** Preprocessing *** 
+Dex_of called with arguments:
+ Positional Arguments: ['/home/aimed_user/dex_of/dex_of.py', 'rough_mesh_8cores_swordfish1.dex']
+ Named Arguments: {'infile': './stl_cfd/swordfish1.stl', 'aoa': '0', 'casefoldername': 'dir_rough_mesh_8cores_swordfish1_aoa_0'}
+Path:  /home/aimed_user/dex_of
+Updated the value for infile given in dex file with  that from the command line
+Updated the value for aoa given in dex file with  that from the command line
+Updated the value for casefoldername given in dex file with  that from the command line
+WARNING - The mesh surface refinement level is not specified. Default values of (5 7) will be used.
+Copying:: cp -r /home/aimed_user/dex_of/ofTemplate/* /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0
+Case folder (/home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0) has been created 
+Problem definition /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0/problem_def.json is written into the case folder
+**** ALL DONE ****
+*** Cleaning and Running OF ***
+Cleaning case /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0
+*** PostProcessing ***
+----- MESH DENSITIES & CPU TIMES ----- 
+ Converged In:
+Results stored in dir_rough_mesh_8cores_swordfish1_aoa_0/results.log
+*** Results ***
+ ----- LIFT AND DRAG FORCES ---- 
+    Sum of forces
+        Total    : (0 0 0)
+        Pressure : (0 0 0)
+        Viscous  : (0 0 0)
+    Sum of moments
+        Total    : (0 0 0)
+        Pressure : (0 0 0)
+        Viscous  : (0 0 0)
+ ----- LIFT AND DRAG COEFFICIENTS ---- 
+        Cd       : 0	(pressure: 0	viscous: 0)
+        Cl       : 0	(pressure: 0	viscous: 0)
+        Cs       : 0	(pressure: 0	viscous: 0)
+___ REFERENCE AREAS ----
+Arefs
+./postProcessing/forceCoeffs_cl/0/coefficient.dat:# Aref          : 1.37089357e-01
+./postProcessing/forceCoeffs_cd/0/coefficient.dat:# Aref          : 2.13736038e-02
+lrefs:
+./postProcessing/forceCoeffs_cl/0/coefficient.dat:# lRef          : 1.20000000e+00
+./postProcessing/forceCoeffs_cd/0/coefficient.dat:# lRef          : 1.20000000e+00
+dir_rough_mesh_8cores_swordfish1_aoa_0.log:Layer mesh : cells:864  faces:2916  points:1225
+log.snappyHexMesh:Finished meshing in = 0.26 s.
+Time = 500
+ExecutionTime = 5.65 s  ClockTime = 5 s
+*** ALL DONE ***
+*** ALL DONE -- ALL DONE ***
+******************************************
+**     DEXTER-OPENFOAM INTERFACE        **
+**  Stevens Institute of Technology     **
+**  No warranties: use at your own risk **
+******************************************
+USAGE: run_one_aoa.sh dexfile stlfile aoa 
+rough_mesh_8cores_swordfish1.dex
+./stl_cfd/swordfish1.stl
+0
+Running openfoam in Docker 
+USAGE: run_one_aoa.sh dexfile stlfile aoa 
+rough_mesh_8cores_swordfish1
+*** Preprocessing *** 
+Dex_of called with arguments:
+ Positional Arguments: ['/home/aimed_user/dex_of/dex_of.py', 'rough_mesh_8cores_swordfish1.dex']
+ Named Arguments: {'infile': './stl_cfd/swordfish1.stl', 'aoa': '0', 'casefoldername': 'dir_rough_mesh_8cores_swordfish1_aoa_0'}
+Path:  /home/aimed_user/dex_of
+Updated the value for infile given in dex file with  that from the command line
+Updated the value for aoa given in dex file with  that from the command line
+Updated the value for casefoldername given in dex file with  that from the command line
+WARNING - The mesh surface refinement level is not specified. Default values of (5 7) will be used.
+Copying:: cp -r /home/aimed_user/dex_of/ofTemplate/* /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0
+Case folder (/home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0) has been created 
+Problem definition /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0/problem_def.json is written into the case folder
+**** ALL DONE ****
+*** Cleaning and Running OF ***
+Cleaning case /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0
+*** PostProcessing ***
+----- MESH DENSITIES & CPU TIMES ----- 
+ Converged In:
+Results stored in dir_rough_mesh_8cores_swordfish1_aoa_0/results.log
+*** Results ***
+ ----- LIFT AND DRAG FORCES ---- 
+    Sum of forces
+        Total    : (4.1487006 -0.00014967429 0.00039012899)
+        Pressure : (0.51869464 -0.00016348751 0.00034406928)
+        Viscous  : (3.630006 1.3813215e-05 4.605971e-05)
+    Sum of moments
+        Total    : (-1.7831723e-05 -0.00027018979 0.00049114029)
+        Pressure : (-2.2380934e-05 -0.00023727396 0.00055356783)
+        Viscous  : (4.5492112e-06 -3.291583e-05 -6.2427543e-05)
+ ----- LIFT AND DRAG COEFFICIENTS ---- 
+        Cd       : 0.094500455	(pressure: 0.011814996	viscous: 0.08268546)
+        Cl       : -5.3154867e-07	(pressure: -5.806045e-07	viscous: 4.9055826e-08)
+        Cs       : -1.3854921e-06	(pressure: -1.221917e-06	viscous: -1.6357503e-07)
+___ REFERENCE AREAS ----
+Arefs
+./postProcessing/forceCoeffs_cl/0/coefficient.dat:# Aref          : 1.37089357e-01
+./postProcessing/forceCoeffs_cd/0/coefficient.dat:# Aref          : 2.13736038e-02
+lrefs:
+./postProcessing/forceCoeffs_cl/0/coefficient.dat:# lRef          : 1.20000000e+00
+./postProcessing/forceCoeffs_cd/0/coefficient.dat:# lRef          : 1.20000000e+00
+dir_rough_mesh_8cores_swordfish1_aoa_0.log:Layer mesh : cells:217860  faces:692916  points:259705
+log.snappyHexMesh:Finished meshing in = 12.98 s.
+Time = 272
+ExecutionTime = 60.33 s  ClockTime = 60 s
+*** ALL DONE ***
+*** ALL DONE -- ALL DONE ***
+8158,    2.99971214,
+        165.        , 1200.        ]), 'drag is:', 4.1487006)
+('*Deleted directory:', './cfd_sim/stl_cfd')
+('*Copied file from', './cad_sim/design_points.csv', 'to destination:', './cfd_sim/design_points.csv')
+('*Copied directory from', './cad_sim/stl_repo', 'to destination:', './cfd_sim/stl_cfd')
+('Deleted files from location:', './cad_sim/stl_repo')
+('prev is', '/home/hv/harsh/Surrogate_and_optimisation/git/Surrogate_based_optim_of_UUVhull/trained_NN_surrogate_and_optim_in_loop')
+('func path is:', '/home/hv/harsh/Surrogate_and_optimisation/git/Surrogate_based_optim_of_UUVhull/trained_NN_surrogate_and_optim_in_loop/cfd_sim')
+('file exist?:', 1)
+Loaded files
+--------------------------------------
+('---Running CFD iteration:', 0, '----------')
+('stl file name:', 'swordfish1.stl')
+('full path of stl file:', './stl_cfd/swordfish1.stl')
+('New dex file name is:', 'rough_mesh_8cores_swordfish1.dex')
+('arg is:', ['./run_dexof.sh', 'rough_mesh_8cores_swordfish1.dex', './stl_cfd/swordfish1.stl', '0'])
+######################################
+######################################
+('Drag force is:', 1100)
+######################################
+('sim time is:', 14.247056007385254)
+Loaded files
+--------------------------------------
+('---Running CFD iteration:', 0, '----------')
+('stl file name:', 'swordfish1.stl')
+('full path of stl file:', './stl_cfd/swordfish1.stl')
+('New dex file name is:', 'rough_mesh_8cores_swordfish1.dex')
+('arg is:', ['./run_dexof.sh', 'rough_mesh_8cores_swordfish1.dex', './stl_cfd/swordfish1.stl', '0'])
+######################################
+######################################
+('Drag force is:', 4.1487006)
+######################################
+('sim time is:', 82.22778606414795)
+('Data is:', array([[5.36414046e+02, 2.78721664e+02, 3.84864290e+02, 1.65000000e+02,
+        1.03761816e+00, 2.99971214e+00, 1.87608269e+04, 4.14870060e+00,
+        1.50000000e-01]]))
+('x is:', array([ 536.41404642,  384.86428978,   10.37618158,    2.99971214,
+        165.        , 1200.        ]), 'drag is:', 4.1487006)
+('*Deleted directory:', './cfd_sim/stl_cfd')
+('*Copied file from', './cad_sim/design_points.csv', 'to destination:', './cfd_sim/design_points.csv')
+('*Copied directory from', './cad_sim/stl_repo', 'to destination:', './cfd_sim/stl_cfd')
+('Deleted files from location:', './cad_sim/stl_repo')
+('prev is', '/home/hv/harsh/Surrogate_and_optimisation/git/Surrogate_based_optim_of_UUVhull/trained_NN_surrogate_and_optim_in_loop')
+('func path is:', '/home/hv/harsh/Surrogate_and_optimisation/git/Surrogate_based_optim_of_UUVhull/trained_NN_surrogate_and_optim_in_loop/cfd_sim')
+('file exist?:', 1)
+Loaded files
+--------------------------------------
+('---Running CFD iteration:', 0, '----------')
+('stl file name:', 'swordfish1.stl')
+('full path of stl file:', './stl_cfd/swordfish1.stl')
+('New dex file name is:', 'rough_mesh_8cores_swordfish1.dex')
+('arg is:', ['./run_dexof.sh', 'rough_mesh_8cores_swordfish1.dex', './stl_cfd/swordfish1.stl', '0'])
+######################################
+######################################
+('Drag force is:', 1100)
+######################################
+('sim time is:', 14.146453857421875)
+Loaded files
+--------------------------------------
+('---Running CFD iteration:', 0, '----------')
+('stl file name:', 'swordfish1.stl')
+('full path of stl file:', './stl_cfd/swordfish1.stl')
+('New dex file name is:', 'rough_mesh_8cores_swordfish1.dex')
+('arg is:', ['./run_dexof.sh', 'rough_mesh_8cores_swordfish1.dex', './stl_cfd/swordfish1.stl', '0'])
+######################################
+######################################
+('Drag force is:', 4.1487006)
+######################################
+('sim time is:', 82.32890200614929)
+('Data is:', array([[5.36414046e+02, 2.78721664e+02, 3.84864290e+02, 1.65000000e+02,
+        1.03761816e+00, 2.99971214e+00, 1.87608269e+04, 4.14870060e+00,
+        1.50000000e-01]]))
+('x is:', array([ 536.41404642,  384.86428978,   10.37618158,    2.99971214,
+        165.        , 1200.        ]), 'drag is:', 4.1487006)
+('*Deleted directory:', './cfd_sim/stl_cfd'Running freecad in Docker 
+Opening: ./seed_cad/Remus_Myring_hull.FCStd
+----> body is: [528.9789175431063, 277.41878943356295, 393.6022930233308, 82.5]
+=> nose_x: [105.79578350862126 211.5915670172425 317.3873505258638 423.183134034485]
+=> tail_x: [885.1181655813355 963.8386241860017 1042.5590827906676 1121.2795413953338]
+******design point is:****** [5.28978918e+02 2.77418789e+02 3.93602293e+02 1.65000000e+02
+ 1.00722214e+00 2.99875378e+00 1.86885372e+04] dp shape  is: (7,)
+=> nose_tail_y: [29.918369200572368 52.96923254409752 69.3866913336259 79.22318587681615
+ 74.57981559942878 55.43944679828634 32.00917019742958 11.219262397715156]
+------Body properties:-------
+  body_area = 0.432807 m^2
+  body_volume = 14900.736112490 m^3
+ my_a: 528.9789175431063 my_b: 277.41878943356295 my_c: 393.6022930233308 my_r: 82.5
+  b1y: 0.0 b2y: 0.0 b3y: 0.0 b4y: 0.0 b5y: 0.0
+  n1y: 29.918369200572368 n2y: 52.96923254409752 n3y: 69.3866913336259 n4y: 79.22318587681615
+  t1y: 74.57981559942878 t2y: 55.43944679828634 t3y: 32.00917019742958 t4y: 11.219262397715156
+------------------------------
+*** ALL DONE -- ALL DONE ***
+******************************************
+**     DEXTER-OPENFOAM INTERFACE        **
+**  Stevens Institute of Technology     **
+**  No warranties: use at your own risk **
+******************************************
+USAGE: run_one_aoa.sh dexfile stlfile aoa 
+rough_mesh_8cores_swordfish1.dex
+./stl_cfd/swordfish1.stl
+0
+Running openfoam in Docker 
+USAGE: run_one_aoa.sh dexfile stlfile aoa 
+rough_mesh_8cores_swordfish1
+*** Preprocessing *** 
+Dex_of called with arguments:
+ Positional Arguments: ['/home/aimed_user/dex_of/dex_of.py', 'rough_mesh_8cores_swordfish1.dex']
+ Named Arguments: {'infile': './stl_cfd/swordfish1.stl', 'aoa': '0', 'casefoldername': 'dir_rough_mesh_8cores_swordfish1_aoa_0'}
+Path:  /home/aimed_user/dex_of
+Updated the value for infile given in dex file with  that from the command line
+Updated the value for aoa given in dex file with  that from the command line
+Updated the value for casefoldername given in dex file with  that from the command line
+WARNING - The mesh surface refinement level is not specified. Default values of (5 7) will be used.
+Copying:: cp -r /home/aimed_user/dex_of/ofTemplate/* /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0
+Case folder (/home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0) has been created 
+Problem definition /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0/problem_def.json is written into the case folder
+**** ALL DONE ****
+*** Cleaning and Running OF ***
+Cleaning case /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0
+*** PostProcessing ***
+----- MESH DENSITIES & CPU TIMES ----- 
+ Converged In:
+Results stored in dir_rough_mesh_8cores_swordfish1_aoa_0/results.log
+*** Results ***
+ ----- LIFT AND DRAG FORCES ---- 
+    Sum of forces
+        Total    : (0 0 0)
+        Pressure : (0 0 0)
+        Viscous  : (0 0 0)
+    Sum of moments
+        Total    : (0 0 0)
+        Pressure : (0 0 0)
+        Viscous  : (0 0 0)
+ ----- LIFT AND DRAG COEFFICIENTS ---- 
+        Cd       : 0	(pressure: 0	viscous: 0)
+        Cl       : 0	(pressure: 0	viscous: 0)
+        Cs       : 0	(pressure: 0	viscous: 0)
+___ REFERENCE AREAS ----
+Arefs
+./postProcessing/forceCoeffs_cl/0/coefficient.dat:# Aref          : 1.36435465e-01
+./postProcessing/forceCoeffs_cd/0/coefficient.dat:# Aref          : 2.13735824e-02
+lrefs:
+./postProcessing/forceCoeffs_cl/0/coefficient.dat:# lRef          : 1.20000000e+00
+./postProcessing/forceCoeffs_cd/0/coefficient.dat:# lRef          : 1.20000000e+00
+dir_rough_mesh_8cores_swordfish1_aoa_0.log:Layer mesh : cells:864  faces:2916  points:1225
+log.snappyHexMesh:Finished meshing in = 0.23 s.
+Time = 500
+ExecutionTime = 5.63 s  ClockTime = 6 s
+*** ALL DONE ***
+*** ALL DONE -- ALL DONE ***
+******************************************
+**     DEXTER-OPENFOAM INTERFACE        **
+**  Stevens Institute of Technology     **
+**  No warranties: use at your own risk **
+******************************************
+USAGE: run_one_aoa.sh dexfile stlfile aoa 
+rough_mesh_8cores_swordfish1.dex
+./stl_cfd/swordfish1.stl
+0
+Running openfoam in Docker 
+USAGE: run_one_aoa.sh dexfile stlfile aoa 
+rough_mesh_8cores_swordfish1
+*** Preprocessing *** 
+Dex_of called with arguments:
+ Positional Arguments: ['/home/aimed_user/dex_of/dex_of.py', 'rough_mesh_8cores_swordfish1.dex']
+ Named Arguments: {'infile': './stl_cfd/swordfish1.stl', 'aoa': '0', 'casefoldername': 'dir_rough_mesh_8cores_swordfish1_aoa_0'}
+Path:  /home/aimed_user/dex_of
+Updated the value for infile given in dex file with  that from the command line
+Updated the value for aoa given in dex file with  that from the command line
+Updated the value for casefoldername given in dex file with  that from the command line
+WARNING - The mesh surface refinement level is not specified. Default values of (5 7) will be used.
+Copying:: cp -r /home/aimed_user/dex_of/ofTemplate/* /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0
+Case folder (/home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0) has been created 
+Problem definition /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0/problem_def.json is written into the case folder
+**** ALL DONE ****
+*** Cleaning and Running OF ***
+Cleaning case /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0
+*** PostProcessing ***
+----- MESH DENSITIES & CPU TIMES ----- 
+ Converged In:
+Results stored in dir_rough_mesh_8cores_swordfish1_aoa_0/results.log
+*** Results ***
+ ----- LIFT AND DRAG FORCES ---- 
+    Sum of forces
+        Total    : (4.1265857 0.00091158348 0.00062197009)
+        Pressure : (0.51545161 0.00090385906 0.00061945209)
+        Viscous  : (3.611134 7.7244187e-06 2.5179973e-06)
+    Sum of moments
+        Total    : (-1.9020446e-05 -0.00026631258 0.00062281908)
+        Pressure : (-2.2058872e-05 -0.00025361979 0.00063770495)
+        Viscous  : (3.0384261e-06 -1.2692783e-05 -1.4885865e-05)
+ ----- LIFT AND DRAG COEFFICIENTS ---- 
+        Cd       : 0.093996808	(pressure: 0.011741137	viscous: 0.082255671)
+        Cl       : 3.2528852e-06	(pressure: 3.2253214e-06	viscous: 2.7563737e-08)
+        Cs       : -2.2194317e-06	(pressure: -2.2104465e-06	viscous: -8.9851959e-09)
+___ REFERENCE AREAS ----
+Arefs
+./postProcessing/forceCoeffs_cl/0/coefficient.dat:# Aref          : 1.36435465e-01
+./postProcessing/forceCoeffs_cd/0/coefficient.dat:# Aref          : 2.13735824e-02
+lrefs:
+./postProcessing/forceCoeffs_cl/0/coefficient.dat:# lRef          : 1.20000000e+00
+./postProcessing/forceCoeffs_cd/0/coefficient.dat:# lRef          : 1.20000000e+00
+dir_rough_mesh_8cores_swordfish1_aoa_0.log:Layer mesh : cells:217823  faces:692210  points:259016
+log.snappyHexMesh:Finished meshing in = 12.7 s.
+Time = 267
+ExecutionTime = 58.72 s  ClockTime = 59 s
+*** ALL DONE ***
+*** ALL DONE -- ALL DONE ***
+Running freecad in Docker 
+Opening: ./seed_cad/Remus_Myring_hull.FCStd
+----> body is: [528.9789175431063, 277.41878943356295, 393.6022930233308, 82.5]
+=> nose_x: [105.79578350862126 211.5915670172425 317.3873505258638 423.183134034485]
+=> tail_x: [885.1181655813355 963.8386241860017 1042.5590827906676 1121.2795413953338]
+******design point is:****** [5.28978918e+02 2.77418789e+02 3.93602293e+02 1.65000000e+02
+ 1.00465654e+00 2.99875378e+00 1.86885372e+04] dp shape  is: (7,)
+=> nose_tail_y: [29.840972124608832 52.909330912091995 69.3560253499298 79.21498669779388
+ 74.57981559942878 55.43944679828634 32.00917019742958 11.219262397715156]
+------Body properties:-------
+  body_area = 0.432696 m^2
+  body_volume = 14895.594785537 m^3
+ my_a: 528.9789175431063 my_b: 277.41878943356295 my_c: 393.6022930233308 my_r: 82.5
+  b1y: 0.0 b2y: 0.0 b3y: 0.0 b4y: 0.0 b5y: 0.0
+  n1y: 29.840972124608832 n2y: 52.909330912091995 n3y: 69.3560253499298 n4y: 79.21498669779388
+  t1y: 74.57981559942878 t2y: 55.43944679828634 t3y: 32.00917019742958 t4y: 11.219262397715156
+------------------------------
+*** ALL DONE -- ALL DONE ***
+******************************************
+**     DEXTER-OPENFOAM INTERFACE        **
+**  Stevens Institute of Technology     **
+**  No warranties: use at your own risk **
+******************************************
+USAGE: run_one_aoa.sh dexfile stlfile aoa 
+rough_mesh_8cores_swordfish1.dex
+./stl_cfd/swordfish1.stl
+0
+Running openfoam in Docker 
+USAGE: run_one_aoa.sh dexfile stlfile aoa 
+rough_mesh_8cores_swordfish1
+*** Preprocessing *** 
+Dex_of called with arguments:
+ Positional Arguments: ['/home/aimed_user/dex_of/dex_of.py', 'rough_mesh_8cores_swordfish1.dex']
+ Named Arguments: {'infile': './stl_cfd/swordfish1.stl', 'aoa': '0', 'casefoldername': 'dir_rough_mesh_8cores_swordfish1_aoa_0'}
+Path:  /home/aimed_user/dex_of
+Updated the value for infile given in dex file with  that from the command line
+Updated the value for aoa given in dex file with  that from the command line
+Updated the value for casefoldername given in dex file with  that from the command line
+WARNING - The mesh surface refinement level is not specified. Default values of (5 7) will be used.
+Copying:: cp -r /home/aimed_user/dex_of/ofTemplate/* /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0
+Case folder (/home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0) has been created 
+Problem definition /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0/problem_def.json is written into the case folder
+**** ALL DONE ****
+*** Cleaning and Running OF ***
+Cleaning case /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0
+*** PostProcessing ***
+----- MESH DENSITIES & CPU TIMES ----- 
+ Converged In:
+Results stored in dir_rough_mesh_8cores_swordfish1_aoa_0/results.log
+*** Results ***
+ ----- LIFT AND DRAG FORCES ---- 
+    Sum of forces
+        Total    : (0 0 0)
+        Pressure : (0 0 0)
+        Viscous  : (0 0 0)
+    Sum of moments
+        Total    : (0 0 0)
+        Pressure : (0 0 0)
+        Viscous  : (0 0 0)
+ ----- LIFT AND DRAG COEFFICIENTS ---- 
+        Cd       : 0	(pressure: 0	viscous: 0)
+        Cl       : 0	(pressure: 0	viscous: 0)
+        Cs       : 0	(pressure: 0	viscous: 0)
+___ REFERENCE AREAS ----
+Arefs
+./postProcessing/forceCoeffs_cl/0/coefficient.dat:# Aref          : 1.36399697e-01
+./postProcessing/forceCoeffs_cd/0/coefficient.dat:# Aref          : 2.13736104e-02
+lrefs:
+./postProcessing/forceCoeffs_cl/0/coefficient.dat:# lRef          : 1.20000000e+00
+./postProcessing/forceCoeffs_cd/0/coefficient.dat:# lRef          : 1.20000000e+00
+dir_rough_mesh_8cores_swordfish1_aoa_0.log:Layer mesh : cells:864  faces:2916  points:1225
+log.snappyHexMesh:Finished meshing in = 0.23 s.
+Time = 500
+ExecutionTime = 5.64 s  ClockTime = 6 s
+*** ALL DONE ***
+*** ALL DONE -- ALL DONE ***
+******************************************
+**     DEXTER-OPENFOAM INTERFACE        **
+**  Stevens Institute of Technology     **
+**  No warranties: use at your own risk **
+******************************************
+USAGE: run_one_aoa.sh dexfile stlfile aoa 
+rough_mesh_8cores_swordfish1.dex
+./stl_cfd/swordfish1.stl
+0
+Running openfoam in Docker 
+USAGE: run_one_aoa.sh dexfile stlfile aoa 
+rough_mesh_8cores_swordfish1
+*** Preprocessing *** 
+Dex_of called with arguments:
+ Positional Arguments: ['/home/aimed_user/dex_of/dex_of.py', 'rough_mesh_8cores_swordfish1.dex']
+ Named Arguments: {'infile': './stl_cfd/swordfish1.stl', 'aoa': '0', 'casefoldername': 'dir_rough_mesh_8cores_swordfish1_aoa_0'}
+Path:  /home/aimed_user/dex_of
+Updated the value for infile given in dex file with  that from the command line
+Updated the value for aoa given in dex file with  that from the command line
+Updated the value for casefoldername given in dex file with  that from the command line
+WARNING - The mesh surface refinement level is not specified. Default values of (5 7) will be used.
+Copying:: cp -r /home/aimed_user/dex_of/ofTemplate/* /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0
+Case folder (/home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0) has been created 
+Problem definition /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0/problem_def.json is written into the case folder
+**** ALL DONE ****
+*** Cleaning and Running OF ***
+Cleaning case /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0
+*** PostProcessing ***
+----- MESH DENSITIES & CPU TIMES ----- 
+ Converged In:
+Results stored in dir_rough_mesh_8cores_swordfish1_aoa_0/results.log
+*** Results ***
+ ----- LIFT AND DRAG FORCES ---- 
+    Sum of forces
+        Total    : (4.1272834 0.0016274054 0.00046508647)
+        Pressure : (0.51730888 0.0016342979 0.00047703031)
+        Viscous  : (3.6099745 -6.8924349e-06 -1.1943846e-05)
+    Sum of moments
+        Total    : (-1.5156237e-05 0.00017440155 0.00068141753)
+        Pressure : (-1.830751e-05 0.00019500753 0.00070541723)
+        Viscous  : (3.1512732e-06 -2.0605981e-05 -2.3999699e-05)
+ ----- LIFT AND DRAG COEFFICIENTS ---- 
+        Cd       : 0.094012577	(pressure: 0.011783427	viscous: 0.082229151)
+        Cl       : 5.8087397e-06	(pressure: 5.8333411e-06	viscous: -2.4601343e-08)
+        Cs       : -1.660045e-06	(pressure: -1.7026765e-06	viscous: 4.2631473e-08)
+___ REFERENCE AREAS ----
+Arefs
+./postProcessing/forceCoeffs_cl/0/coefficient.dat:# Aref          : 1.36399697e-01
+./postProcessing/forceCoeffs_cd/0/coefficient.dat:# Aref          : 2.13736104e-02
+lrefs:
+./postProcessing/forceCoeffs_cl/0/coefficient.dat:# lRef          : 1.20000000e+00
+./postProcessing/forceCoeffs_cd/0/coefficient.dat:# lRef          : 1.20000000e+00
+dir_rough_mesh_8cores_swordfish1_aoa_0.log:Layer mesh : cells:217780  faces:692083  points:258978
+log.snappyHexMesh:Finished meshing in = 12.81 s.
+Time = 267
+ExecutionTime = 58.5 s  ClockTime = 58 s
+*** ALL DONE ***
+*** ALL DONE -- ALL DONE ***
+)
+('*Copied file from', './cad_sim/design_points.csv', 'to destination:', './cfd_sim/design_points.csv')
+('*Copied directory from', './cad_sim/stl_repo', 'to destination:', './cfd_sim/stl_cfd')
+('Deleted files from location:', './cad_sim/stl_repo')
+('prev is', '/home/hv/harsh/Surrogate_and_optimisation/git/Surrogate_based_optim_of_UUVhull/trained_NN_surrogate_and_optim_in_loop')
+('func path is:', '/home/hv/harsh/Surrogate_and_optimisation/git/Surrogate_based_optim_of_UUVhull/trained_NN_surrogate_and_optim_in_loop/cfd_sim')
+('file exist?:', 1)
+Loaded files
+--------------------------------------
+('---Running CFD iteration:', 0, '----------')
+('stl file name:', 'swordfish1.stl')
+('full path of stl file:', './stl_cfd/swordfish1.stl')
+('New dex file name is:', 'rough_mesh_8cores_swordfish1.dex')
+('arg is:', ['./run_dexof.sh', 'rough_mesh_8cores_swordfish1.dex', './stl_cfd/swordfish1.stl', '0'])
+######################################
+######################################
+('Drag force is:', 1100)
+######################################
+('sim time is:', 13.864979982376099)
+Loaded files
+--------------------------------------
+('---Running CFD iteration:', 0, '----------')
+('stl file name:', 'swordfish1.stl')
+('full path of stl file:', './stl_cfd/swordfish1.stl')
+('New dex file name is:', 'rough_mesh_8cores_swordfish1.dex')
+('arg is:', ['./run_dexof.sh', 'rough_mesh_8cores_swordfish1.dex', './stl_cfd/swordfish1.stl', '0'])
+######################################
+######################################
+('Drag force is:', 4.1265857)
+######################################
+('sim time is:', 80.08674907684326)
+('Data is:', array([[5.28978918e+02, 2.77418789e+02, 3.93602293e+02, 1.65000000e+02,
+        1.00722214e+00, 2.99875378e+00, 1.86885372e+04, 4.12658570e+00,
+        1.50000000e-01]]))
+('x is:', array([ 528.97891754,  393.60229302,   10.07222139,    2.99875378,
+        165.        , 1200.        ]), 'drag is:', 4.1265857)
+('*Deleted directory:', './cfd_sim/stl_cfd')
+('*Copied file from', './cad_sim/design_points.csv', 'to destination:', './cfd_sim/design_points.csv')
+('*Copied directory from', './cad_sim/stl_repo', 'to destination:', './cfd_sim/stl_cfd')
+('Deleted files from location:', './cad_sim/stl_repo')
+('prev is', '/home/hv/harsh/Surrogate_and_optimisation/git/Surrogate_based_optim_of_UUVhull/trained_NN_surrogate_and_optim_in_loop')
+('func path is:', '/home/hv/harsh/Surrogate_and_optimisation/git/Surrogate_based_optim_of_UUVhull/trained_NN_surrogate_and_optim_in_loop/cfd_sim')
+('file exist?:', 1)
+Loaded files
+--------------------------------------
+('---Running CFD iteration:', 0, '----------')
+('stl file name:', 'swordfish1.stl')
+('full path of stl file:', './stl_cfd/swordfish1.stl')
+('New dex file name is:', 'rough_mesh_8cores_swordfish1.dex')
+('arg is:', ['./run_dexof.sh', 'rough_mesh_8cores_swordfish1.dex', './stl_cfd/swordfish1.stl', '0'])
+######################################
+######################################
+('Drag force is:', 1100)
+######################################
+('sim time is:', 13.800251960754395)
+Loaded files
+--------------------------------------
+('---Running CFD iteration:', 0, '----------')
+('stl file name:', 'swordfish1.stl')
+('full path of stl file:', './stl_cfd/swordfish1.stl')
+('New dex file name is:', 'rough_mesh_8cores_swordfish1.dex')
+('arg is:', ['./run_dexof.sh', 'rough_mesh_8cores_swordfish1.dex', './stl_cfd/swordfish1.stl', '0'])
+######################################
+######################################
+('Drag force is:', 4.1272834)
+######################################
+('sim time is:', 79.8509509563446)
+('Data is:', array([[5.28978918e+02, 2.77418789e+02, 3.93602293e+02, 1.65000000e+02,
+        1.00465654e+00, 2.99875378e+00, 1.86885372e+04, 4.12728340e+00,
+        1.50000000e-01]]))
+('x is:', array([ 528.97891754,  393.60229302,   10.04656537,    2.99875378,
+        165.        , 1200.        ]), 'drag is:', 4.1272834)
