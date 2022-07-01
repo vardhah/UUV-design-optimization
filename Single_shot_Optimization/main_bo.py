@@ -9,26 +9,23 @@ import subprocess
 import time
 #from run_dexof import *
 import sys 
-from cfd_sim.run_dexof import run_dex
+from cfd_sim.run_dexof import *
 from cfd_sim.dexof_reader_class import parse_dex_file
 import GPyOpt
 from subprocess import PIPE, run
+import random
+from numpy.random import seed
+
 
 sys.dont_write_bytecode = True
-
-
-
-input_size=2                             # input size may change if integer/ordinal type variable and represented by one-hot encoding
 cad_storage_name= './cad_sim/design_points.csv'
 cfd_storage_name= './cfd_sim/design_points.csv'
 
-num_iteration=20                        # Number of iteration of sampling
-init_samples=50 
-budget_samples=50                        # Number of samples-our budget
-ranges=[-10,0,-6.5,0]                    # ranges in form of [low1,high1,low2,high2,...]
 
 src= './cad_sim/stl_repo'
 dst='./cfd_sim/stl_cfd'
+
+d=191; tl=1330;
 
 
 def delete_dir(loc):
@@ -55,7 +52,8 @@ def save_design_points(x):
     np.savetxt(cfd_storage_name,x,  delimiter=',')
 
 def run_cad_cfd(x):
-	save_design_points(x)
+	print('shape of x:',x.shape)
+	save_design_points(np.array([x[0][0],x[0][1],x[0][2],x[0][3],d,tl]))
 	delete_dir(dst)
 	subprocess.call('./cad_sim/run_cad.sh')
 	copy_dir(src,dst)
@@ -65,27 +63,59 @@ def run_cad_cfd(x):
 	cfd_sim_path= prev+'/cfd_sim'
 	print('func path is:',cfd_sim_path)
 	os.chdir(cfd_sim_path)
-	result = run_dex()
+	result = main_run()
 	os.chdir(prev)
 	return result
 
 
-if __name__=='__main__':
-	
 
+def doe(runid,doe_strategy):
+	random.seed(seed)
+	############################
+	data_file_name='doe_strategy'+str(run_id)+'.csv'   
+	dim=4;n=100 ; max_iter  = 1
+	#################################################
+	#given total_len & D => need to find a,c,n,theta
+	ranges=[10,3*d,10,3*d,10,50,1,50]    
+    
+	already_run = len(glob.glob(data_file_name))
+	print('file exist?:',already_run)
+	if already_run==1:
+	    multi_runresults=np.loadtxt(data_file_name, delimiter=",",skiprows=0, dtype=np.float32)
+	    multi_runresults= np.atleast_2d(multi_runresults)
+	    #print('shape of multi_runresults:',multi_runresults.shape)
+	
+	#################################
+
+	for i in range(max_iter):
+		if doe_strategy=='random':
+			ds= random_sampling(dim,n,ranges)
+		elif doe_strategy=='lhc':	
+			ds= lhc_samples_maximin(n,dim,ranges)  #maximin LHC
+		else: 
+			print('Unknown sampling strategy')
+		print('ds is:',ds.shape[0])
+		for i in range(ds.shape[0]):
+		 already_run = len(glob.glob(data_file_name))	
+		 design_point= ds[i]	
+		 print('design point is:',design_point)
+		 fd=run_cad_cfd(design_point)
+		 
+		 if already_run==0:
+		   multi_runresults= fd
+		 else:
+		   multi_runresults= np.concatenate((multi_runresults,fd),axis=0)
+		 #print('multirun result:',multi_runresults)
+		 np.savetxt(data_file_name,multi_runresults,  delimiter=',')
+
+
+
+def run_bo(run_id=0,aquistion='EI',seeds=0):
+	###############################################
 	bounds = [{'name': 'myring_a', 'type': 'continuous', 'domain': (10,573)},
 	        {'name': 'myring_c', 'type': 'continuous', 'domain': (10,573)},
             {'name': 'n', 'type': 'continuous', 'domain': (10,50)},
             {'name': 'theta', 'type': 'continuous', 'domain': (1,50)}]
-	"""        
-            {'name': 'tail1_y', 'type': 'continuous', 'domain': (1,95.5)},
-            {'name': 'tail2_y', 'type': 'continuous', 'domain': (1,95.5)},
-            {'name': 'tail3_y', 'type': 'continuous', 'domain': (1,95.5)},
-            {'name': 'tail4_y', 'type': 'continuous', 'domain': (1,95.5)}]  
-	
-	"""
-
-    
 	################################################
 
 
@@ -93,21 +123,22 @@ if __name__=='__main__':
 	max_iter  = 100
 	num_iter=20
 	batch= int(max_iter/num_iter)
-	tolerance = 1e-8     # distance between two consecutive observations 
-	data_file_name='bo_ei'   
+	#tolerance = 1e-8     # distance between two consecutive observations 
+	data_file_name='./data/bo_'+aquistion+str(run_id)   
 	#################################################
 	already_run = len(glob.glob(data_file_name))
 	print('file exist?:',already_run)
 
 	print('Batch is:',batch)
+	seed(seeds)
 	for i in range(num_iter): 
-
+	
 	 if already_run==1:
 	   evals = pd.read_csv(data_file_name, index_col=0, delimiter="\t")
 	   Y = np.array([[x] for x in evals["Y"]])
 	   X = np.array(evals.filter(regex="var*"))
 	   myBopt2D = GPyOpt.methods.BayesianOptimization(run_cad_cfd, bounds,model_type = 'GP',X=X, Y=Y,
-                                              acquisition_type='EI',  
+                                              acquisition_type=aquistion,  
                                               exact_feval = True) 
 
 	   print('In other runs run')
@@ -115,7 +146,7 @@ if __name__=='__main__':
 	   myBopt2D = GPyOpt.methods.BayesianOptimization(f=run_cad_cfd,
                                               domain=bounds,
                                               model_type = 'GP',
-                                              acquisition_type='EI',  
+                                              acquisition_type=aquistion,  
                                               exact_feval = True) 
 	   already_run=1
 	   print('In 1st run')
@@ -123,14 +154,21 @@ if __name__=='__main__':
    
  # --- Run the optimization 
 	 try:
-	  myBopt2D.run_optimization(batch,eps = tolerance,verbosity=True)  
+	  myBopt2D.run_optimization(batch,verbosity=True)  
 	 except KeyboardInterrupt:
 	  pass
- 
 	 sim_data_x= myBopt2D.X;
 	 myBopt2D.save_evaluations(data_file_name)
 
+if __name__=='__main__':
+	run=[1,2,3,4,5]; seeds=[11,13,17,19,23]
+	aqu1='EI'; aqu2='LCB'
+	for i in range(len(run)):
+		run_bo(run[i],aqu1,seeds[i])
+		run_bo(run[i],aqu2,seeds[i])  
+	
 
-	myBopt2D.plot_acquisition()  
-	myBopt2D.plot_convergence()
+
+	#myBopt2D.plot_acquisition()  
+	#myBopt2D.plot_convergence()
 	

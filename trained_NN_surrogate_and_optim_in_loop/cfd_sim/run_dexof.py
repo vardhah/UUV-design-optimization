@@ -99,6 +99,7 @@ def run_dex(mesh=0.2):
 
 
 def main_run():
+    start=time.time()
     alt_mesh=[0.15,0.1,0.08,0.06,0.05]
     already_run = len(glob.glob(data_file_name))
     print('file exist?:',already_run)
@@ -108,19 +109,22 @@ def main_run():
         #print('shape of multi_runresults:',multi_runresults.shape)
 
     design_set_load= np.loadtxt('./design_points.csv', delimiter = ",")
-    Fd_found= run_dex()
+    mesh=0.2
+    Fd_found= run_dex(mesh)
     
     #print('Fd found is:',Fd_found,type(Fd_found))
     if (Fd_found>=1000):
       for i in range(len(alt_mesh)):
-         Fd_found= run_dex(alt_mesh[i])
-         if (Fd_found<1000):
-            mesh=alt_mesh[i]
+         mesh=alt_mesh[i]
+         Fd_found= run_dex(mesh)
+         if (Fd_found<1000):    
             break
 
-    drag_data=np.array([Fd_found,mesh])
+    end=time.time(); sim_time=end-start
+    drag_data=np.array([Fd_found,mesh,sim_time])
     data= np.atleast_2d(np.append(design_set_load,drag_data))
-    print('Data is:',data)
+    print('--------->Data is:',data)
+   
     if already_run==0:
            multi_runresults= data
     else:

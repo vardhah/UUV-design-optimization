@@ -23,6 +23,11 @@ cfd_storage_name= './cfd_sim/design_points.csv'
 src= './cad_sim/stl_repo'
 dst='./cfd_sim/stl_cfd'
 
+def generate_intial_seed(n=5):
+    ds= random_sampling(dim,n,ranges)
+    np.savetxt(initial_seed.csv,x,  delimiter=',')
+
+
 
 def delete_dir(loc):
     print('*Deleted directory:',loc)
@@ -65,6 +70,50 @@ def run_cad_cfd(x):
 	return result
 
 
+
+def doe(runid,doe_strategy):
+	############################
+	data_file_name='doe_strategy'+str(run_id)+'.csv'   
+	D=191;
+	dim=4;n=100
+	#################################################
+	#given total_len & D => need to find a,c,n,theta
+	ranges=[10,3*D,10,3*D,10,50,1,50]    
+    
+	already_run = len(glob.glob(data_file_name))
+	print('file exist?:',already_run)
+	if already_run==1:
+	    multi_runresults=np.loadtxt(data_file_name, delimiter=",",skiprows=0, dtype=np.float32)
+	    multi_runresults= np.atleast_2d(multi_runresults)
+	    #print('shape of multi_runresults:',multi_runresults.shape)
+	max_iter  = 1
+	#################################
+
+	for i in range(max_iter):
+		if doe_strategy=='random':
+			ds= random_sampling(dim,n,ranges)
+		elif doe_strategy=='lhc':	
+			ds= lhc_samples_maximin(n,dim,ranges)  #maximin LHC
+		else: 
+			print('Unknown sampling strategy')
+		print('ds is:',ds.shape[0])
+		for i in range(ds.shape[0]):
+		 already_run = len(glob.glob(data_file_name))	
+		 design_point= ds[i]	
+		 print('design point is:',design_point)
+		 fd=run_cad_cfd(design_point)
+		 #fd=10
+		 #print('fd is:',fd)
+		 
+		 if already_run==0:
+		   multi_runresults= fd
+		 else:
+		   multi_runresults= np.concatenate((multi_runresults,fd),axis=0)
+		 #print('multirun result:',multi_runresults)
+		 np.savetxt(data_file_name,multi_runresults,  delimiter=',')
+         
+	
+
 if __name__=='__main__':
 	
 	############################
@@ -74,7 +123,11 @@ if __name__=='__main__':
 	#################################################
 	#given total_len & D => need to find a,c,n,theta
 	ranges=[10,3*D,10,3*D,10,50,1,50]    
-    
+	#######################################
+	ds= random_sampling(dim,5,ranges)
+	np.savetxt('initial_seed.csv',ds,  delimiter=',')
+
+	#############################################     
 	already_run = len(glob.glob(data_file_name))
 	print('file exist?:',already_run)
 	if already_run==1:

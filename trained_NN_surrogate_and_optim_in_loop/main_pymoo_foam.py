@@ -9,7 +9,7 @@ import subprocess
 import time
 #from run_dexof import *
 import sys 
-from cfd_sim.run_dexof import run_dex
+from cfd_sim.run_dexof import *
 from cfd_sim.dexof_reader_class import parse_dex_file
 import GPyOpt
 from pymoo.algorithms.soo.nonconvex.ga import GA
@@ -94,7 +94,7 @@ class MyProblem(ElementwiseProblem):
         cfd_sim_path= prev+'/cfd_sim'
         print('func path is:',cfd_sim_path)
         os.chdir(cfd_sim_path)
-        result = run_dex()
+        result = main_run()
         os.chdir(prev)
         #g1 = 1
 

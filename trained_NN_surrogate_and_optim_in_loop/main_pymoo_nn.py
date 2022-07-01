@@ -26,6 +26,10 @@ from torch.utils.data import DataLoader
 import matplotlib.pyplot as plt
 from lp import load_N_predict
 import shutil
+import random
+
+
+
 
 r1l=50; r1h=600;r2l=1;r2h=1850;r3l=50;r3h=600; r4l=50;r4h=200;r5l=1;r5h=5;r6l=1;r6h=50; 
 
