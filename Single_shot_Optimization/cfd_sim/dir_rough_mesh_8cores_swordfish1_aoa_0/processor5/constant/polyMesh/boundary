@@ -16,50 +16,39 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-8
+7
 (
     inlet
     {
         type            patch;
         nFaces          0;
-        startFace       80228;
+        startFace       62756;
     }
     walls
     {
         type            patch;
-        nFaces          108;
-        startFace       80228;
+        nFaces          68;
+        startFace       62756;
     }
     outlet
     {
         type            patch;
         nFaces          0;
-        startFace       80336;
+        startFace       62824;
     }
     airfoil
     {
         type            wall;
         inGroups        1(wall);
-        nFaces          2889;
-        startFace       80336;
-    }
-    procBoundary5to0
-    {
-        type            processor;
-        inGroups        1(processor);
-        nFaces          1;
-        startFace       83225;
-        matchTolerance  0.0001;
-        transform       unknown;
-        myProcNo        5;
-        neighbProcNo    0;
+        nFaces          2191;
+        startFace       62824;
     }
     procBoundary5to1
     {
         type            processor;
         inGroups        1(processor);
-        nFaces          1312;
-        startFace       83226;
+        nFaces          1046;
+        startFace       65015;
         matchTolerance  0.0001;
         transform       unknown;
         myProcNo        5;
@@ -69,8 +58,8 @@ FoamFile
     {
         type            processor;
         inGroups        1(processor);
-        nFaces          813;
-        startFace       84538;
+        nFaces          816;
+        startFace       66061;
         matchTolerance  0.0001;
         transform       unknown;
         myProcNo        5;
@@ -80,8 +69,8 @@ FoamFile
     {
         type            processor;
         inGroups        1(processor);
-        nFaces          780;
-        startFace       85351;
+        nFaces          745;
+        startFace       66877;
         matchTolerance  0.0001;
         transform       unknown;
         myProcNo        5;

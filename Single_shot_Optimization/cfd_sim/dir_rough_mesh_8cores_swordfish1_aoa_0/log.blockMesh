@@ -8,10 +8,10 @@
 Build  : _d44c8318-20220111 OPENFOAM=2112 version=2112
 Arch   : "LSB;label=32;scalar=64"
 Exec   : blockMesh
-Date   : Jul 01 2022
-Time   : 16:05:36
-Host   : 1c9eb7219079
-PID    : 485
+Date   : Jul 04 2022
+Time   : 23:32:04
+Host   : 13639cff52bc
+PID    : 484
 I/O    : uncollated
 Case   : /home/aimed_user/dexof_work/dir_rough_mesh_8cores_swordfish1_aoa_0
 nProcs : 1

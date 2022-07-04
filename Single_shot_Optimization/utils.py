@@ -6,7 +6,8 @@ from pyDOE import *
 
     
 #latin hypercube sampling-maximize the minimum distance between points, but place the point in a randomized location within its interval
-def lhc_samples_maximin(n, dim,ranges): 
+def lhc_samples_maximin(n, dim,ranges,seeds): 
+    np.random.seed(seeds)
     samples=lhs(dim, samples=n, criterion='maximin')
     for i in range(dim): 
        samples[:,i]=samples[:,i]*(ranges[(2*i+1)]-ranges[2*i]) + ranges[2*i]
@@ -20,7 +21,8 @@ def lhc_samples_corr(n, dim,ranges):
     return samples
 
 # monte carlo sampling
-def random_sampling(dim,n,ranges):
+def random_sampling(dim,n,ranges,seeds):
+    np.random.seed(seeds)
     samples=np.random.rand(n,dim)
     for i in range(dim): 
        samples[:,i]=samples[:,i]*(ranges[(2*i+1)]-ranges[2*i]) + ranges[2*i]

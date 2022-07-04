@@ -16,61 +16,50 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-8
+7
 (
     inlet
     {
         type            patch;
         nFaces          0;
-        startFace       80138;
+        startFace       62709;
     }
     walls
     {
         type            patch;
-        nFaces          92;
-        startFace       80138;
+        nFaces          84;
+        startFace       62709;
     }
     outlet
     {
         type            patch;
         nFaces          0;
-        startFace       80230;
+        startFace       62793;
     }
     airfoil
     {
         type            wall;
         inGroups        1(wall);
-        nFaces          2898;
-        startFace       80230;
+        nFaces          2228;
+        startFace       62793;
     }
     procBoundary6to2
     {
         type            processor;
         inGroups        1(processor);
-        nFaces          1261;
-        startFace       83128;
+        nFaces          1087;
+        startFace       65021;
         matchTolerance  0.0001;
         transform       unknown;
         myProcNo        6;
         neighbProcNo    2;
     }
-    procBoundary6to3
-    {
-        type            processor;
-        inGroups        1(processor);
-        nFaces          30;
-        startFace       84389;
-        matchTolerance  0.0001;
-        transform       unknown;
-        myProcNo        6;
-        neighbProcNo    3;
-    }
     procBoundary6to5
     {
         type            processor;
         inGroups        1(processor);
-        nFaces          780;
-        startFace       84419;
+        nFaces          745;
+        startFace       66108;
         matchTolerance  0.0001;
         transform       unknown;
         myProcNo        6;
@@ -80,8 +69,8 @@ FoamFile
     {
         type            processor;
         inGroups        1(processor);
-        nFaces          1963;
-        startFace       85199;
+        nFaces          883;
+        startFace       66853;
         matchTolerance  0.0001;
         transform       unknown;
         myProcNo        6;

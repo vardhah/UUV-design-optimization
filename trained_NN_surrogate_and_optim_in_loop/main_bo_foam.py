@@ -15,7 +15,7 @@ import GPyOpt
 from subprocess import PIPE, run
 import random
 sys.dont_write_bytecode = True
-
+from numpy.random import seed
 
 
 input_size=2                             # input size may change if integer/ordinal type variable and represented by one-hot encoding
@@ -30,8 +30,9 @@ ranges=[-10,0,-6.5,0]                    # ranges in form of [low1,high1,low2,hi
 src= './cad_sim/stl_repo'
 dst='./cfd_sim/stl_cfd'
 
-d=180; tl=1750
-
+#d=191; tl=1330    #Exp1
+d=180; tl=1750    #Exp2
+csv_filename_bo_foam= 'bo_lcb_foam_simtime_D'+str(d)+'_L'+str(tl)+'.csv'
 
 def delete_dir(loc):
     print('*Deleted directory:',loc)
@@ -56,10 +57,14 @@ def save_design_points(x):
     np.savetxt(cad_storage_name,x,  delimiter=',')
     np.savetxt(cfd_storage_name,x,  delimiter=',')
 
+
+flag=0
 def run_cad_cfd(x):
-	#save_design_points(x)
+	global flag,_data
+	start=time.time()
 	print('shape of x:',x.shape)
 	save_design_points(np.array([x[0][0],x[0][1],x[0][2],x[0][3],d,tl]))
+	b= tl-x[0][0]-x[0][1]
 	delete_dir(dst)
 	subprocess.call('./cad_sim/run_cad.sh')
 	copy_dir(src,dst)
@@ -71,34 +76,34 @@ def run_cad_cfd(x):
 	os.chdir(cfd_sim_path)
 	result = main_run()
 	os.chdir(prev)
+	end=time.time(); sim_time=end-start
+	sim_data= np.array([x[0][0],b,x[0][1],d,x[0][2],x[0][3],result,sim_time])
+	if flag==0:
+        	_data= sim_data.reshape(1,-1) ; flag=1
+	else: 
+		_data= np.concatenate((_data,sim_data.reshape(1,-1)),axis=0)
+		np.savetxt(csv_filename_bo_foam,_data,  delimiter=',')
 	return result
 
 
 if __name__=='__main__':
 	
-	random.seed(10)
+	seeds=101
 	bounds = [{'name': 'myring_a', 'type': 'continuous', 'domain': (10,573)},
 	        {'name': 'myring_c', 'type': 'continuous', 'domain': (10,573)},
             {'name': 'n', 'type': 'continuous', 'domain': (10,50)},
             {'name': 'theta', 'type': 'continuous', 'domain': (1,50)}]
-	"""        
-            {'name': 'tail1_y', 'type': 'continuous', 'domain': (1,95.5)},
-            {'name': 'tail2_y', 'type': 'continuous', 'domain': (1,95.5)},
-            {'name': 'tail3_y', 'type': 'continuous', 'domain': (1,95.5)},
-            {'name': 'tail4_y', 'type': 'continuous', 'domain': (1,95.5)}]  
-	
-	"""
 
     
 	################################################
 
-
+	seed(seeds)
 	max_time  = None 
-	max_iter  = 100
-	num_iter=20
+	max_iter  = 50
+	num_iter=9
 	batch= int(max_iter/num_iter)
 	tolerance = 1e-8     # distance between two consecutive observations 
-	data_file_name='bo_lcb_foam_exp1_D180_L1750'   
+	data_file_name='bo_lcb_foam'   
 	#################################################
 	already_run = len(glob.glob(data_file_name))
 	print('file exist?:',already_run)

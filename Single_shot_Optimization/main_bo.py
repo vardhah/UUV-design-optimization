@@ -69,47 +69,6 @@ def run_cad_cfd(x):
 
 
 
-def doe(runid,doe_strategy):
-	random.seed(seed)
-	############################
-	data_file_name='doe_strategy'+str(run_id)+'.csv'   
-	dim=4;n=100 ; max_iter  = 1
-	#################################################
-	#given total_len & D => need to find a,c,n,theta
-	ranges=[10,3*d,10,3*d,10,50,1,50]    
-    
-	already_run = len(glob.glob(data_file_name))
-	print('file exist?:',already_run)
-	if already_run==1:
-	    multi_runresults=np.loadtxt(data_file_name, delimiter=",",skiprows=0, dtype=np.float32)
-	    multi_runresults= np.atleast_2d(multi_runresults)
-	    #print('shape of multi_runresults:',multi_runresults.shape)
-	
-	#################################
-
-	for i in range(max_iter):
-		if doe_strategy=='random':
-			ds= random_sampling(dim,n,ranges)
-		elif doe_strategy=='lhc':	
-			ds= lhc_samples_maximin(n,dim,ranges)  #maximin LHC
-		else: 
-			print('Unknown sampling strategy')
-		print('ds is:',ds.shape[0])
-		for i in range(ds.shape[0]):
-		 already_run = len(glob.glob(data_file_name))	
-		 design_point= ds[i]	
-		 print('design point is:',design_point)
-		 fd=run_cad_cfd(design_point)
-		 
-		 if already_run==0:
-		   multi_runresults= fd
-		 else:
-		   multi_runresults= np.concatenate((multi_runresults,fd),axis=0)
-		 #print('multirun result:',multi_runresults)
-		 np.savetxt(data_file_name,multi_runresults,  delimiter=',')
-
-
-
 def run_bo(run_id=0,aquistion='EI',seeds=0):
 	###############################################
 	bounds = [{'name': 'myring_a', 'type': 'continuous', 'domain': (10,573)},
@@ -120,8 +79,8 @@ def run_bo(run_id=0,aquistion='EI',seeds=0):
 
 
 	max_time  = None 
-	max_iter  = 100
-	num_iter=20
+	max_iter  = 45
+	num_iter=9
 	batch= int(max_iter/num_iter)
 	#tolerance = 1e-8     # distance between two consecutive observations 
 	data_file_name='./data/bo_'+aquistion+str(run_id)   
@@ -161,7 +120,8 @@ def run_bo(run_id=0,aquistion='EI',seeds=0):
 	 myBopt2D.save_evaluations(data_file_name)
 
 if __name__=='__main__':
-	run=[1,2,3,4,5]; seeds=[11,13,17,19,23]
+	run=[1,2,3,4,5]; seeds=[11,13,17,19,21]
+		
 	aqu1='EI'; aqu2='LCB'
 	for i in range(len(run)):
 		run_bo(run[i],aqu1,seeds[i])

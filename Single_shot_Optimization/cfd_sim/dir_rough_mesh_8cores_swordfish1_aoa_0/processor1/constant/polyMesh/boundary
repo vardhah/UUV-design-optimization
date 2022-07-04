@@ -22,33 +22,33 @@ FoamFile
     {
         type            patch;
         nFaces          0;
-        startFace       80270;
+        startFace       62892;
     }
     walls
     {
         type            patch;
-        nFaces          108;
-        startFace       80270;
+        nFaces          68;
+        startFace       62892;
     }
     outlet
     {
         type            patch;
         nFaces          0;
-        startFace       80378;
+        startFace       62960;
     }
     airfoil
     {
         type            wall;
         inGroups        1(wall);
-        nFaces          2897;
-        startFace       80378;
+        nFaces          2211;
+        startFace       62960;
     }
     procBoundary1to0
     {
         type            processor;
         inGroups        1(processor);
         nFaces          794;
-        startFace       83275;
+        startFace       65171;
         matchTolerance  0.0001;
         transform       unknown;
         myProcNo        1;
@@ -58,8 +58,8 @@ FoamFile
     {
         type            processor;
         inGroups        1(processor);
-        nFaces          744;
-        startFace       84069;
+        nFaces          709;
+        startFace       65965;
         matchTolerance  0.0001;
         transform       unknown;
         myProcNo        1;
@@ -69,8 +69,8 @@ FoamFile
     {
         type            processor;
         inGroups        1(processor);
-        nFaces          1312;
-        startFace       84813;
+        nFaces          1046;
+        startFace       66674;
         matchTolerance  0.0001;
         transform       unknown;
         myProcNo        1;

@@ -9,13 +9,14 @@ import subprocess
 import time
 #from run_dexof import *
 import sys 
-from cfd_sim.run_dexof import run_dex
+from cfd_sim.run_dexof import *
 from cfd_sim.dexof_reader_class import parse_dex_file
 import GPyOpt
 
 
 sys.dont_write_bytecode = True
 
+d=191;tl=1330
 
 cad_storage_name= './cad_sim/design_points.csv'
 cfd_storage_name= './cfd_sim/design_points.csv'
@@ -26,7 +27,6 @@ dst='./cfd_sim/stl_cfd'
 def generate_intial_seed(n=5):
     ds= random_sampling(dim,n,ranges)
     np.savetxt(initial_seed.csv,x,  delimiter=',')
-
 
 
 def delete_dir(loc):
@@ -53,8 +53,7 @@ def save_design_points(x):
     #np.savetxt(cfd_storage_name,x,  delimiter=',')
 
 def run_cad_cfd(x):
-	save_design_points(x)
-
+	save_design_points(np.array([x[0],x[1],x[2],x[3],d,tl]))
 	delete_dir(dst)
 	subprocess.call('./cad_sim/run_cad.sh')
 	copy_file(cad_storage_name,cfd_storage_name)
@@ -65,17 +64,16 @@ def run_cad_cfd(x):
 	cfd_sim_path= prev+'/cfd_sim'
 	print('func path is:',cfd_sim_path)
 	os.chdir(cfd_sim_path)
-	result = run_dex()
+	result = main_run()
 	os.chdir(prev)
 	return result
 
 
 
-def doe(runid,doe_strategy):
+def doe(runid,doe_strategy,seeds):
 	############################
-	data_file_name='doe_strategy'+str(run_id)+'.csv'   
-	D=191;
-	dim=4;n=100
+	data_file_name='./data/doe_'+doe_strategy+str(runid)+'.csv'   
+	dim=4;n=50;D=191
 	#################################################
 	#given total_len & D => need to find a,c,n,theta
 	ranges=[10,3*D,10,3*D,10,50,1,50]    
@@ -90,10 +88,10 @@ def doe(runid,doe_strategy):
 	#################################
 
 	for i in range(max_iter):
-		if doe_strategy=='random':
-			ds= random_sampling(dim,n,ranges)
+		if doe_strategy=='vmc':
+			ds= random_sampling(dim,n,ranges,seeds)
 		elif doe_strategy=='lhc':	
-			ds= lhc_samples_maximin(n,dim,ranges)  #maximin LHC
+			ds= lhc_samples_maximin(n,dim,ranges,seeds)  #maximin LHC
 		else: 
 			print('Unknown sampling strategy')
 		print('ds is:',ds.shape[0])
@@ -104,58 +102,20 @@ def doe(runid,doe_strategy):
 		 fd=run_cad_cfd(design_point)
 		 #fd=10
 		 #print('fd is:',fd)
-		 
+		 sim_data=np.append(ds[i],fd).reshape(1,-1); print('Shape of sim_data:',sim_data.shape)
 		 if already_run==0:
-		   multi_runresults= fd
+		   multi_runresults= sim_data
 		 else:
-		   multi_runresults= np.concatenate((multi_runresults,fd),axis=0)
+		   multi_runresults= np.concatenate((multi_runresults,sim_data),axis=0)
 		 #print('multirun result:',multi_runresults)
 		 np.savetxt(data_file_name,multi_runresults,  delimiter=',')
          
 	
 
 if __name__=='__main__':
+	aqu1='vmc'; aqu2='lhc'
+	run=[1,2,3,4,5]; seeds=[11,13,17,19,23]
+	for i in range(len(run)):
+		doe(run[i],aqu1,seeds[i])
+		doe(run[i],aqu2,seeds[i])  	
 	
-	############################
-	data_file_name='lhc_minimax.csv'   
-	D=191;
-	dim=4;n=100
-	#################################################
-	#given total_len & D => need to find a,c,n,theta
-	ranges=[10,3*D,10,3*D,10,50,1,50]    
-	#######################################
-	ds= random_sampling(dim,5,ranges)
-	np.savetxt('initial_seed.csv',ds,  delimiter=',')
-
-	#############################################     
-	already_run = len(glob.glob(data_file_name))
-	print('file exist?:',already_run)
-	if already_run==1:
-	    multi_runresults=np.loadtxt(data_file_name, delimiter=",",skiprows=0, dtype=np.float32)
-	    multi_runresults= np.atleast_2d(multi_runresults)
-	    #print('shape of multi_runresults:',multi_runresults.shape)
-	max_iter  = 1
-	#################################
-
-	for i in range(max_iter):
-		#ds= random_sampling(dim,n,ranges)
-		ds= lhc_samples_maximin(n,dim,ranges)  #maximin LHC
-		#ds= lhc_samples_corr(n,dim,ranges)     # Correlated LHC
-		print('ds is:',ds.shape[0])
-		for i in range(ds.shape[0]):
-		 already_run = len(glob.glob(data_file_name))	
-		 design_point= ds[i]	
-		 print('design point is:',design_point)
-		 fd=run_cad_cfd(design_point)
-		 #fd=10
-		 #print('fd is:',fd)
-		 
-		 if already_run==0:
-		   multi_runresults= fd
-		 else:
-		   multi_runresults= np.concatenate((multi_runresults,fd),axis=0)
-		 #print('multirun result:',multi_runresults)
-		 np.savetxt(data_file_name,multi_runresults,  delimiter=',')
-         
-	
-
