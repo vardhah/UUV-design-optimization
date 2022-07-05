@@ -163,8 +163,7 @@ def run_pymoo(run_id=0,optimiser='GA',seeds=0):
 
 if __name__=='__main__':
 	aqu1='GA'; aqu2='NM'
-	#run=[1,2,3,4,5]; seeds=[11,13,17,19,21]
-	run=[3,4,5]; seeds=[17,19,21]
+	run=[1,2,3,4,5]; seeds=[11,13,17,19,21]
 	for i in range(len(run)):
 		run_pymoo(run[i],aqu1,seeds[i])
 		run_pymoo(run[i],aqu2,seeds[i])  

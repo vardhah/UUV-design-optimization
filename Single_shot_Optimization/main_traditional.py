@@ -114,7 +114,8 @@ def doe(runid,doe_strategy,seeds):
 
 if __name__=='__main__':
 	aqu1='vmc'; aqu2='lhc'
-	run=[1,2,3,4,5]; seeds=[11,13,17,19,23]
+	run=[1,2,3,4,5]; seeds=[11,13,17,19,21]
+	
 	for i in range(len(run)):
 		doe(run[i],aqu1,seeds[i])
 		doe(run[i],aqu2,seeds[i])  	
