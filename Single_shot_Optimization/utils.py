@@ -123,9 +123,7 @@ def save_optimization_snapshots(file_location):
         all_axes[j].invert_yaxis()
         all_axes[j].grid(linestyle=":")
         all_axes[j].set_xlim([4, 15])
-        all_axes[j].text(
-            7, 45, label, fontdict={"fontsize": 7}, verticalalignment="top"
-        )
+        all_axes[j].set_title(label)
         if j == 0:
             all_axes[j].set_ylabel("Number of evaluated designs")
 
