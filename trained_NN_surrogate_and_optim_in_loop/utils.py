@@ -344,9 +344,9 @@ def save_model_prediction_plot(file_location):
     plot_colors[worst] = "r"
     plot_colors[best] = "g"
 
-    markers[bad] = 10
-    markers[worst] = 25
-    markers[best] = 2
+    markers[bad] = 5
+    markers[worst] = 5
+    markers[best] = 5
 
     plt.plot([1, 10], [1, 10], color="black")
     plt.scatter(truth, preds, color=plot_colors, s=markers)
