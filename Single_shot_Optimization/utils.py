@@ -84,7 +84,7 @@ def get_pymoo_data(n=50, search_glob="pymoo_G*"):
     return data_pymoo
 
 
-def save_optimization_snapshots(file_location):
+def read_models_data():
     number = 50
     data_loc = Path(__file__).parent / "data"
     bo_lcb = get_bo_data(n=number, search_glob=f"{data_loc}/bo_L*")
@@ -103,33 +103,53 @@ def save_optimization_snapshots(file_location):
         (data_vmc, "VMC", "magenta"),
     ]
 
-    fig, ax = plt.subplots(1, 6, sharex="all", sharey="row")
-    all_axes = fig.get_axes()
+    return data_labels
 
+
+def save_opt_evolution(filename):
+    data_labels = read_models_data()
+    fig, ax = plt.subplot_mosaic([
+            ['G', 'G', 'G'],
+            ['A', 'B', 'C'],
+            ['D', 'E', 'F'],
+        ],
+        sharex=True,
+        sharey=True
+    )
+    all_axes = fig.get_axes()[1:]
+    avg_plotting_axes = fig.get_axes()[0]
     for j, (data, label, color) in enumerate(data_labels):
         drag = np.average(data, axis=0)
-        y = [x for x in range(0, 50)]
+        x = [x for x in range(0, 50)]
         all_axes[j].plot(
+            x,
             drag,
-            y,
             color=color,
             label=label,
             linewidth=1.0,
         )
+        avg_plotting_axes.plot(
+            x,
+            drag,
+            color=color,
+            linewidth=1.0,
+        )
         min_drag = np.min(data, axis=0)
         max_drag = np.max(data, axis=0)
-        all_axes[j].fill_betweenx(y, max_drag, min_drag, alpha=0.3, color=color)
-        all_axes[j].set_ylim([0, 51])
-        all_axes[j].invert_yaxis()
+        all_axes[j].fill_between(x, max_drag, min_drag, alpha=0.3, color=color)
         all_axes[j].grid(linestyle=":")
-        all_axes[j].set_xlim([4, 15])
-        all_axes[j].set_title(label)
-        if j == 0:
-            all_axes[j].set_ylabel("Number of evaluated designs")
 
-    fig.text(0.5, 0.03, "Drag Force ($F_d$)", ha="center")
-    fig.subplots_adjust(wspace=0.3, hspace=0)
-    plt.savefig(file_location)
+    avg_plotting_axes.grid(linestyle=":")
+    twin_ax = avg_plotting_axes.twiny()
+    twin_ax.set_xlim([0, 50])
+    twin_ax.set_ylim([4, 8])  # Shared Works for all
+    avg_plotting_axes.set_xlim([0, 50])  # Shared Works for all
+
+    fig.text(0.05, 0.5, "Drag Force ($F_d$)", va="center", rotation=90)
+    fig.text(0.5, 0.03, "Number of evaluated designs", ha="center")
+    fig.subplots_adjust(wspace=0.1, hspace=0.2)
+    fig.legend(loc='upper center', bbox_to_anchor=(0.5, 1.0), ncol=6, fontsize=7)
+    plt.savefig(filename)
 
 
 def run(args=None):
@@ -142,7 +162,7 @@ def run(args=None):
 
     arguments = parser.parse_args(args)
     if arguments.command == "save-opt-evolution":
-        save_optimization_snapshots(file_location=arguments.filename)
+        save_opt_evolution(filename=arguments.filename)
     else:
         parser.print_help()
 
