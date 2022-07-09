@@ -108,14 +108,15 @@ def read_models_data():
 
 def save_opt_evolution(filename):
     data_labels = read_models_data()
-    fig, ax = plt.subplot_mosaic([
-            ['G', 'G', 'G'],
-            ['G', 'G', 'G'],
-            ['A', 'B', 'C'],
-            ['D', 'E', 'F'],
+    fig, ax = plt.subplot_mosaic(
+        [
+            ["G", "G", "G"],
+            ["G", "G", "G"],
+            ["A", "B", "C"],
+            ["D", "E", "F"],
         ],
         sharex=True,
-        sharey=True
+        sharey=True,
     )
     all_axes = fig.get_axes()[1:]
     avg_plotting_axes = fig.get_axes()[0]
@@ -149,7 +150,7 @@ def save_opt_evolution(filename):
     fig.text(0.05, 0.5, "Drag Force ($F_d$)", va="center", rotation=90)
     fig.text(0.5, 0.03, "Number of evaluated designs", ha="center")
     fig.subplots_adjust(wspace=0.1, hspace=0.2)
-    fig.legend(loc='upper center', bbox_to_anchor=(0.5, 1.0), ncol=6, fontsize=7)
+    fig.legend(loc="upper center", bbox_to_anchor=(0.5, 1.0), ncol=6, fontsize=7)
     plt.savefig(filename)
 
 
