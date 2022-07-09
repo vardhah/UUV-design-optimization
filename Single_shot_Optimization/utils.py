@@ -110,6 +110,7 @@ def save_opt_evolution(filename):
     data_labels = read_models_data()
     fig, ax = plt.subplot_mosaic([
             ['G', 'G', 'G'],
+            ['G', 'G', 'G'],
             ['A', 'B', 'C'],
             ['D', 'E', 'F'],
         ],
@@ -142,7 +143,7 @@ def save_opt_evolution(filename):
     avg_plotting_axes.grid(linestyle=":")
     twin_ax = avg_plotting_axes.twiny()
     twin_ax.set_xlim([0, 50])
-    twin_ax.set_ylim([4, 8])  # Shared Works for all
+    twin_ax.set_ylim([4, 10])  # Shared Works for all
     avg_plotting_axes.set_xlim([0, 50])  # Shared Works for all
 
     fig.text(0.05, 0.5, "Drag Force ($F_d$)", va="center", rotation=90)
