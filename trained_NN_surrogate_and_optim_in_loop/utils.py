@@ -409,7 +409,7 @@ def save_nn_vs_foam_bo_lcb(file_location):
         if j % 2 == 0:
             fig_layout.insert(j, [".", "."])
             inserted_count += 1
-    total_height_offset = 0.03 * inserted_count
+    total_height_offset = 0.001 * inserted_count
     axes_height = (1 - total_height_offset) / (len(fig_layout) - inserted_count)
 
     fig, axes = plt.subplot_mosaic(
