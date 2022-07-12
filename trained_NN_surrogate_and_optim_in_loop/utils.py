@@ -510,10 +510,56 @@ def save_nn_vs_foam_bo_lcb(file_location):
     plt.savefig(file_location)
 
 
+def save_nn_vs_foam_bo_lcb_time(file_location):
+    all_files = glob.glob(f"{Path(__file__).parent}/exp_NNvsFoam_BO/*.csv")
+    all_files = _partition_by_name(files=all_files)
+    colors = ["red", "green", "blue", "cyan"]
+    j = 0
+
+    for k, v in all_files.items():
+        diam, length = k
+        df_foam = pd.read_csv(v[0], header=None)
+        df_nn = pd.read_csv(v[1], header=None)
+
+        foam_time = np.asarray(df_foam[7])
+        nn_time = np.asarray(df_nn[7])
+        foam_time_cum_sum = np.cumsum(foam_time)
+        nn_time_cum_sum = np.cumsum(nn_time)
+
+        plt.plot(
+            foam_time_cum_sum,
+            markersize=5,
+            marker=".",
+            color=colors[j],
+            label=f"openFOAM (d={diam}, " f"l={length})",
+        )
+        plt.plot(
+            nn_time_cum_sum,
+            markersize=5,
+            marker=".",
+            color=colors[j + 1],
+            label=f"NN Surrogate (d={diam}, " f"l={length})",
+        )
+        plt.grid(linestyle=":")
+        plt.ylabel("Time Elapsed (seconds)")
+        plt.xlabel("Number of evaluated designs")
+        plt.xlim([0, max(foam_time_cum_sum.shape[0], nn_time_cum_sum.shape[0])])
+        j += 2
+
+    plt.legend(fontsize=7)
+    plt.tight_layout()
+    plt.savefig(file_location)
+
+
 def run(args=None):
     parser = ArgumentParser(description="utils")
     parser.add_argument(
-        "command", choices=["save-model-prediction", "save-bo-nn-vs-foam"]
+        "command",
+        choices=[
+            "save-model-prediction",
+            "save-bo-nn-vs-foam",
+            "save-bo-nn-vs-foam-time",
+        ],
     )
     parser.add_argument("--filename", default="./gt_prediction.pdf", type=str)
 
@@ -522,6 +568,8 @@ def run(args=None):
         save_model_prediction_plot(file_location=arguments.filename)
     elif arguments.command == "save-bo-nn-vs-foam":
         save_nn_vs_foam_bo_lcb(file_location=arguments.filename)
+    elif arguments.command == "save-bo-nn-vs-foam-time":
+        save_nn_vs_foam_bo_lcb_time(file_location=arguments.filename)
     else:
         parser.print_help()
 
