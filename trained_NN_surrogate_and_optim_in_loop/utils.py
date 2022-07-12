@@ -4,11 +4,13 @@ Created on Mon Jun 21 16:11:45 2021
 
 @author: HPP
 """
-
+import glob
+import re
 from argparse import ArgumentParser
 from pathlib import Path
 
 import numpy as np
+import pandas as pd
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -18,6 +20,7 @@ device = torch.device("cpu")
 import copy
 
 import matplotlib.pyplot as plt
+from matplotlib.lines import Line2D
 from sklearn.cluster import KMeans
 from sklearn.metrics import pairwise_distances_argmin_min
 from sklearn.preprocessing import OneHotEncoder
@@ -357,14 +360,168 @@ def save_model_prediction_plot(file_location):
     plt.savefig(file_location)
 
 
+def _diameter_length_from_nn_vs_foam_results(filename):
+    match = re.match(r".*_D(\d*)_L(\d*).csv", filename)
+    if match:
+        diam = float(match.group(1))
+        length = float(match.group(2))
+        return diam, length
+
+
+def _partition_by_name(files):
+    all_files = {}
+
+    for file in files:
+        v = _diameter_length_from_nn_vs_foam_results(file)
+        if not all_files.get(v):
+            all_files[v] = [None, None]
+        if "_foam_" in file:
+            all_files[v][0] = file
+        else:
+            all_files[v][1] = file
+
+    return all_files
+
+
+def plt_nn_vs_foam_data_bo_lcb_plot(dist_ax, drag_ax, running_minimum, euclid, color):
+    drag_ax.plot(
+        running_minimum,
+        color=color,
+        marker=".",
+        markersize=10,
+        label=f"$\min (F_d)$ = {round(np.min(running_minimum), 3)}",
+    )
+    dist_ax.plot(euclid, color=color, marker=".", markersize=10)
+    dist_ax.set_ylabel("$L_2$ distances between samples")
+    drag_ax.set_xlabel("Number of evaluated designs")
+    dist_ax.set_xlabel("Number of evaluated designs")
+    drag_ax.set_ylabel("Drag Force (${F_d}$)")
+    drag_ax.legend(loc="upper right")
+
+
+def save_nn_vs_foam_bo_lcb(file_location):
+    all_files = glob.glob(f"{Path(__file__).parent}/exp_NNvsFoam_BO/*.csv")
+    all_files = _partition_by_name(files=all_files)
+    fig_layout = [[f"a{j}", f"b{j}"] for j in range(len(all_files) * 2)]
+
+    inserted_count = 0
+    for j in range(1, len(all_files) * 2):
+        if j % 2 == 0:
+            fig_layout.insert(j, [".", "."])
+            inserted_count += 1
+    total_height_offset = 0.03 * inserted_count
+    axes_height = (1 - total_height_offset) / (len(fig_layout) - inserted_count)
+
+    fig, axes = plt.subplot_mosaic(
+        fig_layout,
+        sharey=False,
+        sharex=False,
+        gridspec_kw=dict(
+            height_ratios=[
+                axes_height if item != [".", "."] else total_height_offset
+                for item in fig_layout
+            ]
+        ),
+        figsize=(10, 15),
+    )
+
+    j = 0
+    for (k, v) in all_files.items():
+        diam, length = k
+        df_foam = pd.read_csv(v[0], header=None)
+        df_nn = pd.read_csv(v[1], header=None)
+        bo_lcb_foam_params = np.asarray(df_foam.loc[:, 0:5])
+        bo_lcb_nn_params = np.asarray(df_nn.loc[:, 0:5])
+
+        bo_lcb_foam_drag = np.asarray(df_foam[6])
+        bo_lcb_nn_drag = np.asarray(df_nn[6])
+        min_foam_drag = np.minimum.accumulate(bo_lcb_foam_drag, axis=0)
+        min_nn_drag = np.minimum.accumulate(bo_lcb_nn_drag, axis=0)
+
+        dist_foam = np.diff(bo_lcb_foam_params, axis=0)
+        dist_foam_euclid = np.sqrt((dist_foam**2).sum(axis=1))
+
+        dist_nn = np.diff(bo_lcb_nn_params, axis=0)
+        dist_nn_euclid = np.sqrt((dist_nn**2).sum(axis=1))
+        opt_foam_params = bo_lcb_foam_params[np.argmin(bo_lcb_foam_drag)]
+        opt_nn_params = bo_lcb_nn_params[np.argmin(bo_lcb_nn_drag)]
+
+        plt_nn_vs_foam_data_bo_lcb_plot(
+            axes[f"a{j}"], axes[f"b{j}"], min_foam_drag, dist_foam_euclid, "red"
+        )
+
+        plt_nn_vs_foam_data_bo_lcb_plot(
+            axes[f"a{j+1}"], axes[f"b{j+1}"], min_nn_drag, dist_nn_euclid, "blue"
+        )
+        axes[f"a{j}"].text(
+            s=f"Diameter = {diam}, Length = {length}",
+            x=0.60,
+            y=1.1,
+            fontdict=dict(fontsize=14, fontweight="bold"),
+            transform=axes[f"a{j}"].transAxes,
+        )
+
+        opt_text_labels = ["$a$", "$b$", "$c$", "$d$", "$n$", "$\\theta$"]
+
+        axes[f"a{j}"].text(
+            s="\n".join(
+                [
+                    f"{text} = {round(value, 3)}"
+                    for text, value in zip(opt_text_labels, opt_foam_params)
+                ]
+            ),
+            x=0.03,
+            y=0.65,
+            fontdict=dict(fontsize=10),
+            transform=axes[f"a{j}"].transAxes,
+            bbox=dict(facecolor="white"),
+        )
+
+        axes[f"a{j+1}"].text(
+            s="\n".join(
+                [
+                    f"{text} = {round(value, 3)}"
+                    for text, value in zip(opt_text_labels, opt_nn_params)
+                ]
+            ),
+            x=0.03,
+            y=0.65,
+            fontdict=dict(fontsize=10),
+            transform=axes[f"a{j+1}"].transAxes,
+            bbox=dict(facecolor="white", alpha=0.5),
+        )
+
+        axes[f"a{j}"].grid(linestyle=":")
+        axes[f"a{j+1}"].grid(linestyle=":")
+        axes[f"b{j}"].grid(linestyle=":")
+        axes[f"b{j+1}"].grid(linestyle=":")
+        j += 2
+
+    fig.subplots_adjust(
+        hspace=0.2, wspace=0.2, top=0.95, left=0.07, right=0.99, bottom=0.05
+    )
+
+    legend_lines = [
+        Line2D([0], [0], color="r", lw=2, marker=".", markersize=10),
+        Line2D([0], [0], color="b", lw=2, marker=".", markersize=10),
+    ]
+
+    fig.legend(legend_lines, ["OpenFOAM", "Neural Network Surrogate"])
+    plt.savefig(file_location)
+
+
 def run(args=None):
     parser = ArgumentParser(description="utils")
-    parser.add_argument("command", choices=["save-model-prediction"])
+    parser.add_argument(
+        "command", choices=["save-model-prediction", "save-bo-nn-vs-foam"]
+    )
     parser.add_argument("--filename", default="./gt_prediction.pdf", type=str)
 
     arguments = parser.parse_args(args)
     if arguments.command == "save-model-prediction":
         save_model_prediction_plot(file_location=arguments.filename)
+    elif arguments.command == "save-bo-nn-vs-foam":
+        save_nn_vs_foam_bo_lcb(file_location=arguments.filename)
     else:
         parser.print_help()
 
