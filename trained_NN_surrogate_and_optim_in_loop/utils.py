@@ -422,7 +422,7 @@ def save_nn_vs_foam_bo_lcb(file_location):
                 for item in fig_layout
             ]
         ),
-        figsize=(10, 15),
+        figsize=(15, 15),
     )
 
     j = 0
@@ -455,7 +455,7 @@ def save_nn_vs_foam_bo_lcb(file_location):
         )
         axes[f"a{j}"].text(
             s=f"Diameter = {diam}, Length = {length}",
-            x=0.60,
+            x=0.80,
             y=1.1,
             fontdict=dict(fontsize=14, fontweight="bold"),
             transform=axes[f"a{j}"].transAxes,
@@ -531,14 +531,14 @@ def save_nn_vs_foam_bo_lcb_time(file_location):
             markersize=5,
             marker=".",
             color=colors[j],
-            label=f"openFOAM (d={diam}, " f"l={length})",
+            label=f"openFOAM (\\textbf{{D}}={diam}, \\textbf{{L}}={length})",
         )
         plt.plot(
             nn_time_cum_sum,
             markersize=5,
             marker=".",
             color=colors[j + 1],
-            label=f"NN Surrogate (d={diam}, " f"l={length})",
+            label=f"NN Surrogate (\\textbf{{D}}={diam}, \\textbf{{L}}={length})",
         )
         plt.grid(linestyle=":")
         plt.ylabel("Time Elapsed (seconds)")
