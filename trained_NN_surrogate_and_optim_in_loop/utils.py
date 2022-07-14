@@ -521,32 +521,33 @@ def save_nn_vs_foam_bo_lcb_time(file_location):
         df_foam = pd.read_csv(v[0], header=None)
         df_nn = pd.read_csv(v[1], header=None)
 
-        foam_time = np.asarray(df_foam[7])
-        nn_time = np.asarray(df_nn[7])
+        foam_time = np.asarray(df_foam[7]) * 1000
+        nn_time = np.asarray(df_nn[7]) * 1000
         foam_time_cum_sum = np.cumsum(foam_time)
         nn_time_cum_sum = np.cumsum(nn_time)
 
         plt.plot(
-            foam_time_cum_sum,
+            np.log(foam_time_cum_sum),
             markersize=5,
             marker=".",
             color=colors[j],
             label=f"openFOAM (\\textbf{{D}}={diam}, \\textbf{{L}}={length})",
         )
         plt.plot(
-            nn_time_cum_sum,
+            np.log(nn_time_cum_sum),
             markersize=5,
             marker=".",
             color=colors[j + 1],
             label=f"NN Surrogate (\\textbf{{D}}={diam}, \\textbf{{L}}={length})",
         )
         plt.grid(linestyle=":")
-        plt.ylabel("Time Elapsed (seconds)")
+        plt.ylabel("Log of the time elapsed (ms)")
         plt.xlabel("Number of evaluated designs")
         plt.xlim([0, max(foam_time_cum_sum.shape[0], nn_time_cum_sum.shape[0])])
+        plt.ylim([0, 20])
         j += 2
 
-    plt.legend(fontsize=7)
+    plt.legend(fontsize=7, loc="upper left", ncol=1)
     plt.tight_layout()
     plt.savefig(file_location)
 
