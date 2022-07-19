@@ -66,7 +66,7 @@ def get_bo_data(n=50, search_glob="bo_L*"):
 def get_pymoo_data(n=50, search_glob="pymoo_G*"):
     flag = 0
     for file in glob.glob(search_glob):
-        placeholder = pd.read_csv(file, delimiter=",", names=list("abntY"), header=None)
+        placeholder = pd.read_csv(file, delimiter=",")
         placeholder["min"] = placeholder.Y.expanding(1).min()
         placeholder = placeholder.head(n)
         _place_ = placeholder["min"]
@@ -153,18 +153,52 @@ def save_opt_evolution(filename):
     fig.legend(loc="upper center", bbox_to_anchor=(0.5, 1.0), ncol=6, fontsize=7)
     plt.savefig(filename)
 
+def get_most_optimal(algorithm, glob_str, delimeter):
+    all_csv_files = glob.glob(
+        f"{Path(__file__).parent}/data/{glob_str}"
+    )
+    all_csv_files.sort()
+    records = []
+    for j, file in enumerate(all_csv_files):
+        record = {
+            "Optimization": algorithm,
+            "run": j + 1
+        }
+        df = pd.read_csv(file, delimiter=delimeter)
+        print(df.loc[df['Y'].idxmin()].to_dict(), df['Y'].min())
+
+
+def save_most_optimal_designs(filename):
+    algorithm_to_glob_map = {
+        'Bayesian Optimization - Lower Condition Bound (BO-LCB)': ('bo_L*', '\t'),
+        'Bayesian Optimization - Expected Improvement (BO-EI)': ('bo_EI*', '\t'),
+        'Latin Hypercube Sampling Mini Max (LHC mini max)': ('doe_lhc*', ','),
+        'Vanilla Monte Carlo (VMC)': ('doe_vmc*', ','),
+        'Genetic Algorithm (GA)': ('pymoo_GA*', ','),
+        'Nelder Mead (NM)': ('pymoo_NM*', ',')
+    }
+
+    records = []
+    for key, (filename, delim) in algorithm_to_glob_map.items():
+        records.append(
+            get_most_optimal(key, filename, delim)
+        )
+
 
 def run(args=None):
     parser = ArgumentParser(description="utils")
     parser.add_argument(
         "command",
-        choices=["save-opt-evolution"],
+        choices=["save-opt-evolution", "save-most-optimal-designs"],
     )
     parser.add_argument("--filename", default="./optimizers.pdf", type=str)
 
     arguments = parser.parse_args(args)
     if arguments.command == "save-opt-evolution":
         save_opt_evolution(filename=arguments.filename)
+    elif arguments.command == "save-most-optimal-designs":
+        assert Path(arguments.filename).suffix == '.csv', "Please provide an appropriate csv file"
+        save_most_optimal_designs(filename=arguments.filename)
     else:
         parser.print_help()
 
