@@ -95,8 +95,8 @@ def read_models_data():
     data_vmc = get_pymoo_data(n=number, search_glob=f"{data_loc}/doe_vmc*")
 
     data_labels = [
-        (bo_ei, "$BO_{EI}$", "r"),
-        (bo_lcb, "$BO_{LCB}$", "g"),
+        (bo_ei, "BO-EI", "r"),
+        (bo_lcb, "BO-LCB", "g"),
         (data_ga, "GA", "b"),
         (data_nm, "NM", "y"),
         (data_lhc, "LHC", "cyan"),
