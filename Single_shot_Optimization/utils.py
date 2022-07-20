@@ -3,11 +3,11 @@ from argparse import ArgumentParser
 from pathlib import Path
 
 import matplotlib.pyplot as plt
-import numpy as np
 import pandas as pd
-import seaborn as sns
-from numpy import pi
 from pyDOE import *
+
+DIAMETER = 191.0
+TOTAL_LENGTH = 1330.0
 
 
 # latin hypercube sampling-maximize the minimum distance between points, but place the point in a randomized location within its interval
@@ -153,36 +153,45 @@ def save_opt_evolution(filename):
     fig.legend(loc="upper center", bbox_to_anchor=(0.5, 1.0), ncol=6, fontsize=7)
     plt.savefig(filename)
 
+
 def get_most_optimal(algorithm, glob_str, delimeter):
-    all_csv_files = glob.glob(
-        f"{Path(__file__).parent}/data/{glob_str}"
-    )
+    all_csv_files = glob.glob(f"{Path(__file__).parent}/data/{glob_str}")
     all_csv_files.sort()
     records = []
     for j, file in enumerate(all_csv_files):
-        record = {
-            "Optimization": algorithm,
-            "run": j + 1
-        }
-        df = pd.read_csv(file, delimiter=delimeter)
-        print(df.loc[df['Y'].idxmin()].to_dict(), df['Y'].min())
+        record = {"Optimization": algorithm, "run": j + 1}
+        df = pd.read_csv(file, delimiter=delimeter, nrows=50)
+        min_drag_idx = df["Y"].idxmin()
+        record["iteration"] = min_drag_idx + 1
+        column_values = df.loc[min_drag_idx]
+        record["a"] = column_values["a"]
+        c = column_values["c"]
+        record["b"] = TOTAL_LENGTH - record["a"] - c
+        record["c"] = c
+        record["n"] = column_values["n"]
+        record["theta"] = column_values["t"]
+        record["F_d"] = column_values["Y"]
+        records.append(record)
+
+    return records
 
 
 def save_most_optimal_designs(filename):
     algorithm_to_glob_map = {
-        'Bayesian Optimization - Lower Condition Bound (BO-LCB)': ('bo_L*', '\t'),
-        'Bayesian Optimization - Expected Improvement (BO-EI)': ('bo_EI*', '\t'),
-        'Latin Hypercube Sampling Mini Max (LHC mini max)': ('doe_lhc*', ','),
-        'Vanilla Monte Carlo (VMC)': ('doe_vmc*', ','),
-        'Genetic Algorithm (GA)': ('pymoo_GA*', ','),
-        'Nelder Mead (NM)': ('pymoo_NM*', ',')
+        "Bayesian Optimization - Lower Condition Bound (BO-LCB)": ("bo_L*", "\t"),
+        "Bayesian Optimization - Expected Improvement (BO-EI)": ("bo_EI*", "\t"),
+        "Latin Hypercube Sampling Mini Max (LHC mini max)": ("doe_lhc*", ","),
+        "Vanilla Monte Carlo (VMC)": ("doe_vmc*", ","),
+        "Genetic Algorithm (GA)": ("pymoo_GA*", ","),
+        "Nelder Mead (NM)": ("pymoo_NM*", ","),
     }
 
     records = []
-    for key, (filename, delim) in algorithm_to_glob_map.items():
-        records.append(
-            get_most_optimal(key, filename, delim)
-        )
+    for key, (files_glob, delim) in algorithm_to_glob_map.items():
+        records.extend(get_most_optimal(key, files_glob, delim))
+
+    df = pd.DataFrame.from_records(records)
+    df.to_csv(filename, index=False, float_format="%g")
 
 
 def run(args=None):
@@ -197,7 +206,9 @@ def run(args=None):
     if arguments.command == "save-opt-evolution":
         save_opt_evolution(filename=arguments.filename)
     elif arguments.command == "save-most-optimal-designs":
-        assert Path(arguments.filename).suffix == '.csv', "Please provide an appropriate csv file"
+        assert (
+            Path(arguments.filename).suffix == ".csv"
+        ), "Please provide an appropriate csv file"
         save_most_optimal_designs(filename=arguments.filename)
     else:
         parser.print_help()
