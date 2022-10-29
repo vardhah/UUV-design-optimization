@@ -31,7 +31,7 @@ src= './cad_sim/stl_repo'
 dst='./cfd_sim/stl_cfd'
 
 #d=191; tl=1330    #Exp1
-d=180; tl=1750    #Exp2
+d=190; tl=1330    #Exp2
 csv_filename_bo_foam= 'bo_lcb_foam_simtime_D'+str(d)+'_L'+str(tl)+'.csv'
 
 def delete_dir(loc):
@@ -89,8 +89,8 @@ def run_cad_cfd(x):
 if __name__=='__main__':
 	
 	seeds=101
-	bounds = [{'name': 'myring_a', 'type': 'continuous', 'domain': (10,573)},
-	        {'name': 'myring_c', 'type': 'continuous', 'domain': (10,573)},
+	bounds = [{'name': 'myring_a', 'type': 'continuous', 'domain': (50,50)},
+	        {'name': 'myring_c', 'type': 'continuous', 'domain': (50,600)},
             {'name': 'n', 'type': 'continuous', 'domain': (10,50)},
             {'name': 'theta', 'type': 'continuous', 'domain': (1,50)}]
 

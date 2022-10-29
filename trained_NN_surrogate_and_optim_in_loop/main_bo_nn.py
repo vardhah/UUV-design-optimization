@@ -48,7 +48,7 @@ path='./models/nn_acc_5percent.pt'
 
 #define problem requirement
 #dia=191; tl=1330  #exp1
-dia=180; tl=1750  #exp2           
+dia=190; tl=1330  #exp2           
 
 
 ###Donot change beyond
@@ -57,8 +57,8 @@ num_iter=9
 seed_num=101
 
 
-bounds = [{'name': 'myring_a', 'type': 'continuous', 'domain': (10,573)},
-	        {'name': 'myring_c', 'type': 'continuous', 'domain': (10,573)},
+bounds = [{'name': 'myring_a', 'type': 'continuous', 'domain': (50,50)},
+	        {'name': 'myring_c', 'type': 'continuous', 'domain': (50,600)},
             {'name': 'n', 'type': 'continuous', 'domain': (10,50)},
             {'name': 'theta', 'type': 'continuous', 'domain': (1,50)}]
 
@@ -77,7 +77,7 @@ def _evaluate(x):
         start=time.time()
         #print('self tl is:',self.tl ,'x is:',x)
         b= tl-x[0][0]-x[0][1]
-        #print('c is:',b ,'x is:',x) 
+        print('c is:',b ,'x is:',x) 
         X= np.array([x[0][0],b,x[0][1],dia,x[0][2]*0.1,x[0][3]])
         X= X.reshape(1,-1)
         #print('X is:',X[0])
