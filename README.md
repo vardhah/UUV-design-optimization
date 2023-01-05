@@ -1,4 +1,7 @@
-# Surrogate_based_optim_of_UUV_hull
+# Sample efficeint and Surrogate based design optimization of UUV hull: 
+In real world computer-aided design (CAD)  problem, some physics simulations are the computational bottleneck in optimization processes.
+Hence, in order to do design optimization, one requires either an optimization framework that is highly sample-efficient or fast data-driven surrogate models for these complex simulations. 
+Recent advances in AI can be leveraged in the field of design optimization involving complex computational physics -in both: direct optimization with numerical simulation in the loop and surrogate modeling/surrogate-based optimization. We take a use case of designing an optimal unmanned underwater vehicle (UUV) hull. For this purpose, Computational Fluid Dynamics (CFD) simulation is deployed in the optimization loop. First, we investigate and compare the sample efficiency and convergence behavior of different optimization techniques with a standard computational fluid dynamics (CFD) solver in the optimization loop.  We then develop a deep neural network (DNN) based surrogate model to approximate drag forces that would otherwise be computed via direct numerical simulation with the CFD solver.
 <img src="./images/cfd_optimization.png" width="800" height="300" title="Employee Data title">
 
 ## How to use the code: 
