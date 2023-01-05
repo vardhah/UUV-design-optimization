@@ -31,6 +31,12 @@ Since there is a lot of tooling involved , we tried to keep our folder seperate 
 
 ## Surrogate based design optimization:
 These are some results : 
+<p float="left">
+  <img src="./images/picture1.png" width="350" />
+  <img src="./images/picture3.png" width="340" /> 
+</p>
 
-<img src="./images/picture1.png" class="center" width="392" height="240"><img src="./images/picture3.png" class="center" width="392" height="240" >
+
+
+
 ##
