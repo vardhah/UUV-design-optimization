@@ -19,11 +19,14 @@ from sklearn.model_selection import train_test_split
 device = torch.device("cpu")
 import copy
 
+import matplotlib
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 from sklearn.cluster import KMeans
 from sklearn.metrics import pairwise_distances_argmin_min
 from sklearn.preprocessing import OneHotEncoder
+
+matplotlib.use("tkagg")
 
 
 class utilities:
@@ -360,6 +363,78 @@ def save_model_prediction_plot(file_location):
     plt.savefig(file_location)
 
 
+def save_residuals_vs_design_params(file_location):
+    preds_loc = Path(__file__).resolve().parent / "data" / "gt_pred.txt"
+    test_set_loc = (
+        Path(__file__).resolve().parent / "data" / "dataware" / "test_data.txt"
+    )
+    loaded_gt_pred = np.loadtxt(preds_loc, delimiter=" ", skiprows=0, dtype=float)
+    loaded_test_set = np.loadtxt(test_set_loc, delimiter=" ", skiprows=0, dtype=float)
+    print(loaded_test_set.shape, loaded_gt_pred.shape)
+    assert np.allclose(loaded_test_set[:, -1], loaded_gt_pred[:, 0])
+    param_indexes = {"a": 0, "b": 1, "c": 2, "d": 3, "n": 4, "\\theta": 5}
+    fd_pred = loaded_gt_pred[:, 1]
+    fd_gt = loaded_gt_pred[:, 0]
+    # residuals = np.abs(fd_pred - fd_gt)
+    param_units = {
+        "a": "mm",
+        "b": "mm",
+        "c": "mm",
+        "d": "mm",
+        "n": "",
+        "\\theta": "degrees",
+    }
+    percentage_error = np.abs(fd_gt - fd_pred) * 100 / fd_gt
+    markers = np.empty(percentage_error.shape)
+    plot_colors = np.empty(percentage_error.shape).astype(str)
+    worst = np.where(percentage_error > 10)
+    bad = np.where(np.logical_and(percentage_error >= 5, percentage_error <= 10))
+    best = np.where(percentage_error < 5)
+
+    markers[bad] = 5
+    markers[worst] = 5
+    markers[best] = 5
+
+    plot_colors[bad] = "b"
+    plot_colors[worst] = "r"
+    plot_colors[best] = "g"
+    fig, axes = plt.subplots(nrows=len(param_indexes) // 2, ncols=3, sharey="none")
+
+    gs = axes[2, 1].get_gridspec()
+    # remove the underlying axes
+    for axs in axes[2:, 0:3]:
+        for ax in axs:
+            ax.remove()
+
+    axbig = fig.add_subplot(gs[2:, 0:3])
+    axbig.plot([1, 10], [1, 10], color="black")
+    axbig.scatter(fd_gt, fd_pred, color=plot_colors, s=markers)
+    axbig.set_xlabel("$F_d$ (Ground Truth)")
+    axbig.set_ylabel("$F_d$ (Predicted)")
+    axbig.set_xlim([1, 10])
+    axbig.set_ylim([1, 10])
+    axbig.grid(linestyle=":")
+
+    for j, ((key, value), ax) in enumerate(zip(param_indexes.items(), axes.flat)):
+        design_param = loaded_test_set[:, value]
+        param_label = (
+            f"${key}$" + " " + (f"({param_units[key]})" if param_units[key] else "")
+        )
+        ax.scatter(design_param, percentage_error, s=markers, color=plot_colors)
+        ax.set_xlabel(param_label)
+        ax.xaxis.set_label_position("top")
+        ax.set_xlim([min(design_param) - 1, max(design_param) + 1])
+        ax.set_ylim([0, 110])
+        ax.grid(linestyle=":")
+        if j % 3 != 0:
+            ax.set_yticklabels([])
+        # ax.set_yticklabels([])
+
+    plt.subplots_adjust(wspace=0.05, hspace=0.4)
+    fig.text(0.04, 0.6, "Percentage Error", va="center", rotation=90)
+    plt.savefig(file_location)
+
+
 def _diameter_length_from_nn_vs_foam_results(filename):
     match = re.match(r".*_D(\d*)_L(\d*).csv", filename)
     if match:
@@ -560,6 +635,7 @@ def run(args=None):
             "save-model-prediction",
             "save-bo-nn-vs-foam",
             "save-bo-nn-vs-foam-time",
+            "save-residuals-vs-design-params",
         ],
     )
     parser.add_argument("--filename", default="./gt_prediction.pdf", type=str)
@@ -567,6 +643,8 @@ def run(args=None):
     arguments = parser.parse_args(args)
     if arguments.command == "save-model-prediction":
         save_model_prediction_plot(file_location=arguments.filename)
+    elif arguments.command == "save-residuals-vs-design-params":
+        save_residuals_vs_design_params(file_location=arguments.filename)
     elif arguments.command == "save-bo-nn-vs-foam":
         save_nn_vs_foam_bo_lcb(file_location=arguments.filename)
     elif arguments.command == "save-bo-nn-vs-foam-time":
