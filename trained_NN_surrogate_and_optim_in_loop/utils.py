@@ -370,7 +370,6 @@ def save_residuals_vs_design_params(file_location):
     )
     loaded_gt_pred = np.loadtxt(preds_loc, delimiter=" ", skiprows=0, dtype=float)
     loaded_test_set = np.loadtxt(test_set_loc, delimiter=" ", skiprows=0, dtype=float)
-    print(loaded_test_set.shape, loaded_gt_pred.shape)
     assert np.allclose(loaded_test_set[:, -1], loaded_gt_pred[:, 0])
     param_indexes = {"a": 0, "b": 1, "c": 2, "d": 3, "n": 4, "\\theta": 5}
     fd_pred = loaded_gt_pred[:, 1]
@@ -407,12 +406,12 @@ def save_residuals_vs_design_params(file_location):
             ax.remove()
 
     axbig = fig.add_subplot(gs[2:, 0:3])
-    axbig.plot([1, 10], [1, 10], color="black")
+    axbig.plot([0, 15], [0, 15], color="black")
     axbig.scatter(fd_gt, fd_pred, color=plot_colors, s=markers)
     axbig.set_xlabel("$F_d$ (Ground Truth)")
     axbig.set_ylabel("$F_d$ (Predicted)")
-    axbig.set_xlim([1, 10])
-    axbig.set_ylim([1, 10])
+    axbig.set_xlim([0, 15])
+    axbig.set_ylim([0, 15])
     axbig.grid(linestyle=":")
 
     for j, ((key, value), ax) in enumerate(zip(param_indexes.items(), axes.flat)):
