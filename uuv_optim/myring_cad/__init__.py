@@ -6,7 +6,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 from ..utils import get_data_file_path
-from .utils import verify_freecad_existence
+from .utils import add_freecad_libs_to_path
 
 
 def estimate_nose(a, d, x, n):
@@ -22,7 +22,7 @@ def estimate_tail(a, b, c, d, x, theta):
 
 
 def parameterize_hull(hull_params: Dict[str, float]) -> "GliderVessel":
-    verify_freecad_existence()
+    add_freecad_libs_to_path()
     from .myring_hull import GliderVessel
 
     vessel = GliderVessel(str(get_data_file_path("cad/Remus_Myring_hull.FCStd")))

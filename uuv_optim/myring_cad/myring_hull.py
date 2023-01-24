@@ -24,7 +24,6 @@ class GliderVessel(object):
 
         self.sketch_params = []
         obj = self.doc.getObject("Sketch")
-
         """
         print('***Parametric properties are:***')
         print('Sketch is:')
