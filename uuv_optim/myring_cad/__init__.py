@@ -62,6 +62,7 @@ def parameterize_hull(hull_params: Dict[str, float]) -> "GliderVessel":
     vessel.set_nose_tail_y(nose_tail_y)
 
     vessel.print_info()
+    return vessel
 
 
 def generate_plot(hull_params: Dict[str, float], save_name: str) -> None:
@@ -119,7 +120,7 @@ def generate_plot(hull_params: Dict[str, float], save_name: str) -> None:
 
 def generate_shape(hull_params: Dict[str, float], save_name: str) -> None:
     vessel = parameterize_hull(hull_params)
-    vessel.create_stl(1)
+    vessel.create_stl(save_name)
 
 
 def run(args=None):

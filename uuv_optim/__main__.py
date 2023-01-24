@@ -5,7 +5,9 @@ from . import myring_cad
 
 
 def run():
-    parser = ArgumentParser("UUV design optimization", formatter_class=ArgumentDefaultsHelpFormatter)
+    parser = ArgumentParser(
+        "UUV design optimization", formatter_class=ArgumentDefaultsHelpFormatter
+    )
 
     commands = ["myring-cad", "cfd", "optimizers", "surrogates"]
 

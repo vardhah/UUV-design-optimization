@@ -1,31 +1,7 @@
-import os
-import sys
-
 import FreeCAD  # noqa
-from FreeCAD import Units  # noqa
-
-femtools_libs = [
-    "/usr/local/Mod/Fem/femtools",
-    "/usr/share/freecad/Mod/Fem/femtools",
-]
-for lib in femtools_libs:
-    if os.path.exists(lib):
-        path = os.path.dirname(lib)
-        if path not in sys.path:
-            sys.path.append(path)
-        path = os.path.abspath(os.path.join(lib, "..", ".."))
-        if path not in sys.path:
-            sys.path.append(path)
-        path = os.path.abspath(os.path.join(lib, "..", "..", "..", "Ext"))
-        if path not in sys.path:
-            sys.path.append(path)
-        break
-else:
-    raise ValueError("femtools library was not found!")
-
 import Mesh
-from femmesh.gmshtools import GmshTools  # noqa
-from femtools.ccxtools import FemToolsCcx  # noqa
+import numpy as np
+from FreeCAD import Units  # noqa
 
 
 class GliderVessel(object):
@@ -171,15 +147,17 @@ class GliderVessel(object):
         self.clean()
         self.doc.recompute()
 
-    def create_stl(self, exp_index):
+    def create_stl(self, save_name: str) -> None:
         """
         Generate stl file from the current design
         """
+        assert save_name.endswith(
+            ".stl"
+        ), f"The extension {save_name.split('.')[-1]} is not valid."
         try:
             __objs__ = self.doc.getObject("Body")
             # print(__objs__.Name, self.doc.Name)
-            stl_name = "./stl_repo/swordfish" + str(exp_index) + ".stl"
-            Mesh.export([__objs__], stl_name)
+            Mesh.export([__objs__], save_name)
             del __objs__
         except:
             print("An error occurred while creating stl file")
