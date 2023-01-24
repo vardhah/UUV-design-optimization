@@ -14,6 +14,16 @@ from .model import DragNet
 matplotlib.use("agg")
 
 
+def scale_training_data(train_set):
+    ranges = [[50, 600], [1, 1850], [50, 600], [50, 200], [1, 5], [1, 50]]
+    values = []
+    for idx, (low, high) in enumerate(ranges):
+        col = train_set[:, idx]
+        values.append(((col - low) / (high - low)).reshape(-1, 1))
+    assert np.all(np.array(values) < 1.0)
+    return np.concatenate(values, axis=1)
+
+
 def train_dragnet(batch_size: int, epochs: int, save_dir: str):
     train_set = np.loadtxt(
         get_data_file_path("surrogate/train_data.txt"),
@@ -22,7 +32,8 @@ def train_dragnet(batch_size: int, epochs: int, save_dir: str):
         dtype=np.float32,
     )
 
-    train_data, train_labels = train_set[:, :-1], train_set[:, -1]
+    train_data = scale_training_data(train_set[:, :-1])
+    train_labels = train_set[:, -1]
     train_set = TensorDataset(
         torch.from_numpy(train_data), torch.from_numpy(train_labels)
     )
@@ -41,9 +52,9 @@ def train_dragnet(batch_size: int, epochs: int, save_dir: str):
         train_loss = 0
         for X, y in train_loader:
             X = X.to(device)
-            y = y.to(device)
+            y = y.to(device).view((-1, 1))
             output = model(X)
-            loss = loss_fn(output.squeeze(), y)
+            loss = loss_fn(output, y)
             loss.backward()
             optimizer.step()
             train_loss += loss.item()
