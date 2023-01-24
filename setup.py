@@ -38,7 +38,7 @@ setup(
         "Topic :: Software Development :: Libraries",
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
-    keywords="deepflow cfd deeplearning airfoil vision transformers",
+    keywords="cfd surrogate modeling bayesian optimization",
     packages=["uuv_optim"],
     include_package_data=True,
     install_requires=["torch >= 1.4", "torchvision"],
