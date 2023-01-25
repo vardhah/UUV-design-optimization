@@ -1,6 +1,6 @@
 from argparse import ArgumentDefaultsHelpFormatter, ArgumentParser
 
-from . import train
+from . import evaluate, train
 
 
 def run(args):
@@ -9,7 +9,7 @@ def run(args):
         formatter_class=ArgumentDefaultsHelpFormatter,
     )
 
-    commands = ["train"]
+    commands = ["train", "eval"]
     parser.add_argument("command", choices=sorted(commands))
     pos = len(args)
 
@@ -21,5 +21,7 @@ def run(args):
 
     if parsed_args.command == "train":
         train.run(args[pos:])
+    elif parsed_args.command == "eval":
+        evaluate.run(args[pos:])
     else:
         parser.print_help()

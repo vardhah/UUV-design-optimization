@@ -5,7 +5,7 @@ from typing import Dict
 import numpy as np
 from matplotlib import pyplot as plt
 
-from ..utils import get_data_file_path
+from ..utils import add_myring_hull_parameters, get_data_file_path
 from .utils import add_freecad_libs_to_path
 
 
@@ -128,44 +128,7 @@ def run(args=None):
         "Myring Hull Generator", formatter_class=ArgumentDefaultsHelpFormatter
     )
 
-    parser.add_argument(
-        "--diameter",
-        "-d",
-        help="Diameter of the hull",
-        type=float,
-        default=1.473602877432195442e02,
-    )
-    parser.add_argument(
-        "--nose-length",
-        "-a",
-        help="Nose Length",
-        type=float,
-        default=1.241980002068568183e02,
-    )
-    parser.add_argument(
-        "--total-length",
-        "-l",
-        help="Total Length",
-        type=float,
-        default=8.356338449468295266e02,
-    )
-    parser.add_argument(
-        "--tail-length",
-        "-c",
-        help="Tail Length",
-        type=float,
-        default=5.224223705425469433e01,
-    )
-    parser.add_argument(
-        "--theta",
-        "-t",
-        help="Tail profile",
-        type=float,
-        default=1.473602877432195442e02,
-    )
-    parser.add_argument(
-        "--nose", "-n", help="Nose Profile", type=float, default=1.825793131346396692e01
-    )
+    add_myring_hull_parameters(parser)
     commands = ["generate-plot", "generate-shape"]
 
     parser.add_argument(

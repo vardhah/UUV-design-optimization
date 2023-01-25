@@ -5,26 +5,19 @@ import matplotlib
 import numpy as np
 import torch
 from matplotlib import pyplot as plt
+from sklearn.model_selection import train_test_split
 from torch.optim import Adam
 from torch.utils.data import DataLoader, TensorDataset
 
 from ..utils import get_data_file_path
 from .model import DragNet
+from .utils import scale_sim_data
 
 matplotlib.use("agg")
 
 
-def scale_training_data(train_set):
-    ranges = [[50, 600], [1, 1850], [50, 600], [50, 200], [1, 5], [1, 50]]
-    values = []
-    for idx, (low, high) in enumerate(ranges):
-        col = train_set[:, idx]
-        values.append(((col - low) / (high - low)).reshape(-1, 1))
-    assert np.all(np.array(values) < 1.0)
-    return np.concatenate(values, axis=1)
-
-
 def train_dragnet(batch_size: int, epochs: int, save_dir: str):
+    """Train the DragNet model"""
     train_set = np.loadtxt(
         get_data_file_path("surrogate/train_data.txt"),
         delimiter=" ",
@@ -32,10 +25,17 @@ def train_dragnet(batch_size: int, epochs: int, save_dir: str):
         dtype=np.float32,
     )
 
-    train_data = scale_training_data(train_set[:, :-1])
+    train_data = scale_sim_data(train_set[:, :-1])
     train_labels = train_set[:, -1]
+    train_data, valid_data, train_labels, valid_labels = train_test_split(
+        train_data, train_labels, test_size=0.1, random_state=42
+    )
     train_set = TensorDataset(
         torch.from_numpy(train_data), torch.from_numpy(train_labels)
+    )
+
+    valid_set = TensorDataset(
+        torch.from_numpy(valid_data), torch.from_numpy(valid_labels)
     )
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -43,35 +43,63 @@ def train_dragnet(batch_size: int, epochs: int, save_dir: str):
     learning_rate = 0.001
 
     train_loader = DataLoader(dataset=train_set, batch_size=batch_size, shuffle=True)
+    valid_loader = DataLoader(dataset=valid_set, batch_size=batch_size, shuffle=True)
+
     model = model.to(device)
     optimizer = Adam(model.parameters(), lr=learning_rate)
     loss_fn = torch.nn.L1Loss()
-
-    history = []
-    for epoch in range(epochs):
-        train_loss = 0
-        for X, y in train_loader:
-            X = X.to(device)
-            y = y.to(device).view((-1, 1))
-            output = model(X)
-            loss = loss_fn(output, y)
-            loss.backward()
-            optimizer.step()
-            train_loss += loss.item()
-
-        history.append(avg_loss := (train_loss / len(train_loader)))
-
-        print(f"DragNet(Training) - Epoch {epoch} | Training Loss: {avg_loss}")
 
     save_dir = pathlib.Path(save_dir)
     if not save_dir.exists():
         os.makedirs(save_dir, exist_ok=True)
 
-    plt.plot(history)
+    history = []
+    best_valid_loss = 10e33
+    for epoch in range(epochs):
+        train_loss = 0
+        model.train()
+        for X, y in train_loader:
+            X = X.to(device)
+            y = y.to(device).view((-1, 1))
+            output = model(X)
+            loss = loss_fn(output, y)
+            optimizer.zero_grad()
+            loss.backward()
+            optimizer.step()
+            train_loss += loss.item()
+
+        model.eval()
+        with torch.no_grad():
+            valid_loss = 0
+            for X, y in valid_loader:
+                X = X.to(device)
+                y = y.to(device).view((-1, 1))
+                output = model(X)
+                loss = loss_fn(output, y)
+                valid_loss += loss.item()
+
+        history.append(
+            (
+                avg_train_loss := (train_loss / len(train_loader)),
+                avg_valid_loss := (valid_loss / len(valid_loader)),
+            )
+        )
+
+        if best_valid_loss > avg_valid_loss:
+            torch.save(model.state_dict(), save_dir / "weights_best.pt")
+            best_valid_loss = avg_valid_loss
+
+        print(
+            f"DragNet(Training) - Epoch {epoch} | Training Loss: {avg_train_loss} | Validation Loss: {avg_valid_loss}"
+        )
+
+    history = np.array(history)
+    plt.plot(history[:, 0], label="Training")
+    plt.plot(history[:, 1], label="Validation")
     plt.xlabel("Epoch")
     plt.ylabel("Training Loss")
+    plt.legend()
     plt.savefig(save_dir / "train_history.png")
-    torch.save(model.state_dict(), save_dir / "weights.pt")
 
 
 def run(args):
