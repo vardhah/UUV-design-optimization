@@ -1,7 +1,7 @@
 import sys
 from argparse import ArgumentDefaultsHelpFormatter, ArgumentParser
 
-from . import myring_cad
+from . import myring_cad, surrogate
 
 
 def run():
@@ -9,7 +9,7 @@ def run():
         "UUV design optimization", formatter_class=ArgumentDefaultsHelpFormatter
     )
 
-    commands = ["myring-cad", "cfd", "optimizers", "surrogates"]
+    commands = ["myring-cad", "cfd", "optimizers", "surrogate"]
 
     parser.add_argument(
         "command", choices=sorted(commands), help="The sub command to execute"
@@ -25,5 +25,7 @@ def run():
 
     if args.command == "myring-cad":
         myring_cad.run(sys.argv[pos:])
+    elif args.command == "surrogate":
+        surrogate.run(sys.argv[pos:])
     else:
         parser.print_help()
